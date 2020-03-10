@@ -1,0 +1,13 @@
+
+footer{
+  grid-area: footer;
+  background-color: chartreuse;
+  text-align: center;
+  width: 100%;
+}
+
+
+
+footer .copy{
+  margin: 20px 0;
+}

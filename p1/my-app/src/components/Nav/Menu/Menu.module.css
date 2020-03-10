@@ -1,0 +1,14 @@
+.menu a{
+  width: 100%;
+  height: 100%;
+  /*background-color: cyan;*/
+  display: block;
+  margin: 2px 0;
+  padding-left: 15px;
+  color: #cc55ff;
+}
+
+.menu a:hover{
+  background-color: cyan;
+  color: black;
+}

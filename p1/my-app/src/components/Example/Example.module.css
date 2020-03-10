@@ -1,0 +1,17 @@
+
+
+.example a{
+  color: black;
+  display: block;
+  width: 95%;
+  padding-left: 10px;
+}
+
+.example a:hover{
+  background-color: cyan;
+}
+
+.example{
+  margin: 10px 20px ;
+}
+

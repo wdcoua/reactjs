@@ -1,0 +1,16 @@
+header{
+  grid-area: header;
+  background-color: #fff;
+}
+
+.logo{
+  height: 80%;
+  margin: 20px;
+}
+
+.auth{
+  float: right;
+  position: relative;
+  top: 30px;
+  right: 30px;
+}
