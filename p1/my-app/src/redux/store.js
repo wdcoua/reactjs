@@ -3,12 +3,12 @@ import examples_reducer from "./examples_reducer";
 import chat_reducer from "./chat_reducer";
 // import src from "../../src/images"
 
-const GET_GB_NEW_POST_TEXT = 'GET-GB-NEW-POST-TEXT';
-const NEW_GB_POST_CHANGE = 'NEW-GB-POST-CHANGE';
-const ADD_GB_POST = 'ADD-GB-POST';
-const ADD_CHAT_POST = 'ADD_CHAT_POST';
-const NEW_CHAT_POST_CHANGE = 'NEW_CHAT_POST_CHANGE';
-const GET_CHAT_NEW_POST_TEXT = 'GET_CHAT_NEW_POST_TEXT';
+// const GET_GB_NEW_POST_TEXT = 'GET-GB-NEW-POST-TEXT';
+// const NEW_GB_POST_CHANGE = 'NEW-GB-POST-CHANGE';
+// const ADD_GB_POST = 'ADD-GB-POST';
+// const ADD_CHAT_POST = 'ADD_CHAT_POST';
+// const NEW_CHAT_POST_CHANGE = 'NEW_CHAT_POST_CHANGE';
+// const GET_CHAT_NEW_POST_TEXT = 'GET_CHAT_NEW_POST_TEXT';
 
 let all_data = { //store
 
@@ -140,26 +140,6 @@ let all_data = { //store
 
 }
 
-export const addPostActionCreator = () =>  {
-    return {type: ADD_GB_POST};
-}
-export const addChatPostActionCreator = () =>  {
-    return {type: ADD_CHAT_POST};
-}
-
-export const newGBpostChangeActionCreator = (text) => {
-    return {type: NEW_GB_POST_CHANGE,changedText: text};
-}
-
-export const newChatPostChangeActionCreator = (text) => {
-    return {type: NEW_CHAT_POST_CHANGE,changedText: text};
-}
-export const gETChatNEWPOSTTEXTActionCreator = () =>  {
-    return {type: GET_CHAT_NEW_POST_TEXT};
-}
-export const gETGBNEWPOSTTEXTActionCreator = () =>  {
-    return {type: GET_GB_NEW_POST_TEXT};
-}
 
 export default all_data;
 window.all_data = all_data;

@@ -1,10 +1,7 @@
 import React from 'react';
 import c from './ChatSendForm.module.css';
-import {
-    addChatPostActionCreator,
-    newChatPostChangeActionCreator,
+import {addChatPostActionCreator, newChatPostChangeActionCreator} from "../../../redux/chat_reducer";
 
-} from "../../../redux/state";
 
 const ChatSendForm = (props) => {
 
@@ -26,9 +23,11 @@ const ChatSendForm = (props) => {
     return (
         <div className={c.chat_form}>
 
-            <textarea className={c.chat_text} ref={new_chat_post}
-                      value={props.newChatPostText}
-                      onChange={onPostChange}></textarea>
+            <textarea
+                className={c.chat_text}
+                ref={new_chat_post}
+                value={props.newChatPostText}
+                onChange={onPostChange}/>
             <button className={c.chat_button} onClick={addPost}>Send</button>
         </div>
 

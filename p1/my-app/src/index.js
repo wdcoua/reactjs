@@ -6,34 +6,34 @@
 import React from 'react';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import all_data from "./redux/state";
+import store from "./redux/redux-store";
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
 
-let state = all_data.getState();
+// let state = store.getState();
 
 let rerenderEntireTree = (state) => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={state} dispatch={all_data.dispatch.bind(all_data)}
-                 // addGBpost={all_data.addGBpost.bind(all_data)}
-                 // gbNewPostChange={all_data.gbNewPostChange.bind(all_data)}
-                 // getGBbranch={all_data.getGBbranch.bind(all_data)}
-                 // getGBposts={all_data.getGBposts.bind(all_data)}
-                 // getGBnewPostText={all_data.getGBnewPostText.bind(all_data)}
-                 // getExamples={all_data.getExamples.bind(all_data)}
-                 // getChatPosts={all_data.getChatPosts.bind(all_data)}
+            <App state={state} dispatch={store.dispatch.bind(store)}
+                 // addGBpost={store.addGBpost.bind(store)}
+                 // gbNewPostChange={store.gbNewPostChange.bind(store)}
+                 // getGBbranch={store.getGBbranch.bind(store)}
+                 // getGBposts={store.getGBposts.bind(store)}
+                 // getGBnewPostText={store.getGBnewPostText.bind(store)}
+                 // getExamples={store.getExamples.bind(store)}
+                 // getChatPosts={store.getChatPosts.bind(store)}
             />
         </BrowserRouter>, document.getElementById('root')
     );
 }
 //
-// all_data.assign_renderer(() => {
+// store.assign_renderer(() => {
 //
 //     ReactDOM.render(
 //         <BrowserRouter>
-//             <App all={all_data}  />
+//             <App all={store}  />
 //         </BrowserRouter>, document.getElementById('root')
 //     );
 // })
@@ -41,18 +41,24 @@ let rerenderEntireTree = (state) => {
 let rerenderer = () => {
     ReactDOM.render(
         <BrowserRouter>
-            <App all={all_data}  />
+            <App all={store}  />
         </BrowserRouter>, document.getElementById('root')
     );
 }
 */
 
-rerenderEntireTree(all_data.getState());
-all_data.assign_renderer(rerenderEntireTree);
+rerenderEntireTree(store.getState());
 
-// all_data.assign_renderer(state);
+store.subscribe(() => {
+    let state = store.getState();
+    rerenderEntireTree(state);
+})
+
+//store.assign_renderer(rerenderEntireTree);
+
+// store.assign_renderer(state);
 //
-// all_data.pass_renderer(all_data.assign_renderer);
+// store.pass_renderer(store.assign_renderer);
 //ReactDOM.render(<Test />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
