@@ -1,0 +1,16 @@
+.gb_form{
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.gb_form_text{
+
+    width: 400px;
+    height: 50px;
+}
+
+.gb_form_button{
+    background-color: green;
+    display: block;
+    margin: auto;
+}

@@ -1,28 +1,31 @@
 import React from 'react';
 import c from './Menu.module.css'
+import {BrowserRouter, NavLink} from "react-router-dom";
 
 const Menu = (props) => {
 
-  return (
-  <div className={c.menu}><a href="#">{props.text}</a></div>
-  );
+    return (
 
-  /*
-      return (<nav>
-        <div className="menu"><a href="#">Гостьова</a></div>
-        <div className="menu"><a href="#">Відгуки</a></div>
-        <div className="menu"><a href="#">Замовити скрипт</a></div>
-        <div className="menu"><a href="#">Контакти</a></div>
-        <div className="menu"><a href="#">Фідбек</a></div>
-        <div className="menu"><a href="#">Оплата</a></div>
-        <div className="menu"><a href="#">Чат</a></div>
-        <div className="menu"><a href="#">FreeWare</a></div>
-        <div className="menu"><a href="#">Гостьова</a></div>
-        <div className="menu"><a href="#">Гостьова</a></div>
-        <div className="menu"><a href="#">Гостьова</a></div>
-        <div className="menu"><a href="#">Гостьова</a></div>
-      </nav>);
-  */
+            <div className={c.menu}><NavLink to={props.href} activeClassName={c.active}>{props.text}</NavLink></div>
+    );
+
+    /*
+        return (<nav>
+          <div className="menu"><a href="#">Гостьова</a></div>
+          <div className="menu"><a href="#">Відгуки</a></div>
+          <div className="menu"><a href="#">Замовити скрипт</a></div>
+          <div className="menu"><a href="#">Контакти</a></div>
+          <div className="menu"><a href="#">Фідбек</a></div>
+          <div className="menu"><a href="#">Оплата</a></div>
+          <div className="menu"><a href="#">Чат</a></div>
+          <div className="menu"><a href="#">FreeWare</a></div>
+          <div className="menu"><a href="#">Гостьова</a></div>
+          <div className="menu"><a href="#">Гостьова</a></div>
+          <div className="menu"><a href="#">Гостьова</a></div>
+          <div className="menu"><a href="#">Гостьова</a></div>
+        </nav>
+        );
+    */
 
 }
 

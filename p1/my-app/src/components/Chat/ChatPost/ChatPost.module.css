@@ -1,0 +1,57 @@
+
+
+.chatpost{
+  color: black;
+  display: block;
+  width: 95%;
+  padding-left: 10px;
+}
+
+
+.chatpost_body{
+  margin: 10px 20px ;
+}
+
+.avaimg{
+
+}
+
+img.ava{
+  width:100px;
+  border-radius: 15px;
+}
+
+.name{
+  color: #ff0000;
+  display: block;
+  padding: 0 25px 0 16px;
+  width: auto;
+  line-height: 32px;
+  margin: 0 25px 0 0;
+}
+
+.chatpost_text{
+  font-size: 25px;
+
+}
+
+.chatpost_date{
+  display: block;
+  font-size: 8px;
+  text-align: right;
+  color: cornflowerblue;
+}
+
+.chatpost_admin{
+  background-color: #bab9b9;
+}
+
+.chatpost_admin a{
+  display: inline;
+  padding: 0 10px;
+}
+
+.admin_post{
+  background-color: #c4ffc8;
+  text-align: right;
+}

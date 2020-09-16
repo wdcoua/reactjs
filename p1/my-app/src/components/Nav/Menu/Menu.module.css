@@ -12,3 +12,7 @@
   background-color: cyan;
   color: black;
 }
+
+a.active{
+  color: green;
+}
