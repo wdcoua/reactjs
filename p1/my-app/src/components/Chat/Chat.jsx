@@ -4,17 +4,22 @@ import ChatSendForm from "./ChatSendForm/ChatSendForm";
 
 const Chat = (props) => {
 
-    const chat = props.chat.chatPosts.map(e => <ChatPost
-        id={e.id} author={e.author} authorAva={e.authorAva} text={e.text} date={e.date}/>);
-
     return (
 
         <div>
             <h1>Чат</h1>
-
-            {chat}
-
-            <ChatSendForm newChatPostText={props.chat.newChatPostText} dispatch={props.dispatch} />
+            {props.chat.map(e => <ChatPost
+                id={e.id}
+                author={e.author}
+                authorAva={e.authorAva}
+                text={e.text}
+                date={e.date}
+            />)}
+            <ChatSendForm
+                newChatPostText={props.newChatPostText}
+                onChatAddPost={props.onChatAddPost}
+                onChatNewPostChange={props.onChatNewPostChange}
+            />
         </div>
     );
 }

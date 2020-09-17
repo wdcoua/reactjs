@@ -20,7 +20,7 @@ const gb_reducer = (state = initialState,action) => {
 
     switch (action.type){
 
-        case ADD_GB_POST:
+        case ADD_GB_POST: {
             let newPost = {
                 id: 5,
                 text: state.newPostText,
@@ -29,13 +29,23 @@ const gb_reducer = (state = initialState,action) => {
                 authorAva: 'https://avatarfiles.alphacoders.com/111/111521.png',
                 date: '02:16 23-07-2020'
             }
-            state.gbPosts.push(newPost);
-            state.newPostText = '';
 
-            return state;
-        case NEW_GB_POST_CHANGE:
-            state.newPostText = action.changedText;
-            return state;
+            let stateCopy = {...state}
+            stateCopy.gbPosts = [...state.gbPosts];
+            stateCopy.gbPosts.push(newPost);
+            stateCopy.newPostText = '';
+
+            return stateCopy;
+        }
+
+        case NEW_GB_POST_CHANGE: {
+
+            let stateCopy = {...state}
+            stateCopy.newPostText = action.changedText;
+            return stateCopy;
+        }
+
+
 
         default:
             return state;

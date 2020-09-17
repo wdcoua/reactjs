@@ -1,45 +1,32 @@
 import React from 'react';
-import ChatPost from "./ChatPost/ChatPost";
-import ChatSendForm from "./ChatSendForm/ChatSendForm";
 import {addChatPostActionCreator, newChatPostChangeActionCreator} from "../../redux/chat_reducer";
-import StoreContext from "../../StoreContext";
+import {connect} from "react-redux";
 
-const ChatContainer = () => {
+import Chat from "./Chat";
 
 
-    return (<StoreContext.Consumer>
-            {
-                (store) => {
-                    let onChatNewPostChange = (text) => {
-                        store.dispatch(newChatPostChangeActionCreator(text));
-                    }
-
-                    let onChatAddPost = () => {
-                        store.dispatch(addChatPostActionCreator());
-                        store.dispatch(newChatPostChangeActionCreator(''));
-                    }
-
-                    const chat = store.getState().chat.chatPosts.map(e => <ChatPost
-                        id={e.id}
-                        author={e.author}
-                        authorAva={e.authorAva}
-                        text={e.text}
-                        date={e.date}
-                    />);
-
-                    return <div>
-                        <h1>Чат</h1>
-                        {chat}
-                        <ChatSendForm
-                            newChatPostText={store.getState().chat.newChatPostText}
-                            onChatAddPost={onChatAddPost}
-                            onChatNewPostChange={onChatNewPostChange}
-                        />
-                    </div>
-                }
-            }
-        </StoreContext.Consumer>
-    );
+let mapStateToProps = (state) => {
+    return {
+        chat: state.chat.chatPosts,
+        newChatPostText: state.chat.newChatPostText
+    }
 }
+let mapDispatchToProps = (dispatch) => {
+
+    return {
+        onChatAddPost: () => {
+            dispatch(addChatPostActionCreator());
+            dispatch(newChatPostChangeActionCreator(''));
+        },
+        onChatNewPostChange: (text) => {
+            //debugger
+            dispatch(newChatPostChangeActionCreator(text));
+        }
+
+    }
+}
+
+const ChatContainer = connect(mapStateToProps, mapDispatchToProps)(Chat)
+
 
 export default ChatContainer;

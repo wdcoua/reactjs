@@ -10,18 +10,14 @@ const GuestBook = (props) => {
 
   return (
       <div className={c.gb}>
-        <GuestBookSendForm
-                            dispatch={props.store.dispatch}
-                           //  gbNewPostChange={props.gbNewPostChange}
-                           // addGBpost={props.addGBpost}
-                           // getGBbranch={props.getGBbranch}
-                            newPostText={props.store.getState().gb.newPostText}
-                           // getGBnewPostText={props.getGBnewPostText}
+               <GuestBookSendForm
+                  onGBNewPostChange={props.onGBNewPostChange}
+                  onGBAddPost={props.onGBAddPost}
+                  newPostText={props.newPostText}
+              />
 
-        />
-
-        <GuestBookPosts  gbPosts={props.store.getState().gb.gbPosts} />
-      </div>
+              <GuestBookPosts gbPosts={props.gbPosts}/>
+          </div>
   );
 }
 
