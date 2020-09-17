@@ -5,6 +5,8 @@ import Examples from "../Examples/Examples";
 import GuestBook from "../GuestBook/GuestBook";
 import {ExamplesData, PostsData} from "../../index";
 import Chat from "../Chat/Chat";
+import ChatContainer from "../Chat/ChatContainer";
+import GuestBookContainer from "../GuestBook/GuestBookContainer";
 
 const Main = (props) => {
     return (
@@ -16,15 +18,14 @@ const Main = (props) => {
 
 
                 <Route path='/examples' render={() => (
-                    <Examples  examples={props.state.examples}
+                    <Examples  examples={props.store.getState().examples}
                     />
                 )}/>
                 <Route  path='/gb' render={() => (
-                    <GuestBook
-                               state={props.state}
-
-                               dispatch={props.dispatch}
-
+                    <GuestBookContainer
+                               // state={props.state}
+                               // dispatch={props.dispatch}
+                                store={props.store}
                                // addGBpost={props.addGBpost}
                                // gbNewPostChange={props.gbNewPostChange}
                                // getGBbranch={props.getGBbranch}
@@ -33,7 +34,14 @@ const Main = (props) => {
                     />
                 )}/>
                 <Route  path='/chat' render={() => (
-                    <Chat chat={props.state.chat} dispatch={props.dispatch} />
+                    <ChatContainer
+                        store={props.store}
+                    />
+                    // <Chat
+                    //     // chat={props.state.chat}
+                    //     // dispatch={props.dispatch}
+                    //
+                    // />
                 )}/>
 
             </div>

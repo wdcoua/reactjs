@@ -10,14 +10,18 @@ const GuestBookSendForm = (props) => {
 
 
     let onPostChange = () => {
+        // debugger;
         let text = new_gb_post.current.value;
-        props.dispatch(newGBpostChangeActionCreator(text)); //gbNewPostChange('');
+        // props.dispatch(newGBpostChangeActionCreator(text)); //gbNewPostChange('');
+        props.onGBNewPostChange(text);
 
     }
 
     let addPost = () => {
-        props.dispatch(addGBPostActionCreator());//  addGBpost();
-        props.dispatch(newGBpostChangeActionCreator('')); //gbNewPostChange('');
+        // props.dispatch(addGBPostActionCreator());//  addGBpost();
+        // props.dispatch(newGBpostChangeActionCreator('')); //gbNewPostChange('');
+        props.onGBAddPost();
+        props.onGBNewPostChange('');
     }
 
 

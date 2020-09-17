@@ -5,18 +5,26 @@ import {addChatPostActionCreator, newChatPostChangeActionCreator} from "../../..
 
 const ChatSendForm = (props) => {
 
+
+
+
     let new_chat_post = React.createRef();
 
     let onPostChange = () => {
         let text = new_chat_post.current.value;
-        props.dispatch(newChatPostChangeActionCreator(text)); //gbNewPostChange('');
+        // props.dispatch(newChatPostChangeActionCreator(text)); //gbNewPostChange('');
+
+        props.onChatNewPostChange(text);
 
     }
 
     let addPost = () => {
         //let text = new_chat_post.current.value;
-        props.dispatch(addChatPostActionCreator());//  addGBpost();
-        props.dispatch(newChatPostChangeActionCreator('')); //gbNewPostChange('');
+        props.onChatAddPost();
+        props.onChatNewPostChange('');
+
+        // props.dispatch(addChatPostActionCreator());//  addGBpost();
+        // props.dispatch(newChatPostChangeActionCreator('')); //gbNewPostChange('');
     }
 
 

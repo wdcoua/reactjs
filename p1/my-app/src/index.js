@@ -17,6 +17,7 @@ let rerenderEntireTree = (state) => {
     ReactDOM.render(
         <BrowserRouter>
             <App state={state} dispatch={store.dispatch.bind(store)}
+                 store={store}
                  // addGBpost={store.addGBpost.bind(store)}
                  // gbNewPostChange={store.gbNewPostChange.bind(store)}
                  // getGBbranch={store.getGBbranch.bind(store)}
@@ -69,3 +70,6 @@ serviceWorker.unregister();
 /**********/
 // wd@wd-nout:/media/wd/1c65ded6-8343-4eea-b5cb-6cb824d7acab/wd/wd5/webdev/react/p1/my-app$
 // npm start
+
+// карта-схема
+// https://app.lucidchart.com/documents/edit/eeddadd9-a7cb-444a-8750-5b07377a1d66/0_0?beaconFlowId=25B49DD164AED936#?folder_id=home&browser=icon

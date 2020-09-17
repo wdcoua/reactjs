@@ -15,9 +15,10 @@ const App = (props) => {
             <div className="app-wrapper">
                 <Header/>
                 <Nav/>
-                <Main 
-                      state={props.state}
-                      dispatch={props.dispatch}
+                <Main
+                    store={props.store}
+                      // state={props.state}
+                      // dispatch={props.dispatch}
                       // gbNewPostChange={props.gbNewPostChange}
                       // getGBbranch={props.getGBbranch}
                       // getGBposts={props.getGBposts}

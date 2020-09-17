@@ -6,11 +6,15 @@ import Main from "../../Main/Main";
 
 const GuestBookPosts = (props) => {
 
-    console.log('props - '+props)
+    //console.log('props - '+props)
 
     let posts =  props.gbPosts.map(p => <Post id={p.id}
-                                              text={p.text} author={p.author} authorID={p.authorID}
-                                              authorAva={p.authorAva} date={p.date} />);
+                                              text={p.text}
+                                              author={p.author}
+                                              authorID={p.authorID}
+                                              authorAva={p.authorAva}
+                                              date={p.date}
+    />);
 
     return (
       <div >
