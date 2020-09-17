@@ -1,7 +1,5 @@
 import React from 'react';
 import c from './GuestBookSendForm.module.css';
-import {addGBPostActionCreator, newGBpostChangeActionCreator} from "../../../redux/gb_reducer";
-
 
 const GuestBookSendForm = (props) => {
 
@@ -10,16 +8,12 @@ const GuestBookSendForm = (props) => {
 
 
     let onPostChange = () => {
-        // debugger;
         let text = new_gb_post.current.value;
-        // props.dispatch(newGBpostChangeActionCreator(text)); //gbNewPostChange('');
         props.onGBNewPostChange(text);
 
     }
 
     let addPost = () => {
-        // props.dispatch(addGBPostActionCreator());//  addGBpost();
-        // props.dispatch(newGBpostChangeActionCreator('')); //gbNewPostChange('');
         props.onGBAddPost();
         props.onGBNewPostChange('');
     }

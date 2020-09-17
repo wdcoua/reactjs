@@ -1,20 +1,27 @@
 import React from 'react';
-import c from './Examples.module.css';
 import Example from "./Example/Example";
-import Main from "../Main/Main";
+import StoreContext from "../../StoreContext";
 
-const Examples = (props) => {
+const Examples = () => {
 
-
-    const examples = props.examples.map(e => <Example url={"/out/"+e.id} descr={e.name}/>);
 
     return (
 
-        <div>
-            <h1>Приклади моїх робіт</h1>
+        <StoreContext.Consumer>
+            {
+                (store) => {
 
-            {examples}
-        </div>
+                    const examples = store.getState().examples.map(e => <Example url={"/out/"+e.id} descr={e.name}/>);
+
+                    return <div>
+                        <h1>Приклади моїх робіт</h1>
+
+                        {examples}
+                    </div>
+                }
+            }
+        </StoreContext.Consumer>
+
     );
 }
 

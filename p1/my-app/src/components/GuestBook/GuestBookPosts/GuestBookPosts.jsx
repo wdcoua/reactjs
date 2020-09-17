@@ -1,12 +1,7 @@
 import React from 'react';
-import c from './GuestBookPosts.module.css';
-import Example from "../../Examples/Example/Example";
 import Post from "./Post/Post";
-import Main from "../../Main/Main";
 
 const GuestBookPosts = (props) => {
-
-    //console.log('props - '+props)
 
     let posts =  props.gbPosts.map(p => <Post id={p.id}
                                               text={p.text}

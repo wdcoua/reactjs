@@ -3,44 +3,38 @@ import c from './GuestBook.module.css';
 import GuestBookSendForm from "./GuestBookSendForm/GuestBookSendForm";
 import GuestBookPosts from "./GuestBookPosts/GuestBookPosts";
 import {addGBPostActionCreator, newGBpostChangeActionCreator} from "../../redux/gb_reducer";
-// debugger
-const GuestBook = (props) => {
+import StoreContext from "../../StoreContext";
 
-
-    let store = props.store;
-
-    let onGBNewPostChange = (text) => {
-
-
-        store.dispatch(newGBpostChangeActionCreator(text)); //gbNewPostChange('');
-    }
-
-    let onGBAddPost = () => {
-
-        store.dispatch(addGBPostActionCreator());//
-        store.dispatch(newGBpostChangeActionCreator(''));
-    }
-
-
-
+const GuestBook = () => {
 
     return (
-      <div className={c.gb}>
-        <GuestBookSendForm
-                            // dispatch={props.store.dispatch}
+        <StoreContext.Consumer>
+            {
+                (store) => {
+
+                    let onGBNewPostChange = (text) => {
+                        store.dispatch(newGBpostChangeActionCreator(text));
+                    }
+
+                    let onGBAddPost = () => {
+
+                        store.dispatch(addGBPostActionCreator());//
+                        store.dispatch(newGBpostChangeActionCreator(''));
+                    }
+
+                    return <div className={c.gb}>
+                        <GuestBookSendForm
                             onGBNewPostChange={onGBNewPostChange}
                             onGBAddPost={onGBAddPost}
-                           //  gbNewPostChange={props.gbNewPostChange}
-                           // addGBpost={props.addGBpost}
-                           // getGBbranch={props.getGBbranch}
                             newPostText={store.getState().gb.newPostText}
-                           // getGBnewPostText={props.getGBnewPostText}
+                        />
 
-        />
-
-        <GuestBookPosts  gbPosts={store.getState().gb.gbPosts} />
-      </div>
-  );
+                        <GuestBookPosts gbPosts={store.getState().gb.gbPosts}/>
+                    </div>
+                }
+            }
+        </StoreContext.Consumer>
+    );
 }
 
 export default GuestBook;
