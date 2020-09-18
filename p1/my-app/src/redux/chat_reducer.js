@@ -18,30 +18,27 @@ let initialState = {
 const chat_reducer = (state = initialState,action) => {
 
     switch (action.type){
-        case ADD_CHAT_POST: {
+        case ADD_CHAT_POST:
             let newChatPost = {
-
                 id: 8,
                 author: 'Котигорошко',
                 authorAva: '/src/kotigoroshko.jpg',
                 text: state.newChatPostText,
                 date: '15:25 17-09-2020'
-
-
             }
-            let stateCopy = {...state}
-            stateCopy.chatPosts = [...state.chatPosts]
-            stateCopy.chatPosts.push(newChatPost);
-            stateCopy.newChatPostText = '';
-            return stateCopy;
-        }
+            return {
+                ...state,
+                chatPosts: [...state.chatPosts,newChatPost],
+                newChatPostText: ''
+            }
 
-        case NEW_CHAT_POST_CHANGE:{
 
-            let stateCopy = {...state}
-            stateCopy.newChatPostText = action.changedText;
-            return stateCopy;
-        }
+        case NEW_CHAT_POST_CHANGE:
+            return {
+                ...state,
+                newChatPostText: action.changedText
+            }
+
         default:
             return state;
             //break;
