@@ -4,6 +4,8 @@ import { Route} from "react-router-dom";
 import ChatContainer from "../Chat/ChatContainer";
 import GuestBookContainer from "../GuestBook/GuestBookContainer";
 import ExamplesContainer from "../Examples/ExamplesContainer";
+// import Users from "../Users/Users";
+import UsersContainer from "../Users/UsersContainer";
 
 const Main = () => {
     return (
@@ -19,6 +21,9 @@ const Main = () => {
                 )}/>
                 <Route  path='/chat' render={() => (
                             <ChatContainer/>
+                )}/>
+                <Route  path='/users' render={() => (
+                            <UsersContainer/>
                 )}/>
 
             </div>

@@ -16,6 +16,7 @@ const GuestBookSendForm = (props) => {
     let addPost = () => {
         props.onGBAddPost();
         props.onGBNewPostChange('');
+
     }
 
 
@@ -27,7 +28,10 @@ const GuestBookSendForm = (props) => {
               value={props.newPostText}
               onChange={onPostChange}
           />
-            <button className={c.gb_form_button} onClick={addPost}>Send</button>
+            <button className={c.gb_form_button} onClick={
+                // alert('wefsd')
+                addPost
+            }>Send</button>
         </div>
     );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import {addGBPostActionCreator, newGBpostChangeActionCreator} from "../../redux/gb_reducer";
 import GuestBook from "./GuestBook";
 import {connect} from "react-redux";

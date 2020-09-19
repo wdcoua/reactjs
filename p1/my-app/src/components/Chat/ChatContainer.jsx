@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import {addChatPostActionCreator, newChatPostChangeActionCreator} from "../../redux/chat_reducer";
 import {connect} from "react-redux";
 

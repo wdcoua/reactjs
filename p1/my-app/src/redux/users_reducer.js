@@ -1,0 +1,112 @@
+const CHANGE_USER_FOLLOW_STATUS = 'CHANGE_USER_FOLLOW_STATUS';
+const SET_USERS = 'SET_USERS';
+
+let initialState = {
+    usersList: []
+}
+
+const users_reducer = (state = initialState, action) => {
+
+    switch (action.type) {
+
+        // case ADD_CHAT_POST:
+        //     let newChatPost = {
+        //         id: 8,
+        //         author: 'Котигорошко',
+        //         authorAva: '/src/kotigoroshko.jpg',
+        //         text: state.newChatPostText,
+        //         date: '15:25 17-09-2020'
+        //     }
+        //     return {
+        //         ...state,
+        //         chatPosts: [...state.chatPosts,newChatPost],
+        //         newChatPostText: ''
+        //     }
+        //
+        //
+        case CHANGE_USER_FOLLOW_STATUS:
+            // console.log(state)
+            // return state;
+
+            // debugger
+            return {
+                ...state,
+
+
+                // usersList: [...state.usersList]
+                // usersList: state.usersList.map(u => {
+                //     if (u.id === action.user_id) {
+                //         return {
+                //             ...u,
+                //             followed: true
+                //         }
+                //     }
+                //     return u;
+                // })
+
+
+                usersList: state.usersList.map(u => { // перебір масиву користувачів
+                        // console.log('u - ' + u.id)
+                        // console.log(u)
+                        if (u.id === action.user_id) {    // пошук по ID
+                            if (action.followStatus === 1) {
+                                //console.log(u.id + ' - ' + action.user_id)
+                                let newU = {
+                                    ...u,   // копіюємо самого користувача
+                                    followed: true  // змінюємо статус follow
+                                }
+                                console.log(newU);
+                                return newU;
+                            }
+                            if (action.followStatus === 0) {
+                                //console.log(u.id + ' - ' + action.user_id)
+                                let newU = {
+                                    ...u,
+                                    followed: false
+                                }
+                                console.log(newU);
+                                return newU;
+                            }
+                        }
+                        return u;
+                    }
+                )
+
+
+            }
+
+        // console.log(stateCopy)
+        // return stateCopy
+        case SET_USERS:
+            return {
+                ...state,
+                usersList: [...state.usersList, ...action.users]
+            }
+
+        default:
+            return state;
+        //break;
+
+    }
+
+}
+
+export default users_reducer;
+
+
+export const changeUserFollowStatusAC = (user_id, followStatus) => {
+    return {type: CHANGE_USER_FOLLOW_STATUS, user_id: user_id, followStatus: followStatus};
+}
+
+
+export const setUsersAC = (users) => {
+    return {type: SET_USERS, users: users};
+}
+
+
+// export const newChatPostChangeActionCreator = (text) => {
+//     return {type: NEW_CHAT_POST_CHANGE, changedText: text};
+// }
+// export const gETChatNEWPOSTTEXTActionCreator = () => {
+//     return {type: GET_CHAT_NEW_POST_TEXT};
+// }

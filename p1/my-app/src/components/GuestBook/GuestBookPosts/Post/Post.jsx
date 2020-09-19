@@ -5,7 +5,7 @@ const Post = (props) => {
   return (
       <div className={c.gb_post}>
           <div className={c.gb_post_body}>
-              <a href={'user/'+props.authorID} className={c.name}>{props.author}<br/><img src={props.authorAva} className={c.ava}/></a>
+              <a href={'user/'+props.authorID} className={c.name}>{props.author}<br/><img src={props.authorAva} className={c.ava}  alt='alt'/></a>
               <div className={c.gb_post_text}>{props.text}</div>
           </div>
 

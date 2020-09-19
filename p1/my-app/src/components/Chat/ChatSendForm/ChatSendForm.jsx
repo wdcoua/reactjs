@@ -1,6 +1,6 @@
 import React from 'react';
 import c from './ChatSendForm.module.css';
-import {addChatPostActionCreator, newChatPostChangeActionCreator} from "../../../redux/chat_reducer";
+// import {addChatPostActionCreator, newChatPostChangeActionCreator} from "../../../redux/chat_reducer";
 
 
 const ChatSendForm = (props) => {

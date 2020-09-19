@@ -36,3 +36,14 @@ serviceWorker.unregister();
 
 // карта-схема
 // https://app.lucidchart.com/documents/edit/eeddadd9-a7cb-444a-8750-5b07377a1d66/0_0?beaconFlowId=25B49DD164AED936#?folder_id=home&browser=icon
+
+
+/*
+
+console.log('before request')
+axios
+    .get('https://blabla.com/dfg')
+    .then(data => console.log(data))
+console.log('after request')
+
+* */
