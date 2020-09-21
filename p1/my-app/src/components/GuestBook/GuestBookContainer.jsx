@@ -2,49 +2,64 @@
 import {addGBPostActionCreator, newGBpostChangeActionCreator, setGBPostsAC} from "../../redux/gb_reducer";
 // import GuestBook from "./GuestBook";
 import {connect} from "react-redux";
-import GuestBookClass from "./GuestBookClass";
-// import {setUsersAC} from "../../redux/users_reducer";
+import React from "react";
+import * as axios from "axios";
+import c from "./GuestBook.module.css";
+import GuestBookSendForm from "./GuestBookSendForm/GuestBookSendForm";
+import GuestBookPosts from "./GuestBookPosts/GuestBookPosts";
+// import GuestBookClass from "./GuestBookClass";
 
-//
-// const GuestBookContainer = () => {
-//
-//     return (''
-//         // <StoreContext.Consumer>
-//         //     {
-//         //         (store) => {
-//         //
-//         //             let onGBNewPostChange = (text) => {
-//         //                 store.dispatch(newGBpostChangeActionCreator(text));
-//         //             }
-//         //
-//         //             let onGBAddPost = () => {
-//         //
-//         //                 store.dispatch(addGBPostActionCreator());//
-//         //                 store.dispatch(newGBpostChangeActionCreator(''));
-//         //             }
-//         //
-//         //             return <GuestBook
-//         //
-//         //                         onGBNewPostChange={onGBNewPostChange}
-//         //                         onGBAddPost={onGBAddPost}
-//         //                         newPostText={store.getState().gb.newPostText}
-//         //                         gbPosts={store.getState().gb.gbPosts}
-//         //                 />
-//         //
-//         //             // return <div className={c.gb}>
-//         //             //     <GuestBookSendForm
-//         //             //         onGBNewPostChange={onGBNewPostChange}
-//         //             //         onGBAddPost={onGBAddPost}
-//         //             //         newPostText={store.getState().gb.newPostText}
-//         //             //     />
-//         //             //
-//         //             //     <GuestBookPosts gbPosts={store.getState().gb.gbPosts}/>
-//         //             // </div>
-//         //         }
-//         //     }
-//         // </StoreContext.Consumer>
-//     );
-// }
+
+class GuestBookContainer extends React.Component{
+
+    apiKey = 'ada3692f-cdc4-4c82-9079-5847319d88fc'
+    baseURL = 'https://wd.co.ua/api.php'
+
+
+    componentDidMount = () => {
+
+        const instance = axios.create({
+            withCredentials: true,
+            baseURL: this.baseURL,
+            headers: {
+                'API-KEY': this.apiKey
+            }
+
+        });
+
+        instance
+            .get('?action=get_gb_posts')
+            // .get('https://social-network.samuraijs.com/api/1.0/users/?count=20&page=250')
+            .then(resp => {
+                // debugger
+                this.props.setGBPosts(resp.data.items)
+                console.log(resp)
+            })
+
+            .catch(error => {
+                console.warn(error);
+            });
+
+    }
+
+
+    render = () => {
+
+        return (
+            <div className={c.gb}>
+                <GuestBookSendForm
+                    onGBNewPostChange={this.props.onGBNewPostChange}
+                    onGBAddPost={this.props.onGBAddPost}
+                    newPostText={this.props.newPostText}
+                />
+
+                <GuestBookPosts gbPosts={this.props.gbPosts}/>
+            </div>
+        );
+    }
+}
+
+
 
 function mapStateToProps(state) {
     return {
@@ -71,6 +86,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-const GuestBookContainer = connect(mapStateToProps, mapDispatchToProps)(GuestBookClass)
-
-export default GuestBookContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(GuestBookContainer);

@@ -3,7 +3,18 @@ import {addChatPostActionCreator, newChatPostChangeActionCreator} from "../../re
 import {connect} from "react-redux";
 
 import Chat from "./Chat";
+import React from "react";
 
+class ChatContainer extends React.Component{
+    render() {
+        return <Chat
+            chat={this.props.chat}
+            newChatPostText={this.props.newChatPostText}
+            onChatAddPost={this.props.onChatAddPost}
+            onChatNewPostChange={this.props.onChatNewPostChange}
+        />
+    }
+}
 
 let mapStateToProps = (state) => {
     return {
@@ -26,7 +37,7 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-const ChatContainer = connect(mapStateToProps, mapDispatchToProps)(Chat)
+// const ChatContainer =
 
 
-export default ChatContainer;
+export default connect(mapStateToProps, mapDispatchToProps)(ChatContainer);

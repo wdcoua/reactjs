@@ -53,24 +53,23 @@ const users_reducer = (state = initialState, action) => {
                 usersList: state.usersList.map(u => { // перебір масиву користувачів
                         // console.log('u - ' + u.id)
                         // console.log(u)
+                    // debugger
                         if (u.id === action.user_id) {    // пошук по ID
                             if (action.followStatus === 1) {
                                 //console.log(u.id + ' - ' + action.user_id)
-                                let newU = {
+                                return {
                                     ...u,   // копіюємо самого користувача
                                     followed: true  // змінюємо статус follow
                                 }
-                                console.log(newU);
-                                return newU;
+                                // console.log(newU);
                             }
                             if (action.followStatus === 0) {
                                 //console.log(u.id + ' - ' + action.user_id)
-                                let newU = {
+                                return {
                                     ...u,
                                     followed: false
                                 }
-                                console.log(newU);
-                                return newU;
+                                // console.log(newU);
                             }
                         }
                         return u;
