@@ -3,7 +3,7 @@ import React from 'react';
 import defaultUserPhoto from '../../../images/user.png'
 import style from './User.module.css'
 
-const User = (props) => {
+const UserView = (props) => {
     // let changeFollowStatus = () => {
     //     props.changeFollowStatus()
     // }
@@ -38,5 +38,5 @@ const User = (props) => {
     );
 }
 
-export default User;
+export default UserView;
 

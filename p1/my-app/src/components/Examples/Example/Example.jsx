@@ -4,7 +4,7 @@ import c from './Example.module.css';
 const Example = (props) => {
   return (
       <div className={c.example}>
-        <a href={props.url}>{props.descr}</a>
+        <a href={props.link} title={props.descr}>{props.title}</a>
       </div>
   );
 }

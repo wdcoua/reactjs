@@ -1,7 +1,9 @@
 // import React from 'react';
-import {addGBPostActionCreator, newGBpostChangeActionCreator} from "../../redux/gb_reducer";
-import GuestBook from "./GuestBook";
+import {addGBPostActionCreator, newGBpostChangeActionCreator, setGBPostsAC} from "../../redux/gb_reducer";
+// import GuestBook from "./GuestBook";
 import {connect} from "react-redux";
+import GuestBookClass from "./GuestBookClass";
+// import {setUsersAC} from "../../redux/users_reducer";
 
 //
 // const GuestBookContainer = () => {
@@ -61,9 +63,14 @@ function mapDispatchToProps(dispatch) {
             dispatch(newGBpostChangeActionCreator(''));
         },
 
+        setGBPosts:(posts) => {
+            // debugger
+            dispatch(setGBPostsAC(posts));
+        }
+
     }
 }
 
-const GuestBookContainer = connect(mapStateToProps, mapDispatchToProps)(GuestBook)
+const GuestBookContainer = connect(mapStateToProps, mapDispatchToProps)(GuestBookClass)
 
 export default GuestBookContainer;

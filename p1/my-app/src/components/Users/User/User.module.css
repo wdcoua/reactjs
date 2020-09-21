@@ -2,3 +2,11 @@
 .userphoto{
   width: 100px;
 }
+
+.currentPage{
+  font-weight: bold;
+}
+
+.pages{
+  cursor: pointer
+}

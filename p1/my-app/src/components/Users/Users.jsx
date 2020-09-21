@@ -1,5 +1,5 @@
 import React from "react";
-import User from "./User/User";
+import User from "./User/UserView";
 import * as axios from 'axios';
 
 const Users = (props) => {
@@ -10,7 +10,7 @@ const Users = (props) => {
 
         const instance = axios.create({
             withCredentials: true,
-            baseURL: 'https://social-network.samuraijs.com/api/1.0/',
+            baseURL: 'https://wd.co.ua/api.php',
             headers: {
                 'API-KEY': apiKey
             }
@@ -18,9 +18,10 @@ const Users = (props) => {
         });
 
         instance
-            .get('https://social-network.samuraijs.com/api/1.0/users/')
+            .get('?action=users&eee')
             // .get('https://social-network.samuraijs.com/api/1.0/users/?count=20&page=250')
             .then(resp => {
+                // debugger
                 props.setUsers(resp.data.items)
                 console.log(resp)
             })
@@ -34,14 +35,14 @@ const Users = (props) => {
             //
             //     })
 
-            // .get('auth/me')
-            // .post('auth/login?email=wd.co.ua@gmail.com&password=C2dNA6yuHkbMVej&rememberMe=true')
-            .then(resp => {
-                    // props.setUsers(resp.data.items)
-                    console.log(resp)
-                })
+             // .get('?auth/me')
+            // .post('?auth/login?email=wd.co.ua@gmail.com&password=C2dNA6yuHkbMVej&rememberMe=true')
+            // .then(resp => {
+            //         // props.setUsers(resp.data.items)
+            //         console.log(resp)
+            //     })
             .catch(error => {
-                console.log(error);
+                console.warn(error);
             });
 
         // props.setUsers(

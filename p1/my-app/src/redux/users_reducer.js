@@ -1,8 +1,13 @@
 const CHANGE_USER_FOLLOW_STATUS = 'CHANGE_USER_FOLLOW_STATUS';
 const SET_USERS = 'SET_USERS';
+const SET_TOTAL_USERS = 'SET_TOTAL_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 
 let initialState = {
-    usersList: []
+    usersList: [],
+    usersPerPage: 5,
+    totalUsers: 0,
+    currentPage: 1
 }
 
 const users_reducer = (state = initialState, action) => {
@@ -78,9 +83,23 @@ const users_reducer = (state = initialState, action) => {
         // console.log(stateCopy)
         // return stateCopy
         case SET_USERS:
+            // debugger
             return {
                 ...state,
-                usersList: [...state.usersList, ...action.users]
+                // usersList: [...state.usersList, ...action.users]
+                usersList: [ ...action.users]
+            }
+        case SET_TOTAL_USERS:
+            // debugger
+            return {
+                ...state,
+                totalUsers: action.total
+            }
+        case SET_CURRENT_PAGE:
+            // debugger
+            return {
+                ...state,
+                currentPage: action.currentPage
             }
 
         default:
@@ -101,6 +120,13 @@ export const changeUserFollowStatusAC = (user_id, followStatus) => {
 
 export const setUsersAC = (users) => {
     return {type: SET_USERS, users: users};
+}
+export const setTotalUsersAC = (total) => {
+    return {type: SET_TOTAL_USERS, total: total};
+}
+export const setCurrentPageAC = (currentPage) => {
+    console.log(currentPage)
+    return {type: SET_CURRENT_PAGE, currentPage: currentPage};
 }
 
 

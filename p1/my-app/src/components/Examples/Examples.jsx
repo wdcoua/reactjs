@@ -2,7 +2,6 @@ import React from 'react';
 import Example from "./Example/Example";
 
 const Examples = (props) => {
-
     return (
         <div>
             <h1>Приклади моїх робіт</h1>
