@@ -1,9 +1,17 @@
 import {connect} from "react-redux";
-import {changeUserFollowStatusAC, setCurrentPageAC, setTotalUsersAC, setUsersAC} from "../../redux/users_reducer";
+import {
+    setFetchingStatus,
+    changeUserFollowStatus,
+    setCurrentPage,
+    setTotalUsers,
+    setUsers
+} from "../../redux/users_reducer";
 import React from "react";
 import * as axios from "axios";
 import styles from "./User/User.module.css";
 import Users from "./User/Users";
+// import preloader from "../../images/rings.svg"
+import Preloader from "../Preloader/Preloader";
 
 
 class UsersContainer extends React.Component {
@@ -24,11 +32,13 @@ class UsersContainer extends React.Component {
     componentDidMount() {
 
 
+        this.props.setFetchingStatus(true);
         this.instance
             // .get('?action=users&eee')
             .get('users/?count=' + this.props.usersPerPage + '&page=' + this.currentPage)
             .then(resp => {
                 // debugger
+                this.props.setFetchingStatus(false);
                 this.props.setUsers(resp.data.items)
                 this.props.setTotalUsers(resp.data.totalCount)
                 // this.props.totalUsers = resp.data.totalCount
@@ -43,12 +53,14 @@ class UsersContainer extends React.Component {
     openPageNumber(n) {
 
 
-        this.props.setCurrentPage(n)
+        this.props.setCurrentPage(n);
+        this.props.setFetchingStatus(true);
         this.instance
             // .get('?action=users&eee')
             .get('users/?count=' + this.props.usersPerPage + '&page=' + n)
             .then(resp => {
                 // debugger
+                this.props.setFetchingStatus(false);
                 this.props.setUsers(resp.data.items)
                 this.props.setTotalUsers(resp.data.totalCount)
                 // this.props.totalUsers = resp.data.totalCount
@@ -65,7 +77,7 @@ class UsersContainer extends React.Component {
 
         let pages = Math.ceil(this.props.totalUsers / this.props.usersPerPage);
         let out = [];
-        let cp = this.props.currentPage;
+        // let cp = this.props.currentPage;
         if (pages > 5) {
 
             // for(let p = 1; p <= pages; p++){
@@ -212,15 +224,19 @@ class UsersContainer extends React.Component {
     render() {
 
 
-        return (
+        return ( <>
+                {this.props.isFetching ? <Preloader /> : null}
             <div>
                 {this.showPages()}
                 <Users
                     users={this.props.users}
                     showPages={this.showPages}
-                    changeFollowStatus={this.props.changeFollowStatus}
+                    changeUserFollowStatus={this.props.changeUserFollowStatus}
                 />
             </div>
+
+            </>
+
         )
     }
 }
@@ -230,29 +246,41 @@ let mapStateToProps = (state) => { // бере увесь глобальний S
         users: state.users.usersList,
         usersPerPage:state.users.usersPerPage,
         totalUsers:state.users.totalUsers,
-        currentPage: state.users.currentPage
+        currentPage: state.users.currentPage,
+        isFetching: state.users.isFetching
     }
 }
-let mapDispatchToProps = (dispatch) => { // передає дочірній компоненті колбеки (функції)
+//
+// let mapDispatchToProps = (dispatch) => { // передає дочірній компоненті колбеки (функції)
+//
+//     return {
+//         changeUserFollowStatus: (user_id,follow_status) => {
+//             // debugger
+//             dispatch(changeUserFollowStatusAC(user_id,follow_status));
+//         },
+//         setUsers:(users) => {
+//             // debugger
+//             dispatch(setUsersAC(users));
+//         },
+//         setTotalUsers:(total) => {
+//             // debugger
+//             dispatch(setTotalUsersAC(total));
+//         },
+//         setCurrentPage:(currentPage) => {
+//             // debugger
+//             dispatch(setCurrentPageAC(currentPage));
+//         },
+//         setFetchingStatus:(isFetching) => {
+//             // debugger
+//             dispatch(changeFetchingStatusAC(isFetching));
+//         }
+//     }
+// }
 
-    return {
-        changeFollowStatus: (user_id,follow_status) => {
-            // debugger
-            dispatch(changeUserFollowStatusAC(user_id,follow_status));
-        },
-        setUsers:(users) => {
-            // debugger
-            dispatch(setUsersAC(users));
-        },
-        setTotalUsers:(total) => {
-            // debugger
-            dispatch(setTotalUsersAC(total));
-        },
-        setCurrentPage:(currentPage) => {
-            // debugger
-            dispatch(setCurrentPageAC(currentPage));
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+export default connect(mapStateToProps, {
+    changeUserFollowStatus,
+    setUsers,
+    setTotalUsers,
+    setCurrentPage,
+    setFetchingStatus
+})(UsersContainer)

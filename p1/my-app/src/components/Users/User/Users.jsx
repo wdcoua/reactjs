@@ -2,6 +2,7 @@ import React from 'react';
 // import c from './Example.module.css';
 import defaultUserPhoto from '../../../images/user.png'
 import style from './User.module.css'
+// import {changeUserFollowStatusAC} from "../../../redux/users_reducer";
 
 const Users = (props) => {
     // let changeFollowStatus = () => {
@@ -34,7 +35,7 @@ const Users = (props) => {
                     <button
                         onClick={
                             () => {
-                                props.changeFollowStatus(user.id, (user.followed === true ? 0 : 1));
+                                props.changeUserFollowStatus(user.id, (user.followed === true ? 0 : 1));
                             }
                         }>
                         {(user.followed === true ? 'unfollow' : 'follow')

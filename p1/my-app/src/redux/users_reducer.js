@@ -2,12 +2,14 @@ const CHANGE_USER_FOLLOW_STATUS = 'CHANGE_USER_FOLLOW_STATUS';
 const SET_USERS = 'SET_USERS';
 const SET_TOTAL_USERS = 'SET_TOTAL_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const CHANGE_FETCHING_STATUS = 'CHANGE_FETCHING_STATUS';
 
 let initialState = {
     usersList: [],
     usersPerPage: 5,
     totalUsers: 0,
-    currentPage: 1
+    currentPage: 1,
+    isFetching: true
 }
 
 const users_reducer = (state = initialState, action) => {
@@ -53,7 +55,7 @@ const users_reducer = (state = initialState, action) => {
                 usersList: state.usersList.map(u => { // перебір масиву користувачів
                         // console.log('u - ' + u.id)
                         // console.log(u)
-                    // debugger
+                        // debugger
                         if (u.id === action.user_id) {    // пошук по ID
                             if (action.followStatus === 1) {
                                 //console.log(u.id + ' - ' + action.user_id)
@@ -100,6 +102,12 @@ const users_reducer = (state = initialState, action) => {
                 ...state,
                 currentPage: action.currentPage
             }
+        case CHANGE_FETCHING_STATUS:
+            // debugger
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
 
         default:
             return state;
@@ -112,20 +120,24 @@ const users_reducer = (state = initialState, action) => {
 export default users_reducer;
 
 
-export const changeUserFollowStatusAC = (user_id, followStatus) => {
+export const changeUserFollowStatus = (user_id, followStatus) => {
     return {type: CHANGE_USER_FOLLOW_STATUS, user_id: user_id, followStatus: followStatus};
 }
 
 
-export const setUsersAC = (users) => {
+export const setUsers = (users) => {
     return {type: SET_USERS, users: users};
 }
-export const setTotalUsersAC = (total) => {
+export const setTotalUsers = (total) => {
     return {type: SET_TOTAL_USERS, total: total};
 }
-export const setCurrentPageAC = (currentPage) => {
-    console.log(currentPage)
+export const setCurrentPage = (currentPage) => {
+    //console.log(currentPage)
     return {type: SET_CURRENT_PAGE, currentPage: currentPage};
+}
+export const setFetchingStatus = (isFetching) => {
+    //console.log(currentPage)
+    return {type: CHANGE_FETCHING_STATUS, isFetching: isFetching};
 }
 
 
