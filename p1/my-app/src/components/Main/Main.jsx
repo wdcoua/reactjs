@@ -6,6 +6,7 @@ import GuestBookContainer from "../GuestBook/GuestBookContainer";
 import ExamplesContainer from "../Examples/ExamplesContainer";
 // import Users from "../Users/Users";
 import UsersContainer from "../Users/UsersContainer";
+import ProfileContainer from "../Profile/ProfileContainer";
 
 const Main = () => {
     return (
@@ -20,10 +21,13 @@ const Main = () => {
 
                 )}/>
                 <Route  path='/chat' render={() => (
-                            <ChatContainer/>
+                            <ChatContainer />
                 )}/>
                 <Route  path='/users' render={() => (
-                            <UsersContainer/>
+                            <UsersContainer />
+                )}/>
+                <Route  path='/profile/:userID?' render={() => (
+                            <ProfileContainer />
                 )}/>
 
             </div>

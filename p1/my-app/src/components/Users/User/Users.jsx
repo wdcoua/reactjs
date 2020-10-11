@@ -2,6 +2,7 @@ import React from 'react';
 // import c from './Example.module.css';
 import defaultUserPhoto from '../../../images/user.png'
 import style from './User.module.css'
+import {NavLink} from "react-router-dom";
 // import {changeUserFollowStatusAC} from "../../../redux/users_reducer";
 
 const Users = (props) => {
@@ -26,10 +27,13 @@ const Users = (props) => {
 
                 return <div key={user.id} className={style.oneUser}>
 
-                    <img alt={user.name} className={style.userPhoto}
-                         src={user.photos.small != null ? user.photos.small : defaultUserPhoto}/>
 
-                    <a href={'userview/' + user.id}>{user.name}</a>:
+                    <NavLink to={'/profile/' + user.id}>
+                        <img alt={user.name} className={style.userPhoto}
+                             src={user.photos.small != null ? user.photos.small : defaultUserPhoto}/> {user.name}
+                    </NavLink>
+                    {/*<a href={'userview/' + user.id}></a>*/}
+                    :
                     {user.status != null ? ' "' + user.status + '" ' : ''}
                     {user.uniqueUrlName != null ? ' - ' + user.uniqueUrlName + ' - ' : ''}
                     <button
