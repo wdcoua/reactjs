@@ -34,7 +34,7 @@ class ExamplesContainer extends React.Component{
             .then(resp => {
                 // debugger
                 this.props.setExamples(resp.data.items)
-                console.log(resp)
+                // console.log(resp)
             })
 
             .catch(error => {
@@ -55,7 +55,7 @@ class ExamplesContainer extends React.Component{
 }
 
 let mapStateToProps = (state) => {
-    console.warn(state);
+    // console.warn(state);
     return {
         examples: state.examples,
     }

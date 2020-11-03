@@ -23,7 +23,7 @@ class ProfileContainer extends React.Component{
         }
 
     });
-
+    // test2
     componentDidMount() {
 
 
@@ -39,7 +39,7 @@ class ProfileContainer extends React.Component{
                 this.props.setUserProfile(resp.data)
                 // this.props.setTotalUsers(resp.data.totalCount)
                 // this.props.totalUsers = resp.data.totalCount
-                console.log(resp)
+                // console.log(resp)
             })
 
             .catch(error => {

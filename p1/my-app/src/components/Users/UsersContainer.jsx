@@ -42,7 +42,7 @@ class UsersContainer extends React.Component {
                 this.props.setUsers(resp.data.items)
                 this.props.setTotalUsers(resp.data.totalCount)
                 // this.props.totalUsers = resp.data.totalCount
-                console.log(resp)
+                // console.log(resp)
             })
 
             .catch(error => {
@@ -64,7 +64,7 @@ class UsersContainer extends React.Component {
                 this.props.setUsers(resp.data.items)
                 this.props.setTotalUsers(resp.data.totalCount)
                 // this.props.totalUsers = resp.data.totalCount
-                console.log(resp)
+                // console.log(resp)
             })
 
             .catch(error => {

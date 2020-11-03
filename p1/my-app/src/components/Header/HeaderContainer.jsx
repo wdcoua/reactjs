@@ -1,6 +1,8 @@
 import React from 'react';
 import Header from "./Header";
 import * as axios from "axios";
+import {setUserAuthData, setUserAuthImg} from "../../redux/auth_reducer";
+import {connect} from "react-redux";
 
 class HeaderContainer extends React.Component{
 
@@ -22,9 +24,30 @@ class HeaderContainer extends React.Component{
         this.instance
             .get('auth/me')
             .then(resp => {
-                // debugger
-                // this.props.setUserProfile(resp.data)
-                console.log(resp)
+                 // debugger
+                if(resp.data.resultCode === 0){
+                    let {id, login, email} = resp.data.data;
+                    this.props.setUserAuthData(id,email,login);
+
+                    this.instance
+                        .get('profile/' + id)
+                        .then(resp => {
+                             // debugger
+                            if(resp.data.resultCode === 0){
+                                // let {id, login, email} = resp.data.data;
+                                this.props.setUserAuthImg(resp.data.photos.small)
+                            }
+
+                            // console.log(resp)
+                        })
+
+                        .catch(error => {
+                            console.warn(error);
+                        });
+
+                }
+
+                // console.log(resp)
             })
 
             .catch(error => {
@@ -33,9 +56,15 @@ class HeaderContainer extends React.Component{
     }
 
     render(){
-        return <Header />
+        return <Header {...this.props} />
     }
 }
 
+const mapStateToProps = (props) => {
+    // debugger
+    return {
+        auth: props.auth
+    }
+};
 
-export default HeaderContainer;
+export default connect(mapStateToProps,{setUserAuthData,setUserAuthImg})(HeaderContainer);

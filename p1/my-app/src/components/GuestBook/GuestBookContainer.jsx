@@ -33,7 +33,7 @@ class GuestBookContainer extends React.Component{
             .then(resp => {
                 // debugger
                 this.props.setGBPosts(resp.data.items)
-                console.log(resp)
+                // console.log(resp)
             })
 
             .catch(error => {

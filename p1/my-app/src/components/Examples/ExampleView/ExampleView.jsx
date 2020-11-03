@@ -1,5 +1,5 @@
 import React from 'react';
-import c from './Example.module.css';
+import c from './ExampleView.module.css';
 
 const ExampleView = (props) => {
   return (
