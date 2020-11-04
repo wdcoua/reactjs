@@ -23,7 +23,6 @@ class ProfileContainer extends React.Component{
         }
 
     });
-    // test2
     componentDidMount() {
 
 
