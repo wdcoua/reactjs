@@ -5,35 +5,25 @@ import {connect} from "react-redux";
 import {setExamplesAC} from "../../redux/examples_reducer";
 // import ExamplesClass from "./ExamplesClass";
 import React from "react";
-import * as axios from "axios";
 // import Example from "./Example/Example";
 import Examples from "./Example/Examples";
+import {API} from "../../api/api";
 
 
 class ExamplesContainer extends React.Component{
 
 
-    apiKey = 'ada3692f-cdc4-4c82-9079-5847319d88fc'
-    baseURL = 'https://wd.co.ua/api.php'
 
 
     componentDidMount = () => {
 
-        const instance = axios.create({
-            withCredentials: true,
-            baseURL: this.baseURL,
-            headers: {
-                'API-KEY': this.apiKey
-            }
 
-        });
 
-        instance
-            .get('?action=get_examples')
+        API.getExamples()
             // .get('https://social-network.samuraijs.com/api/1.0/users/?count=20&page=250')
-            .then(resp => {
+            .then(data => {
                 // debugger
-                this.props.setExamples(resp.data.items)
+                this.props.setExamples(data.items)
                 // console.log(resp)
             })
 

@@ -7,15 +7,15 @@ import {
     setUsers
 } from "../../redux/users_reducer";
 import React from "react";
-import * as axios from "axios";
 import styles from "./User/User.module.css";
 import Users from "./User/Users";
-// import preloader from "../../images/rings.svg"
 import Preloader from "../Preloader/Preloader";
+
+import {API} from "../../api/api"
 
 
 class UsersContainer extends React.Component {
-
+/*
     apiKey = 'ada3692f-cdc4-4c82-9079-5847319d88fc'
     // baseURL = 'https://wd.co.ua/api.php'
     baseURL = 'https://social-network.samuraijs.com/api/1.0/'
@@ -28,19 +28,17 @@ class UsersContainer extends React.Component {
         }
 
     });
-
+*/
     componentDidMount() {
 
 
         this.props.setFetchingStatus(true);
-        this.instance
-            // .get('?action=users&eee')
-            .get('users/?count=' + this.props.usersPerPage + '&page=' + this.currentPage)
-            .then(resp => {
+        API.getUsers( this.props.usersPerPage ,this.currentPage)
+            .then(data => {
                 // debugger
                 this.props.setFetchingStatus(false);
-                this.props.setUsers(resp.data.items)
-                this.props.setTotalUsers(resp.data.totalCount)
+                this.props.setUsers(data.items)
+                this.props.setTotalUsers(data.totalCount)
                 // this.props.totalUsers = resp.data.totalCount
                 // console.log(resp)
             })
@@ -55,14 +53,12 @@ class UsersContainer extends React.Component {
 
         this.props.setCurrentPage(n);
         this.props.setFetchingStatus(true);
-        this.instance
-            // .get('?action=users&eee')
-            .get('users/?count=' + this.props.usersPerPage + '&page=' + n)
-            .then(resp => {
+        API.getUsers( this.props.usersPerPage , n)
+            .then(data => {
                 // debugger
                 this.props.setFetchingStatus(false);
-                this.props.setUsers(resp.data.items)
-                this.props.setTotalUsers(resp.data.totalCount)
+                this.props.setUsers(data.items)
+                this.props.setTotalUsers(data.totalCount)
                 // this.props.totalUsers = resp.data.totalCount
                 // console.log(resp)
             })
@@ -73,52 +69,6 @@ class UsersContainer extends React.Component {
 
     }
 
-    realFollow111(id, followToggle){ /* 1233, true */
-        //debugger
-        this.props.setFetchingStatus(true);
-
-        if(followToggle){ // follow
-
-            this.instance
-                // .get('?action=users&eee')
-                .post('follow/' + id)
-                .then(resp => {
-                    // debugger
-                    this.props.setFetchingStatus(false);
-                    this.props.changeUserFollowStatus(id, 1)
-
-
-                    //this.props.setUsers(resp.data.items)
-                    //this.props.setTotalUsers(resp.data.totalCount)
-                    // this.props.totalUsers = resp.data.totalCount
-                    console.log(resp)
-                })
-
-                .catch(error => {
-                    console.warn(error);
-                });
-        }else{ // unfollow
-            this.instance
-                // .get('?action=users&eee')
-                .delete('follow/' + id)
-                .then(resp => {
-                    // debugger
-                    this.props.setFetchingStatus(false);
-                    this.props.changeUserFollowStatus(id, 0)
-
-
-                    //this.props.setUsers(resp.data.items)
-                    //this.props.setTotalUsers(resp.data.totalCount)
-                    // this.props.totalUsers = resp.data.totalCount
-                    console.log(resp)
-                })
-
-                .catch(error => {
-                    console.warn(error);
-                });
-        }
-
-    }
 
     showPages() {
 

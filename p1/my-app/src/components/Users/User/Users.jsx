@@ -1,24 +1,10 @@
 import React from 'react';
-// import c from './Example.module.css';
 import defaultUserPhoto from '../../../images/user.png'
 import style from './User.module.css'
 import {NavLink} from "react-router-dom";
-import * as axios from "axios";
-// import {changeUserFollowStatusAC} from "../../../redux/users_reducer";
+import {API} from "../../../api/api";
 
 
-let apiKey = 'ada3692f-cdc4-4c82-9079-5847319d88fc'
-// baseURL = 'https://wd.co.ua/api.php'
-let baseURL = 'https://social-network.samuraijs.com/api/1.0/'
-// currPage = 4
-let instance = axios.create({
-    withCredentials: true,
-    baseURL: baseURL,
-    headers: {
-        'API-KEY': apiKey
-    }
-
-});
 
 const realFollow = (id, followToggle,props) => { /* 1233, true */
     //debugger
@@ -26,12 +12,10 @@ const realFollow = (id, followToggle,props) => { /* 1233, true */
 
     if(followToggle){ // follow
 
-        instance
-            // .get('?action=users&eee')
-            .post('follow/' + id)
-            .then(resp => {
+        API.follow( id)
+            .then(data => {
                 // debugger
-                if(resp.data.resultCode === 0){ // чи потрібно?
+                if(data.resultCode === 0){ // чи потрібно?
 
                     props.setFetchingStatus(false);
                     props.changeUserFollowStatus(id, 1)
@@ -40,7 +24,7 @@ const realFollow = (id, followToggle,props) => { /* 1233, true */
                     //props.setUsers(resp.data.items)
                     //props.setTotalUsers(resp.data.totalCount)
                     // props.totalUsers = resp.data.totalCount
-                    console.log(resp)
+                    console.log(data)
                     //console.log('ffffff')
                 }else{
                     // error
@@ -51,9 +35,7 @@ const realFollow = (id, followToggle,props) => { /* 1233, true */
                 console.warn(error);
             });
     }else{ // unfollow
-        instance
-            // .get('?action=users&eee')
-            .delete('follow/' + id)
+        API.unfollow( id)
             .then(resp => {
                 // debugger
                 props.setFetchingStatus(false);

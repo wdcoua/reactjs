@@ -3,36 +3,35 @@ import {addGBPostActionCreator, newGBpostChangeActionCreator, setGBPostsAC} from
 // import GuestBook from "./GuestBook";
 import {connect} from "react-redux";
 import React from "react";
-import * as axios from "axios";
 import c from "./GuestBook.module.css";
 import GuestBookSendForm from "./GuestBookSendForm/GuestBookSendForm";
 import GuestBookPosts from "./GuestBookPosts/GuestBookPosts";
+import {API} from "../../api/api";
 // import GuestBookClass from "./GuestBookClass";
 
 
 class GuestBookContainer extends React.Component{
-
-    apiKey = 'ada3692f-cdc4-4c82-9079-5847319d88fc'
-    baseURL = 'https://wd.co.ua/api.php'
+    //
+    // apiKey = 'ada3692f-cdc4-4c82-9079-5847319d88fc'
+    // baseURL = 'https://wd.co.ua/api.php'
 
 
     componentDidMount = () => {
+        //
+        // const instance = axios.create({
+        //     withCredentials: true,
+        //     baseURL: this.baseURL,
+        //     headers: {
+        //         'API-KEY': this.apiKey
+        //     }
+        //
+        // });
 
-        const instance = axios.create({
-            withCredentials: true,
-            baseURL: this.baseURL,
-            headers: {
-                'API-KEY': this.apiKey
-            }
-
-        });
-
-        instance
-            .get('?action=get_gb_posts')
+        API.get_gb_posts()
             // .get('https://social-network.samuraijs.com/api/1.0/users/?count=20&page=250')
-            .then(resp => {
+            .then(data => {
                 // debugger
-                this.props.setGBPosts(resp.data.items)
+                this.props.setGBPosts(data.items)
                 // console.log(resp)
             })
 
