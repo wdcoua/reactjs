@@ -126,6 +126,8 @@ class UsersContainer extends React.Component {
         let pages = Math.ceil(this.props.totalUsers / this.props.usersPerPage);
         let out = [];
         let cp = this.props.currentPage;
+        let prev_is_shown = 0;
+
         if (pages > 5) {
 
             for(let p = 1; p <= pages; p++){
@@ -140,7 +142,8 @@ class UsersContainer extends React.Component {
                             )
                         }
                         className={cp === p ? styles.currentPage : '' + ' ' + styles.pages}
-                    > {p} </span>))
+                    > {p} </span>));
+                    prev_is_shown = 0;
                 }
 
                 if( ((p === cp && cp !== 1 && cp !== pages) ||
@@ -155,9 +158,14 @@ class UsersContainer extends React.Component {
                             )
                         }
                         className={cp === p ? styles.currentPage : '' + ' ' + styles.pages}
-                    > {p} </span>))
+                    > {p} </span>));
+                    prev_is_shown = 0;
                 }
 
+                if (prev_is_shown === 1)
+                out.push(' ... ');
+
+                prev_is_shown++;
 
             }
 
