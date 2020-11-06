@@ -4,7 +4,7 @@ import {
     changeUserFollowStatus,
     setCurrentPage,
     setTotalUsers,
-    setUsers
+    setUsers, setFollowingInProgress
 } from "../../redux/users_reducer";
 import React from "react";
 import styles from "./User/User.module.css";
@@ -175,6 +175,8 @@ class UsersContainer extends React.Component {
                     showPages={this.showPages}
                     changeUserFollowStatus={this.props.changeUserFollowStatus}
                     setFetchingStatus={this.props.setFetchingStatus}
+                    setFollowingInProgress={this.props.setFollowingInProgress}
+                    followingIsInProgress={this.props.followingIsInProgress}
 
 
                 />
@@ -187,12 +189,15 @@ class UsersContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => { // бере увесь глобальний STATE і повертає тільки те, що нам потрібно для цієї компоненти
+    //debugger
     return {
         users: state.users.usersList,
         usersPerPage:state.users.usersPerPage,
         totalUsers:state.users.totalUsers,
         currentPage: state.users.currentPage,
-        isFetching: state.users.isFetching
+        isFetching: state.users.isFetching,
+        followingIsInProgress: state.users.followingIsInProgress
+
     }
 }
 //
@@ -227,5 +232,6 @@ export default connect(mapStateToProps, {
     setUsers,
     setTotalUsers,
     setCurrentPage,
-    setFetchingStatus
+    setFetchingStatus,
+    setFollowingInProgress
 })(UsersContainer)

@@ -6,9 +6,11 @@ import {API} from "../../../api/api";
 
 
 
+
 const realFollow = (id, followToggle,props) => { /* 1233, true */
     //debugger
-    props.setFetchingStatus(true);
+    //props.setFetchingStatus(true);
+    props.setFollowingInProgress(true, id);
 
     if(followToggle){ // follow
 
@@ -17,8 +19,9 @@ const realFollow = (id, followToggle,props) => { /* 1233, true */
                 // debugger
                 if(data.resultCode === 0){ // чи потрібно?
 
-                    props.setFetchingStatus(false);
+                    //props.setFetchingStatus(false);
                     props.changeUserFollowStatus(id, 1)
+                    props.setFollowingInProgress(false, id);
 
 
                     //props.setUsers(resp.data.items)
@@ -38,8 +41,9 @@ const realFollow = (id, followToggle,props) => { /* 1233, true */
         API.unfollow( id)
             .then(resp => {
                 // debugger
-                props.setFetchingStatus(false);
+                //props.setFetchingStatus(false);
                 props.changeUserFollowStatus(id, 0)
+                props.setFollowingInProgress(false, id);
 
 
                 //props.setUsers(resp.data.items)
@@ -76,6 +80,7 @@ const Users = (props) => {
 
             {props.users.map(user => {
                 //debugger
+                //console.log(props.followingIsInProgress + ' props.followingIsInProgress');
                 return <div key={user.id} className={style.oneUser}>
 
 
@@ -88,6 +93,7 @@ const Users = (props) => {
                     {user.status != null ? ' "' + user.status + '" ' : ''}
                     {user.uniqueUrlName != null ? ' - ' + user.uniqueUrlName + ' - ' : ''}
                     <button
+                        disabled={props.followingIsInProgress.some(id => id === user.id)}
                         onClick={
                             () => {
                                 //props.changeUserFollowStatus(user.id, (user.followed === true ? 0 : 1));

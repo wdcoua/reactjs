@@ -3,59 +3,25 @@ const SET_USERS = 'SET_USERS';
 const SET_TOTAL_USERS = 'SET_TOTAL_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const CHANGE_FETCHING_STATUS = 'CHANGE_FETCHING_STATUS';
+const FOLLOWING_IN_PROGRESS = 'FOLLOWING_IN_PROGRESS';
 
 let initialState = {
     usersList: [],
     usersPerPage: 5,
     totalUsers: 0,
     currentPage: 1,
-    isFetching: true
+    isFetching: true,
+    followingIsInProgress: []
 }
 
 const users_reducer = (state = initialState, action) => {
 
     switch (action.type) {
 
-        // case ADD_CHAT_POST:
-        //     let newChatPost = {
-        //         id: 8,
-        //         author: 'Котигорошко',
-        //         authorAva: '/src/kotigoroshko.jpg',
-        //         text: state.newChatPostText,
-        //         date: '15:25 17-09-2020'
-        //     }
-        //     return {
-        //         ...state,
-        //         chatPosts: [...state.chatPosts,newChatPost],
-        //         newChatPostText: ''
-        //     }
-        //
-        //
         case CHANGE_USER_FOLLOW_STATUS:
-            // console.log(state)
-            // return state;
-
-            // debugger
             return {
                 ...state,
-
-
-                // usersList: [...state.usersList]
-                // usersList: state.usersList.map(u => {
-                //     if (u.id === action.user_id) {
-                //         return {
-                //             ...u,
-                //             followed: true
-                //         }
-                //     }
-                //     return u;
-                // })
-
-
                 usersList: state.usersList.map(u => { // перебір масиву користувачів
-                        // console.log('u - ' + u.id)
-                        // console.log(u)
-                        // debugger
                         if (u.id === action.user_id) {    // пошук по ID
                             if (action.followStatus === 1) {
                                 //console.log(u.id + ' - ' + action.user_id)
@@ -108,6 +74,14 @@ const users_reducer = (state = initialState, action) => {
                 ...state,
                 isFetching: action.isFetching
             }
+        case FOLLOWING_IN_PROGRESS:
+            // debugger
+            return {
+                ...state,
+                followingIsInProgress: action.followingIsInProgress
+                    ? [...state.followingIsInProgress, action.userId ]
+                    : state.followingIsInProgress.filter(id => id !== action.userId )
+            }
 
         default:
             return state;
@@ -138,6 +112,10 @@ export const setCurrentPage = (currentPage) => {
 export const setFetchingStatus = (isFetching) => {
     //console.log(currentPage)
     return {type: CHANGE_FETCHING_STATUS, isFetching: isFetching};
+}
+export const setFollowingInProgress = (followingIsInProgress,userId) => {
+    //console.log(currentPage)
+    return {type: FOLLOWING_IN_PROGRESS, followingIsInProgress,userId};
 }
 
 
