@@ -7,12 +7,16 @@ import ExamplesContainer from "../Examples/ExamplesContainer";
 // import Users from "../Users/Users";
 import UsersContainer from "../Users/UsersContainer";
 import ProfileContainer from "../Profile/ProfileContainer";
+import Login from "../Login/Login";
 
 const Main = () => {
     return (
             <div className={c.main}>
 
                 <Route path='/examples' render={() => (
+                            <ExamplesContainer/>
+                )}/>
+                <Route path='/index' render={() => (
                             <ExamplesContainer/>
                 )}/>
                 <Route  path='/gb' render={() => (
@@ -28,6 +32,12 @@ const Main = () => {
                 )}/>
                 <Route  path='/profile/:userID?' render={() => (
                             <ProfileContainer />
+                )}/>
+                <Route  path='/login' render={() => (
+                            <Login />
+                )}/>
+                <Route  path='/reg' render={() => (
+                            <Login />
                 )}/>
 
             </div>

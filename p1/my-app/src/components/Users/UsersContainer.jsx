@@ -10,6 +10,7 @@ import React from "react";
 import styles from "./User/User.module.css";
 import Users from "./User/Users";
 import Preloader from "../Preloader/Preloader";
+import {Redirect} from "react-router-dom";
 
 //import {API} from "../../api/api"
 
@@ -137,6 +138,7 @@ class UsersContainer extends React.Component {
     }
 
     render() {
+        if(this.props.isAuth === false) return <Redirect to={'/login'}/>;
 
 
         return ( <>
@@ -169,7 +171,8 @@ let mapStateToProps = (state) => { // бере увесь глобальний S
         totalUsers:state.users.totalUsers,
         currentPage: state.users.currentPage,
         isFetching: state.users.isFetching,
-        followingIsInProgress: state.users.followingIsInProgress
+        followingIsInProgress: state.users.followingIsInProgress,
+        isAuth: state.auth.isAuth
 
     }
 }

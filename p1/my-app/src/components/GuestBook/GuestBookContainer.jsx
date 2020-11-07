@@ -9,6 +9,7 @@ import React from "react";
 import c from "./GuestBook.module.css";
 import GuestBookSendForm from "./GuestBookSendForm/GuestBookSendForm";
 import GuestBookPosts from "./GuestBookPosts/GuestBookPosts";
+import {Redirect} from "react-router-dom";
 
 
 class GuestBookContainer extends React.Component{
@@ -18,7 +19,7 @@ class GuestBookContainer extends React.Component{
     }
 
     render = () => {
-
+        if(this.props.isAuth === false) return <Redirect to={'/login'}/>;
         return (
             <div className={c.gb}>
                 <GuestBookSendForm
@@ -38,7 +39,8 @@ class GuestBookContainer extends React.Component{
 function mapStateToProps(state) {
     return {
         newPostText: state.gb.newPostText,
-        gbPosts: state.gb.gbPosts
+        gbPosts: state.gb.gbPosts,
+        isAuth: state.auth.isAuth
     }
 }
 
