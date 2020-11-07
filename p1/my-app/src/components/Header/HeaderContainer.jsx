@@ -1,8 +1,8 @@
 import React from 'react';
 import Header from "./Header";
-import {setUserAuthData, setUserAuthImg} from "../../redux/auth_reducer";
+import {authorization, setUserAuthData, setUserAuthImg} from "../../redux/auth_reducer";
 import {connect} from "react-redux";
-import {API} from "../../api/api";
+//import {API} from "../../api/api";
 
 class HeaderContainer extends React.Component{
 
@@ -21,36 +21,8 @@ class HeaderContainer extends React.Component{
 
     componentDidMount() {
 
-        API.authMe()
-            .then(data => {
-                 // debugger
-                if(data.resultCode === 0){
-                    let {id, login, email} = data.data;
-                    this.props.setUserAuthData(id,email,login);
+        this.props.authorization();
 
-                    API.getProfile(id)
-                        .then(resp => {
-                             // debugger
-                            if(resp.data.resultCode === 0){
-                                // let {id, login, email} = resp.data.data;
-                                this.props.setUserAuthImg(resp.data.photos.small)
-                            }
-
-                            // console.log(resp)
-                        })
-
-                        .catch(error => {
-                            console.warn(error);
-                        });
-
-                }
-
-                // console.log(resp)
-            })
-
-            .catch(error => {
-                console.warn(error);
-            });
     }
 
     render(){
@@ -65,4 +37,4 @@ const mapStateToProps = (props) => {
     }
 };
 
-export default connect(mapStateToProps,{setUserAuthData,setUserAuthImg})(HeaderContainer);
+export default connect(mapStateToProps,{setUserAuthData,setUserAuthImg,authorization})(HeaderContainer);

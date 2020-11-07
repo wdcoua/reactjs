@@ -4,14 +4,14 @@ import {
     changeUserFollowStatus,
     setCurrentPage,
     setTotalUsers,
-    setUsers, setFollowingInProgress
+    setUsers, setFollowingInProgress, getUsers, follow
 } from "../../redux/users_reducer";
 import React from "react";
 import styles from "./User/User.module.css";
 import Users from "./User/Users";
 import Preloader from "../Preloader/Preloader";
 
-import {API} from "../../api/api"
+//import {API} from "../../api/api"
 
 
 class UsersContainer extends React.Component {
@@ -31,41 +31,14 @@ class UsersContainer extends React.Component {
 */
     componentDidMount() {
 
+        this.props.getUsers(this.props.usersPerPage ,this.currentPage);
 
-        this.props.setFetchingStatus(true);
-        API.getUsers( this.props.usersPerPage ,this.currentPage)
-            .then(data => {
-                // debugger
-                this.props.setFetchingStatus(false);
-                this.props.setUsers(data.items)
-                this.props.setTotalUsers(data.totalCount)
-                // this.props.totalUsers = resp.data.totalCount
-                // console.log(resp)
-            })
-
-            .catch(error => {
-                console.warn(error);
-            });
     }
 
     openPageNumber(n) {
 
+        this.props.getUsers(this.props.usersPerPage ,n);
 
-        this.props.setCurrentPage(n);
-        this.props.setFetchingStatus(true);
-        API.getUsers( this.props.usersPerPage , n)
-            .then(data => {
-                // debugger
-                this.props.setFetchingStatus(false);
-                this.props.setUsers(data.items)
-                this.props.setTotalUsers(data.totalCount)
-                // this.props.totalUsers = resp.data.totalCount
-                // console.log(resp)
-            })
-
-            .catch(error => {
-                console.warn(error);
-            });
 
     }
 
@@ -86,12 +59,12 @@ class UsersContainer extends React.Component {
                     out.push((<span
                         key={p}
                         onClick={
-                            (cp === p ? '' : () => {
+                            (cp === p ? null : () => {
                                     this.openPageNumber(p)
                                 }
                             )
                         }
-                        className={cp === p ? styles.currentPage : '' + ' ' + styles.pages}
+                        className={cp === p ? styles.currentPage : /*'' + ' ' +*/ styles.pages}
                     > {p} </span>));
                     prev_is_shown = 0;
                 }
@@ -102,12 +75,12 @@ class UsersContainer extends React.Component {
                     out.push((<span
                         key={p}
                         onClick={
-                            (cp === p ? '' : () => {
+                            (cp === p ? null : () => {
                                     this.openPageNumber(p)
                                 }
                             )
                         }
-                        className={cp === p ? styles.currentPage : '' + ' ' + styles.pages}
+                        className={cp === p ? styles.currentPage : /*'' + ' ' +*/ styles.pages}
                     > {p} </span>));
                     prev_is_shown = 0;
                 }
@@ -177,7 +150,7 @@ class UsersContainer extends React.Component {
                     setFetchingStatus={this.props.setFetchingStatus}
                     setFollowingInProgress={this.props.setFollowingInProgress}
                     followingIsInProgress={this.props.followingIsInProgress}
-
+                    follow={this.props.follow}
 
                 />
             </div>
@@ -233,5 +206,7 @@ export default connect(mapStateToProps, {
     setTotalUsers,
     setCurrentPage,
     setFetchingStatus,
-    setFollowingInProgress
+    setFollowingInProgress,
+    getUsers,
+    follow
 })(UsersContainer)

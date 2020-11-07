@@ -1,3 +1,4 @@
+import {API} from "../api/api";
 
 const NEW_GB_POST_CHANGE = 'NEW-GB-POST-CHANGE';
 const ADD_GB_POST = 'ADD-GB-POST';
@@ -70,6 +71,21 @@ export const newGBpostChangeActionCreator = (text) => {
 
 
 
-export const setGBPostsAC = (posts) => {
+export const setGBPosts = (posts) => {
     return {type: SET_GB_POSTS, posts: posts};
+}
+
+
+// thunk-и
+export const get_gb_posts = () => {
+    return (dispatch) => {
+
+        API.get_gb_posts()
+            .then(data => {
+                dispatch(setGBPosts(data.items));
+            })
+            .catch(error => {
+                console.warn(error);
+            });
+    }
 }

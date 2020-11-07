@@ -1,10 +1,9 @@
 import React from "react";
 import {connect} from "react-redux";
-import {setUserProfile} from "../../redux/profile_reducer";
+import {getProfile, setUserProfile} from "../../redux/profile_reducer";
 import Preloader from "../Preloader/Preloader";
 import {withRouter} from "react-router-dom";
 import Profile from "./Profile";
-import {API} from "../../api/api";
 
 
 
@@ -29,20 +28,7 @@ class ProfileContainer extends React.Component{
 
         // this.props.setFetchingStatus(true);
         let userID = this.props.match.params.userID;
-
-        API.getProfile(!userID ? 11583 : userID)
-            .then(data => {
-                // debugger
-                // this.props.setFetchingStatus(false);
-                this.props.setUserProfile(data)
-                // this.props.setTotalUsers(resp.data.totalCount)
-                // this.props.totalUsers = resp.data.totalCount
-                // console.log(resp)
-            })
-
-            .catch(error => {
-                console.warn(error);
-            });
+        this.props.getProfile(userID);
     }
 
     render(){
@@ -68,7 +54,8 @@ let ProfileContainerWithUrlData = withRouter(ProfileContainer);
 
 
 export default connect(mapStateToProps, {
-    setUserProfile
+    setUserProfile,
+    getProfile
     // changeUserFollowStatus,
     // setUsers,
     // setTotalUsers,

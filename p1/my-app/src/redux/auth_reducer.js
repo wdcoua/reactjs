@@ -1,3 +1,4 @@
+import {API} from "../api/api";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const SET_USER_IMG = 'SET_USER_IMG';
@@ -46,3 +47,40 @@ export const setUserAuthImg = (img) => {
     return {type: SET_USER_IMG, img};
 }
 
+// thunk-и
+
+export const authorization = () => {
+    return (dispatch) => {
+
+        API.authMe()
+            .then(data => {
+                // debugger
+                if(data.resultCode === 0){
+                    let {id, login, email} = data.data;
+                    dispatch(setUserAuthData(id,email,login));
+
+                    API.getProfile(id)
+                        .then(data => {
+                            // debugger
+                            if(data.resultCode === 0){
+                                // let {id, login, email} = resp.data.data;
+                                dispatch(setUserAuthImg(data.photos.small))
+                            }
+
+                            // console.log(resp)
+                        })
+
+                        .catch(error => {
+                            console.warn(error);
+                        });
+
+                }
+
+                // console.log(resp)
+            })
+
+            .catch(error => {
+                console.warn(error);
+            });
+    }
+}

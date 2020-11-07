@@ -2,7 +2,7 @@ import React from 'react';
 import defaultUserPhoto from '../../../images/user.png'
 import style from './User.module.css'
 import {NavLink} from "react-router-dom";
-import {API} from "../../../api/api";
+//import {API} from "../../../api/api";
 
 
 
@@ -10,52 +10,7 @@ import {API} from "../../../api/api";
 const realFollow = (id, followToggle,props) => { /* 1233, true */
     //debugger
     //props.setFetchingStatus(true);
-    props.setFollowingInProgress(true, id);
-
-    if(followToggle){ // follow
-
-        API.follow( id)
-            .then(data => {
-                // debugger
-                if(data.resultCode === 0){ // чи потрібно?
-
-                    //props.setFetchingStatus(false);
-                    props.changeUserFollowStatus(id, 1)
-                    props.setFollowingInProgress(false, id);
-
-
-                    //props.setUsers(resp.data.items)
-                    //props.setTotalUsers(resp.data.totalCount)
-                    // props.totalUsers = resp.data.totalCount
-                    console.log(data)
-                    //console.log('ffffff')
-                }else{
-                    // error
-                }
-            })
-
-            .catch(error => {
-                console.warn(error);
-            });
-    }else{ // unfollow
-        API.unfollow( id)
-            .then(resp => {
-                // debugger
-                //props.setFetchingStatus(false);
-                props.changeUserFollowStatus(id, 0)
-                props.setFollowingInProgress(false, id);
-
-
-                //props.setUsers(resp.data.items)
-                //props.setTotalUsers(resp.data.totalCount)
-                // props.totalUsers = resp.data.totalCount
-                console.log(resp)
-            })
-
-            .catch(error => {
-                console.warn(error);
-            });
-    }
+    props.follow(id, followToggle);
 
 }
 

@@ -1,54 +1,29 @@
-// import React from 'react';
-import {addGBPostActionCreator, newGBpostChangeActionCreator, setGBPostsAC} from "../../redux/gb_reducer";
-// import GuestBook from "./GuestBook";
+import {
+    addGBPostActionCreator,
+    get_gb_posts,
+    newGBpostChangeActionCreator,
+
+} from "../../redux/gb_reducer";
 import {connect} from "react-redux";
 import React from "react";
 import c from "./GuestBook.module.css";
 import GuestBookSendForm from "./GuestBookSendForm/GuestBookSendForm";
 import GuestBookPosts from "./GuestBookPosts/GuestBookPosts";
-import {API} from "../../api/api";
-// import GuestBookClass from "./GuestBookClass";
 
 
 class GuestBookContainer extends React.Component{
-    //
-    // apiKey = 'ada3692f-cdc4-4c82-9079-5847319d88fc'
-    // baseURL = 'https://wd.co.ua/api.php'
-
 
     componentDidMount = () => {
-        //
-        // const instance = axios.create({
-        //     withCredentials: true,
-        //     baseURL: this.baseURL,
-        //     headers: {
-        //         'API-KEY': this.apiKey
-        //     }
-        //
-        // });
-
-        API.get_gb_posts()
-            // .get('https://social-network.samuraijs.com/api/1.0/users/?count=20&page=250')
-            .then(data => {
-                // debugger
-                this.props.setGBPosts(data.items)
-                // console.log(resp)
-            })
-
-            .catch(error => {
-                console.warn(error);
-            });
-
+        this.props.get_gb_posts();
     }
-
 
     render = () => {
 
         return (
             <div className={c.gb}>
                 <GuestBookSendForm
-                    onGBNewPostChange={this.props.onGBNewPostChange}
-                    onGBAddPost={this.props.onGBAddPost}
+                    onGBNewPostChange={this.props.newGBpostChangeActionCreator}
+                    onGBAddPost={this.props.addGBPostActionCreator}
                     newPostText={this.props.newPostText}
                 />
 
@@ -67,22 +42,10 @@ function mapStateToProps(state) {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        onGBNewPostChange: (text) => {
-            dispatch(newGBpostChangeActionCreator(text));
-        },
-        onGBAddPost: () => {
-            dispatch(addGBPostActionCreator());//
-            dispatch(newGBpostChangeActionCreator(''));
-        },
 
-        setGBPosts:(posts) => {
-            // debugger
-            dispatch(setGBPostsAC(posts));
-        }
+export default connect(mapStateToProps, {
+    get_gb_posts,
+    newGBpostChangeActionCreator,
+    addGBPostActionCreator,
+})(GuestBookContainer);
 
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(GuestBookContainer);
