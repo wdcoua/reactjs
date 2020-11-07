@@ -60,11 +60,11 @@ const gb_reducer = (state = initialState,action) => {
 export default gb_reducer;
 
 
-export const addGBPostActionCreator = () =>  {
+export const addGBPost = () =>  {
     return {type: ADD_GB_POST};
 }
 
-export const newGBpostChangeActionCreator = (text) => {
+export const newGBpostChange = (text) => {
     return {type: NEW_GB_POST_CHANGE,changedText: text};
 }
 
@@ -77,10 +77,10 @@ export const setGBPosts = (posts) => {
 
 
 // thunk-и
-export const get_gb_posts = () => {
+export const getGbPosts = () => {
     return (dispatch) => {
 
-        API.get_gb_posts()
+        API.getGbPosts()
             .then(data => {
                 dispatch(setGBPosts(data.items));
             })

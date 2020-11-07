@@ -10,37 +10,16 @@ import React from "react";
 import styles from "./User/User.module.css";
 import Users from "./User/Users";
 import Preloader from "../Preloader/Preloader";
-import {Redirect} from "react-router-dom";
-
-//import {API} from "../../api/api"
-
+import {withAuthRedirect} from "../hoc/withAuthRedirect";
 
 class UsersContainer extends React.Component {
-/*
-    apiKey = 'ada3692f-cdc4-4c82-9079-5847319d88fc'
-    // baseURL = 'https://wd.co.ua/api.php'
-    baseURL = 'https://social-network.samuraijs.com/api/1.0/'
-    // currPage = 4
-    instance = axios.create({
-        withCredentials: true,
-        baseURL: this.baseURL,
-        headers: {
-            'API-KEY': this.apiKey
-        }
 
-    });
-*/
     componentDidMount() {
-
         this.props.getUsers(this.props.usersPerPage ,this.currentPage);
-
     }
 
     openPageNumber(n) {
-
         this.props.getUsers(this.props.usersPerPage ,n);
-
-
     }
 
 
@@ -94,26 +73,6 @@ class UsersContainer extends React.Component {
             }
 
 
-            /* simple
-
-            for (let i = 1; i <= pages; i++) {
-                if (cp === i) {
-                    out.push((<span
-                        key={i}
-                        className={styles.currentPage + ' ' + styles.pages}
-                    > {i} </span>))
-                } else {
-                    out.push((<span
-                        key={i}
-                        onClick={() => {
-                            this.openPageNumber(i)
-                        }}
-                        className={styles.pages}
-                    > {i} </span>))
-                }
-            }
-            */
-
 
         } else {    // якщо сторінок <= 5
 
@@ -138,8 +97,6 @@ class UsersContainer extends React.Component {
     }
 
     render() {
-        if(this.props.isAuth === false) return <Redirect to={'/login'}/>;
-
 
         return ( <>
                 {this.props.isFetching ? <Preloader /> : null}
@@ -172,36 +129,9 @@ let mapStateToProps = (state) => { // бере увесь глобальний S
         currentPage: state.users.currentPage,
         isFetching: state.users.isFetching,
         followingIsInProgress: state.users.followingIsInProgress,
-        isAuth: state.auth.isAuth
 
     }
 }
-//
-// let mapDispatchToProps = (dispatch) => { // передає дочірній компоненті колбеки (функції)
-//
-//     return {
-//         changeUserFollowStatus: (user_id,follow_status) => {
-//             // debugger
-//             dispatch(changeUserFollowStatusAC(user_id,follow_status));
-//         },
-//         setUsers:(users) => {
-//             // debugger
-//             dispatch(setUsersAC(users));
-//         },
-//         setTotalUsers:(total) => {
-//             // debugger
-//             dispatch(setTotalUsersAC(total));
-//         },
-//         setCurrentPage:(currentPage) => {
-//             // debugger
-//             dispatch(setCurrentPageAC(currentPage));
-//         },
-//         setFetchingStatus:(isFetching) => {
-//             // debugger
-//             dispatch(changeFetchingStatusAC(isFetching));
-//         }
-//     }
-// }
 
 export default connect(mapStateToProps, {
     changeUserFollowStatus,
@@ -212,4 +142,4 @@ export default connect(mapStateToProps, {
     setFollowingInProgress,
     getUsers,
     follow
-})(UsersContainer)
+})(withAuthRedirect(UsersContainer))

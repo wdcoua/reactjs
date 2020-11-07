@@ -1,30 +1,28 @@
 import {
-    addGBPostActionCreator,
-    get_gb_posts,
-    newGBpostChangeActionCreator,
-
+    addGBPost,
+    getGbPosts, newGBpostChange,
 } from "../../redux/gb_reducer";
 import {connect} from "react-redux";
 import React from "react";
 import c from "./GuestBook.module.css";
 import GuestBookSendForm from "./GuestBookSendForm/GuestBookSendForm";
 import GuestBookPosts from "./GuestBookPosts/GuestBookPosts";
-import {Redirect} from "react-router-dom";
+import {withAuthRedirect} from "../hoc/withAuthRedirect";
 
 
 class GuestBookContainer extends React.Component{
 
     componentDidMount = () => {
-        this.props.get_gb_posts();
+        this.props.getGbPosts();
     }
 
     render = () => {
-        if(this.props.isAuth === false) return <Redirect to={'/login'}/>;
+        //if(this.props.isAuth === false) return <Redirect to={'/login'}/>;
         return (
             <div className={c.gb}>
                 <GuestBookSendForm
-                    onGBNewPostChange={this.props.newGBpostChangeActionCreator}
-                    onGBAddPost={this.props.addGBPostActionCreator}
+                    onGBNewPostChange={this.props.newGBpostChange}
+                    onGBAddPost={this.props.addGBPost}
                     newPostText={this.props.newPostText}
                 />
 
@@ -40,14 +38,14 @@ function mapStateToProps(state) {
     return {
         newPostText: state.gb.newPostText,
         gbPosts: state.gb.gbPosts,
-        isAuth: state.auth.isAuth
+        //isAuth: state.auth.isAuth
     }
 }
 
 
 export default connect(mapStateToProps, {
-    get_gb_posts,
-    newGBpostChangeActionCreator,
-    addGBPostActionCreator,
-})(GuestBookContainer);
+    getGbPosts,
+    newGBpostChange,
+    addGBPost,
+})(withAuthRedirect(GuestBookContainer));
 

@@ -1,14 +1,11 @@
-// import React from 'react';
 import {addChatPostActionCreator, newChatPostChangeActionCreator} from "../../redux/chat_reducer";
 import {connect} from "react-redux";
-
 import Chat from "./Chat";
 import React from "react";
-import {Redirect} from "react-router-dom";
+import {withAuthRedirect} from "../hoc/withAuthRedirect";
 
 class ChatContainer extends React.Component{
     render() {
-        if(this.props.isAuth === false) return <Redirect to={'/login'}/>;
 
         return <Chat
             chat={this.props.chat}
@@ -23,8 +20,6 @@ let mapStateToProps = (state) => {
     return {
         chat: state.chat.chatPosts,
         newChatPostText: state.chat.newChatPostText,
-        isAuth: state.auth.isAuth
-
     }
 }
 let mapDispatchToProps = (dispatch) => {
@@ -42,7 +37,4 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-// const ChatContainer =
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(ChatContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(withAuthRedirect(ChatContainer));

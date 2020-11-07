@@ -90,7 +90,7 @@ export const API = {
             );
     },
 
-    get_gb_posts ()  {
+    getGbPosts ()  {
         return instance2
             .get('?action=get_gb_posts')
             .then(resp => {
