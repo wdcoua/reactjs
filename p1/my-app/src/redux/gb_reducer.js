@@ -24,7 +24,7 @@ const gb_reducer = (state = initialState,action) => {
 
         case ADD_GB_POST:
             let newPost = {
-                id: 5,
+                id: state.gbPosts.length + 1,
                 text: state.newPostText,
                 author: 'Марічка',
                 authorID: '65',

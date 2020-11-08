@@ -5,6 +5,7 @@ import Preloader from "../Preloader/Preloader";
 import {withRouter} from "react-router-dom";
 import Profile from "./Profile";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 
@@ -34,9 +35,13 @@ let mapStateToProps = (state) => { // бере увесь глобальний S
     }
 }
 
-let ProfileContainerWithUrlData = withRouter(ProfileContainer);
+//let ProfileContainerWithUrlData = (ProfileContainer);
 
+export default compose(
+    withRouter,
+    connect(mapStateToProps, {
+        getProfile
+    }),
+    withAuthRedirect
+)(ProfileContainer)
 
-export default connect(mapStateToProps, {
-    getProfile
-})(withAuthRedirect(ProfileContainerWithUrlData))

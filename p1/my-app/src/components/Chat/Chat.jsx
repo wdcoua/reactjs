@@ -20,8 +20,8 @@ const Chat = (props) => {
             />
             <ChatSendForm
                 newChatPostText={props.newChatPostText}
-                onChatAddPost={props.onChatAddPost}
-                onChatNewPostChange={props.onChatNewPostChange}
+                addChatPost={props.addChatPost}
+                newChatPostChange={props.newChatPostChange}
             />
         </div>
     );

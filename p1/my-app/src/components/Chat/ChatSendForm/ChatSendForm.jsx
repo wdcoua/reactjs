@@ -1,30 +1,19 @@
 import React from 'react';
 import c from './ChatSendForm.module.css';
-// import {addChatPostActionCreator, newChatPostChangeActionCreator} from "../../../redux/chat_reducer";
 
 
 const ChatSendForm = (props) => {
-
-
-
 
     let new_chat_post = React.createRef();
 
     let onPostChange = () => {
         let text = new_chat_post.current.value;
-        // props.dispatch(newChatPostChangeActionCreator(text)); //gbNewPostChange('');
-
-        props.onChatNewPostChange(text);
-
+        props.newChatPostChange(text);
     }
 
     let addPost = () => {
-        //let text = new_chat_post.current.value;
-        props.onChatAddPost();
-        props.onChatNewPostChange('');
-
-        // props.dispatch(addChatPostActionCreator());//  addGBpost();
-        // props.dispatch(newChatPostChangeActionCreator('')); //gbNewPostChange('');
+        props.addChatPost();
+        props.newChatPostChange('');
     }
 
 

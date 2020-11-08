@@ -1,8 +1,9 @@
-import {addChatPostActionCreator, newChatPostChangeActionCreator} from "../../redux/chat_reducer";
+import {addChatPost, newChatPostChange} from "../../redux/chat_reducer";
 import {connect} from "react-redux";
 import Chat from "./Chat";
 import React from "react";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 class ChatContainer extends React.Component{
     render() {
@@ -10,8 +11,8 @@ class ChatContainer extends React.Component{
         return <Chat
             chat={this.props.chat}
             newChatPostText={this.props.newChatPostText}
-            onChatAddPost={this.props.onChatAddPost}
-            onChatNewPostChange={this.props.onChatNewPostChange}
+            addChatPost={this.props.addChatPost}
+            newChatPostChange={this.props.newChatPostChange}
         />
     }
 }
@@ -22,19 +23,10 @@ let mapStateToProps = (state) => {
         newChatPostText: state.chat.newChatPostText,
     }
 }
-let mapDispatchToProps = (dispatch) => {
 
-    return {
-        onChatAddPost: () => {
-            dispatch(addChatPostActionCreator());
-            dispatch(newChatPostChangeActionCreator(''));
-        },
-        onChatNewPostChange: (text) => {
-            //debugger
-            dispatch(newChatPostChangeActionCreator(text));
-        }
 
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(withAuthRedirect(ChatContainer));
+export default compose(
+    connect(mapStateToProps, {addChatPost,
+        newChatPostChange}),
+    withAuthRedirect
+)(ChatContainer)

@@ -11,6 +11,7 @@ import styles from "./User/User.module.css";
 import Users from "./User/Users";
 import Preloader from "../Preloader/Preloader";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 class UsersContainer extends React.Component {
 
@@ -133,13 +134,16 @@ let mapStateToProps = (state) => { // бере увесь глобальний S
     }
 }
 
-export default connect(mapStateToProps, {
-    changeUserFollowStatus,
-    setUsers,
-    setTotalUsers,
-    setCurrentPage,
-    setFetchingStatus,
-    setFollowingInProgress,
-    getUsers,
-    follow
-})(withAuthRedirect(UsersContainer))
+export default compose(
+    connect(mapStateToProps, {
+        changeUserFollowStatus,
+        setUsers,
+        setTotalUsers,
+        setCurrentPage,
+        setFetchingStatus,
+        setFollowingInProgress,
+        getUsers,
+        follow
+    }),
+    withAuthRedirect
+)(UsersContainer)

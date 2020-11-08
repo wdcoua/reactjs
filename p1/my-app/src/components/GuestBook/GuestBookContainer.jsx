@@ -8,6 +8,7 @@ import c from "./GuestBook.module.css";
 import GuestBookSendForm from "./GuestBookSendForm/GuestBookSendForm";
 import GuestBookPosts from "./GuestBookPosts/GuestBookPosts";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 
 class GuestBookContainer extends React.Component{
@@ -42,10 +43,13 @@ function mapStateToProps(state) {
     }
 }
 
+export default compose(
+    connect(mapStateToProps, {
+        getGbPosts,
+        newGBpostChange,
+        addGBPost,
+    }),
+    withAuthRedirect
+)(GuestBookContainer);
 
-export default connect(mapStateToProps, {
-    getGbPosts,
-    newGBpostChange,
-    addGBPost,
-})(withAuthRedirect(GuestBookContainer));
 
