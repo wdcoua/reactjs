@@ -10,7 +10,11 @@ const Header = (props) => {
 
         <div className={c.auth}>
 
-            {props.auth.isAuth ? props.auth.login : <div>
+            {props.auth.isAuth
+                ? <NavLink to={'/myprofile'}>
+                    {props.auth.login}
+                </NavLink>
+                : <div>
                 <NavLink to={'/reg'}>
                     <button id="reg">Реєстрація</button>
                 </NavLink> <NavLink to={'/login'}>

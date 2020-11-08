@@ -77,6 +77,26 @@ export const API = {
             );
     },
 
+     getStatus (id) {
+        return instance
+            .get('profile/status/' + id)
+            .then(resp => {
+                    return resp.data
+                }
+            );
+    },
+
+     setStatus (status) {
+        return instance
+            .put('profile/status/',{
+                status: status
+            })
+            .then(resp => {
+                    return resp.data
+                }
+            );
+    },
+
 
 
 

@@ -8,6 +8,7 @@ import ExamplesContainer from "../Examples/ExamplesContainer";
 import UsersContainer from "../Users/UsersContainer";
 import ProfileContainer from "../Profile/ProfileContainer";
 import Login from "../Login/Login";
+import MyProfile from "../Profile/MyProfile";
 
 const Main = () => {
     return (
@@ -32,6 +33,9 @@ const Main = () => {
                 )}/>
                 <Route  path='/profile/:userID?' render={() => (
                             <ProfileContainer />
+                )}/>
+                <Route  path='/myprofile' render={() => (
+                            <MyProfile />
                 )}/>
                 <Route  path='/login' render={() => (
                             <Login />
