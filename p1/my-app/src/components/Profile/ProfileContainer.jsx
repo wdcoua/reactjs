@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-import {getProfile} from "../../redux/profile_reducer";
+import {getProfile, getStatus} from "../../redux/profile_reducer";
 import Preloader from "../Preloader/Preloader";
 import {withRouter} from "react-router-dom";
 import Profile from "./Profile";
@@ -17,6 +17,7 @@ class ProfileContainer extends React.Component{
 
         // this.props.setFetchingStatus(true);
         let userID = this.props.match.params.userID;
+        this.props.getStatus(userID);
         this.props.getProfile(userID);
     }
 
@@ -31,7 +32,8 @@ class ProfileContainer extends React.Component{
 
 let mapStateToProps = (state) => { // бере увесь глобальний STATE і повертає тільки те, що нам потрібно для цієї компоненти
     return {
-         profile: state.profilePage.profile
+         profile: state.profilePage.profile,
+        status: state.profilePage.status
     }
 }
 
@@ -40,7 +42,8 @@ let mapStateToProps = (state) => { // бере увесь глобальний S
 export default compose(
     withRouter,
     connect(mapStateToProps, {
-        getProfile
+        getProfile,
+        getStatus
     }),
     withAuthRedirect
 )(ProfileContainer)

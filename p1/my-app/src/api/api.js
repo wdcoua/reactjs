@@ -98,6 +98,32 @@ export const API = {
     },
 
 
+     updateProfile () {
+        return instance
+            .put('profile',{
+                userId: 11583,
+                lookingForAJob: false,
+                lookingForAJobDescription: 'уже есть',
+                fullName: 'WD',
+                aboutMe: 'Димыч, курсы - агонь!!!',
+                contacts: {
+                    github: '',
+                    vk: '',
+                    facebook: '',
+                    instagram: '',
+                    twitter: '',
+                    website: 'localhost.com',
+                    youtube: '',
+                    mainLink: '',
+                }
+            })
+            .then(resp => {
+                    return resp.data
+                }
+            );
+    },
+
+
 
 
 

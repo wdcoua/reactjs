@@ -7,6 +7,7 @@ class ProfileStatus extends React.Component {
         editMode: false,
         tempStatusText: this.props.status
     }
+/*
 
     componentDidMount(){
         this.state.tempStatusText = this.props.status;
@@ -18,6 +19,7 @@ class ProfileStatus extends React.Component {
         console.log(this.props.status + ' props2');
 
     }
+*/
 
 
     toggleEditMode = () =>{
@@ -26,34 +28,36 @@ class ProfileStatus extends React.Component {
             this.setState({ // асинхронний, змінює STATE після виконання поточної задачі
                 editMode:false
             })
+            this.props.setStatus(this.state.tempStatusText)
             //this.state.editMode = false;
         }else{
             this.setState({
                 editMode:true
             })
             //this.state.editMode = true;
+            //this.changeStatus
         }
 
     }
 
-    newStatus = React.createRef();
+    //newStatus = React.createRef();
 
-    statusOnChange = () => {
+    statusOnChange = (e) => {
 
         this.setState({ // асинхронний, змінює STATE після виконання поточної задачі
-            tempStatusText:this.newStatus.current.value
+            tempStatusText:e.currentTarget.value
         })
     }
 
+    //
+    // changeStatus = () => {
+    //
+    //     let text = this.newStatus.current.value;
+    //     this.props.setStatus(text);
+    //     this.toggleEditMode();
+    // }
 
-    changeStatus = () => {
-
-        let text = this.newStatus.current.value;
-        this.props.setStatus(text);
-        this.toggleEditMode();
-    }
-
-    //onBlur={this.toggleEditMode}
+    //<input type="button" onClick={this.changeStatus} value="OK"/>
 
     render() {
         console.log(this.state.tempStatusText + ' state');
@@ -61,11 +65,11 @@ class ProfileStatus extends React.Component {
         return <div>
             {this.state.editMode
                 ? <div>
-                    <input value={this.state.tempStatusText} onChange={this.statusOnChange} ref={this.newStatus}  autoFocus={true} />
-                    <input type="button" onClick={this.changeStatus} value="OK"/>
+                    <input value={this.state.tempStatusText} onChange={this.statusOnChange}  autoFocus={true} onBlur={this.toggleEditMode} />
+
                 </div>
                 : <div>
-                        <span onDoubleClick={this.toggleEditMode}>{this.state.tempStatusText}</span>
+                        <span onDoubleClick={this.toggleEditMode}>{this.props.status === '' ? '[click to change]' : this.props.status}</span>
                     </div>
             }
 

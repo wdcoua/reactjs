@@ -4,12 +4,8 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
 
 let initialState = {
-    profile: null
-    // usersList: [],
-    // usersPerPage: 5,
-    // totalUsers: 0,
-    // currentPage: 1,
-    // isFetching: true
+    profile: null,
+    status: ""
 }
 
 const profile_reducer = (state = initialState, action) => {
@@ -22,6 +18,7 @@ const profile_reducer = (state = initialState, action) => {
                 profile: action.profile
             }
         case SET_USER_STATUS:
+
             return {
                 ...state,
                 status: action.status
@@ -52,12 +49,8 @@ export const getProfile = (id) => {
 
         API.getProfile(!id ? 11583 : id)
             .then(data => {
-                // debugger
-                // this.props.setFetchingStatus(false);
+                //console.log('data = ' + data)
                 dispatch(setUserProfile(data));
-                // this.props.setTotalUsers(resp.data.totalCount)
-                // this.props.totalUsers = resp.data.totalCount
-                // console.log(resp)
             })
 
             .catch(error => {
@@ -71,12 +64,11 @@ export const getStatus = (id) => {
 
         API.getStatus(!id ? 11583 : id)
             .then(data => {
-                // debugger
-                // this.props.setFetchingStatus(false);
-                dispatch(setUserStatus(data));
-                // this.props.setTotalUsers(resp.data.totalCount)
-                // this.props.totalUsers = resp.data.totalCount
-                // console.log(resp)
+                const {resultCode} = data;
+                if(resultCode === 0 || resultCode === undefined){ // експериментально
+                    dispatch(setUserStatus(data));
+                }
+
             })
 
             .catch(error => {
@@ -86,16 +78,29 @@ export const getStatus = (id) => {
 }
 
 export const setStatus = (status) => {
+    console.log('setStatus - ' + status)
     return (dispatch) => {
 
         API.setStatus(status)
             .then(data => {
-                // debugger
-                // this.props.setFetchingStatus(false);
-                dispatch(setUserStatus(data));
-                // this.props.setTotalUsers(resp.data.totalCount)
-                // this.props.totalUsers = resp.data.totalCount
-                // console.log(resp)
+                dispatch(setUserStatus(status));
+            })
+
+            .catch(error => {
+                console.warn(error);
+            });
+    }
+}
+
+export const updateProfile = () => {
+    console.log('updateProfile - ' )
+    return (dispatch) => {
+
+        API.updateProfile()
+            .then(data => {
+                //dispatch(setUserStatus(status));
+                console.log('updateProfile + ' + data.resultCode)
+                console.log('updateProfile + ' + data.data)
             })
 
             .catch(error => {

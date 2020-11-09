@@ -2,13 +2,14 @@ import React from "react";
 import ProfileStatus from "../Profile/ProfileStatus.jsx"
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {getProfile, getStatus, setStatus} from "../../redux/profile_reducer";
+import {getProfile, getStatus, setStatus, updateProfile} from "../../redux/profile_reducer";
 
 class MyProfile extends React.Component{
 
     componentDidMount() {
 
-
+        this.props.getProfile(11583);
+        this.props.getStatus(11583);
         // this.props.setFetchingStatus(true);
         //let userID = this.props.match.params.userID;
         // this.props.getProfile(11583);
@@ -20,6 +21,7 @@ class MyProfile extends React.Component{
         if(this.props.profile === null) {
             this.props.getProfile(11583);
             this.props.getStatus(11583);
+            //this.props.updateProfile();
             return null;
 
         }
@@ -55,7 +57,8 @@ export default compose(
         mapStateToProps,{
             getProfile,
             getStatus,
-            setStatus
+            setStatus,
+            updateProfile
         }
     )
 )(MyProfile)
