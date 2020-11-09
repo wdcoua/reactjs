@@ -124,6 +124,22 @@ export const API = {
     },
 
 
+     auth (email,pass,remember = true,captcha = false) {
+        return instance
+            .post('auth/login',{
+                email: email,
+                password: pass,
+                rememberMe: remember,
+                captcha: captcha,
+
+            })
+            .then(resp => {
+                    return resp.data
+                }
+            );
+    },
+
+
 
 
 

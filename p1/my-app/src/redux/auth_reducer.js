@@ -49,7 +49,7 @@ export const setUserAuthImg = (img) => {
 
 // thunk-и
 
-export const authorization = () => {
+export const checkAuthorization = () => {
     return (dispatch) => {
 
         API.authMe()
@@ -82,5 +82,53 @@ export const authorization = () => {
             .catch(error => {
                 console.warn(error);
             });
+    }
+}
+
+
+export const login = (email,pass,remember,captcha) => {
+    return (dispatch) => {
+        API.auth(email,pass,remember,captcha)
+            .then(data => {
+                if(data.resultCode === 0){
+                    console.log('login +')
+                    API.authMe()
+                        .then(data => {
+                            // debugger
+                            if(data.resultCode === 0){
+                                let {id, login, email} = data.data;
+                                dispatch(setUserAuthData(id,email,login));
+
+                                API.getProfile(id)
+                                    .then(data => {
+                                        // debugger
+                                        if(data.resultCode === 0){
+                                            // let {id, login, email} = resp.data.data;
+                                            dispatch(setUserAuthImg(data.photos.small))
+                                        }
+
+                                        // console.log(resp)
+                                    })
+
+                                    .catch(error => {
+                                        console.warn(error);
+                                    });
+
+                            }
+
+                            // console.log(resp)
+                        })
+
+                        .catch(error => {
+                            console.warn(error);
+                        });
+                }else{
+                    // todo зробити виведення помилок
+                }
+            })
+            .catch(error => {
+                console.warn(error);
+            });
+
     }
 }
