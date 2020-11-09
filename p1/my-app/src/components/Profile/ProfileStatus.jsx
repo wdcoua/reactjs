@@ -7,19 +7,33 @@ class ProfileStatus extends React.Component {
         editMode: false,
         tempStatusText: this.props.status
     }
-/*
 
-    componentDidMount(){
-        this.state.tempStatusText = this.props.status;
-        this.setState({
-            tempStatusText:this.props.status
-        })
-
-        console.log(this.state.tempStatusText + ' state2');
-        console.log(this.props.status + ' props2');
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        //let a = this.props;
+        //let b = this.state;
+        //debugger
+        if(prevProps.status !== this.props.status){
+            this.setState({ // асинхронний, змінює STATE після виконання поточної задачі
+                tempStatusText:this.props.status
+            })
+        }
 
     }
-*/
+
+
+    /*
+
+        componentDidMount(){
+            this.state.tempStatusText = this.props.status;
+            this.setState({
+                tempStatusText:this.props.status
+            })
+
+            console.log(this.state.tempStatusText + ' state2');
+            console.log(this.props.status + ' props2');
+
+        }
+    */
 
 
     toggleEditMode = () =>{
