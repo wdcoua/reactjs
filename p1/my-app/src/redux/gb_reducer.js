@@ -23,13 +23,30 @@ const gb_reducer = (state = initialState,action) => {
     switch (action.type){
 
         case ADD_GB_POST:
+            let d = new Date;
+            let time = parseInt(d.getTime()/1000);
+
             let newPost = {
+                /*
+                    id: state.gbPosts.length + 1,
+                    text: action.text,
+                    author: 'Марічка',
+                    authorID: '65',
+                    authorAva: 'https://avatarfiles.alphacoders.com/111/111521.png',
+                    date: '02:16 23-07-2020',
+                */
+                answer: "",
+                answer_time: "0",
+                email: "ddddd@mail.com",
                 id: state.gbPosts.length + 1,
-                text: state.newPostText,
-                author: 'Марічка',
-                authorID: '65',
-                authorAva: 'https://avatarfiles.alphacoders.com/111/111521.png',
-                date: '02:16 23-07-2020'
+                ip: "",
+                login: "Марічка",
+                status: "1",
+                text: action.text,
+                time: time,
+                ua: ""
+
+
             }
             return {
                 ...state,
@@ -60,8 +77,8 @@ const gb_reducer = (state = initialState,action) => {
 export default gb_reducer;
 
 
-export const addGBPost = () =>  {
-    return {type: ADD_GB_POST};
+export const addGBPost = (text) =>  {
+    return {type: ADD_GB_POST,text};
 }
 
 export const newGBpostChange = (text) => {

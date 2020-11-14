@@ -26,7 +26,7 @@ const chat_reducer = (state = initialState,action) => {
                 id: state.chatPosts.length + 1,
                 author: 'Котигорошко',
                 authorAva: kot,
-                text: state.newChatPostText,
+                text: action.text,
                 date: '15:25 17-09-2020'
             }
             return {
@@ -53,8 +53,8 @@ const chat_reducer = (state = initialState,action) => {
 export default chat_reducer;
 
 
-export const addChatPost = () =>  {
-    return {type: ADD_CHAT_POST};
+export const addChatPost = (text) =>  {
+    return {type: ADD_CHAT_POST, text};
 }
 export const newChatPostChange = (text) => {
     return {type: NEW_CHAT_POST_CHANGE,changedText: text};
