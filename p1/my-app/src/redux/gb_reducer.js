@@ -23,7 +23,7 @@ const gb_reducer = (state = initialState,action) => {
     switch (action.type){
 
         case ADD_GB_POST:
-            let d = new Date;
+            let d = new Date();
             let time = parseInt(d.getTime()/1000);
 
             let newPost = {

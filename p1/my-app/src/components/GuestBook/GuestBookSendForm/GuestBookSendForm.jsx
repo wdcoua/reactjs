@@ -1,6 +1,11 @@
 import React from 'react';
 import c from './GuestBookSendForm.module.css';
 import {Field, reduxForm} from "redux-form";
+import {Textarea} from "../../common/FormsControls/FormsControls";
+import {maxLenCreator, minLenCreator, required} from "../../../utils/validate/validator";
+
+const maxLen150 = maxLenCreator(150);
+const minLen2 = minLenCreator(2);
 
 const GbForm = (props) => {
 
@@ -16,7 +21,10 @@ const GbForm = (props) => {
 */
     return <form onSubmit={props.handleSubmit}>
         <div>
-            <Field component={'textarea'} name={'new_gb_post'} placeholder={'new GB post here'} className={c.gb_form_text} />
+            <Field component={Textarea} name={'new_gb_post'}
+                   placeholder={'new GB post here'} className={c.gb_form_text}
+                    validate={[required,maxLen150,minLen2]}
+            />
         </div>
 
         <button className={c.gb_form_button} >Send</button>

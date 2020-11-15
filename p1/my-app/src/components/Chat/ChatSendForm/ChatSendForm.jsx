@@ -1,12 +1,18 @@
 import React from 'react';
 import c from './ChatSendForm.module.css';
 import {Field, reduxForm} from "redux-form";
+import {maxLenCreator, required} from "../../../utils/validate/validator";
+import {Textarea} from "../../common/FormsControls/FormsControls";
 
+const maxLen10 = maxLenCreator(10);
 
 const ChatForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field placeholder={'new CHAT post here'} component={'textarea'} name={'new_chat_post'} className={c.chat_text}/>
+            <Field placeholder={'new CHAT post here'} component={Textarea}
+                   name={'new_chat_post'} className={c.chat_text}
+                   validate={[required,maxLen10]}
+            />
             {/*<textarea
 
                 ref={new_chat_post}

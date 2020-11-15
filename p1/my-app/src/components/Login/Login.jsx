@@ -4,12 +4,14 @@ import {connect} from "react-redux";
 import {login, checkAuthorization} from "../../redux/auth_reducer";
 import {Redirect} from "react-router-dom";
 import {compose} from "redux";
+import {Input} from "../common/FormsControls/FormsControls";
+import {maxLenCreator, minLenCreator, required} from "../../utils/validate/validator";
 
 class LoginContainer extends React.Component { // зробив для тесту, можна і без цього класу
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        let p = this.props;
-        let s = this.state;
+        //let p = this.props;
+        //let s = this.state;
         // todo не працює при лог-ауті на сайті
     }
 
@@ -33,6 +35,9 @@ const Login = (props) => {
         <LoginReduxForm onSubmit={onSubmit} {...props} />
     </div>
 }
+const maxLen50 = maxLenCreator(50);
+const minLen2 = minLenCreator(2);
+
 
 const LoginForm = (props) => {
 
@@ -41,13 +46,13 @@ const LoginForm = (props) => {
 
         return <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={"email"} component={'input'} name={'email'} />
+                <Field placeholder={"email"} component={Input} name={'email'} validate={[required,maxLen50,minLen2]}/>
             </div>
             <div>
-                <Field placeholder={"pass"} component={'input'} name={'pass'} />
+                <Field placeholder={"pass"} component={Input} name={'pass'} validate={[required,maxLen50,minLen2]} />
             </div>
             <div>
-                <Field name={'rememberMe'} type={'checkbox'} component={'input'}  /> Запам'ятай мене
+                <Field name={'rememberMe'} type={'checkbox'} component={Input}  /> Запам'ятай мене
             </div>
             <div>
                 <button>Увійти</button>
