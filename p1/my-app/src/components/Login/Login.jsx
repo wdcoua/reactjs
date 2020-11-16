@@ -6,12 +6,14 @@ import {Redirect} from "react-router-dom";
 import {compose} from "redux";
 import {Input} from "../common/FormsControls/FormsControls";
 import {maxLenCreator, minLenCreator, required} from "../../utils/validate/validator";
+import style from "./Login.module.css"
 
 class LoginContainer extends React.Component { // зробив для тесту, можна і без цього класу
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        //let p = this.props;
-        //let s = this.state;
+        let p = this.props;
+        let s = this.state;
+        //debugger
         // todo не працює при лог-ауті на сайті
     }
 
@@ -24,7 +26,7 @@ const Login = (props) => {
     const onSubmit = (formData) => {
         //
         if(props.auth.isAuth === false){
-            props.login(formData.email,formData.pass,formData.rememberMe)
+            props.login(formData.email,formData.pass,formData.rememberMe,formData.captcha)
         }else{
             return <Redirect to={'/index'}/>
         }
@@ -45,14 +47,32 @@ const LoginForm = (props) => {
         //props.auth(formData.email,formData.pass,formData.rememberMe)
 
         return <form onSubmit={props.handleSubmit}>
+
+            <div className={(!props.auth.loginError ? style.noError : '') + ' ' + style.error}>
+                {props.auth.loginError}
+            </div>
+
             <div>
-                <Field placeholder={"email"} component={Input} name={'email'} validate={[required,maxLen50,minLen2]}/>
+                <Field placeholder="email" component={Input} name='email' validate={[required,maxLen50,minLen2]}/>
             </div>
             <div>
-                <Field placeholder={"pass"} component={Input} name={'pass'} validate={[required,maxLen50,minLen2]} />
+                <Field placeholder="pass" component={Input} type='password' name='pass' validate={[required,maxLen50,minLen2]} />
             </div>
+
+            <div className={style.captchaDiv + ' ' + (!props.auth.capthaImg ? style.noCaptcha : '')}>
+                <div>
+                    <img alt='captcha' src={props.auth.capthaImg  ? props.auth.capthaImg : ''}  />
+                </div>
+                <div>
+                    <Field placeholder="cAp7cH4"
+                           component={Input}
+                           name='captcha'
+                           validate={!props.auth.capthaImg ? [] : [required,maxLen50,minLen2]} />
+                </div>
+            </div>
+
             <div>
-                <Field name={'rememberMe'} type={'checkbox'} component={Input}  /> Запам'ятай мене
+                <Field name='rememberMe' type='checkbox' component={Input}  /> Запам'ятай мене
             </div>
             <div>
                 <button>Увійти</button>
@@ -71,9 +91,10 @@ const LoginReduxForm = reduxForm({
 
 
 const mapStateToProps = (props) => {
-    // debugger
+     //debugger
     return {
-        auth: props.auth
+        auth: props.auth,
+        //capthaImg: props.capthaImg
     }
 };
 

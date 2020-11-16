@@ -125,6 +125,7 @@ export const API = {
 
 
      auth (email,pass,remember = true,captcha = false) {
+         console.log(email,pass,remember,captcha)
         return instance
             .post('auth/login',{
                 email: email,
@@ -133,6 +134,27 @@ export const API = {
                 captcha: captcha,
 
             })
+            .then(resp => {
+                    return resp.data
+                }
+            );
+    },
+
+     logOut () {
+         console.log('logout1')
+        return instance
+            .delete('auth/login')
+            .then(resp => {
+                    console.log('logout')
+                    return resp.data
+                }
+            );
+    },
+
+
+     getCaptcha () {
+        return instance
+            .get('security/get-captcha-url')
             .then(resp => {
                     return resp.data
                 }

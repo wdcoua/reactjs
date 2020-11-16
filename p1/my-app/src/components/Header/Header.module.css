@@ -14,3 +14,9 @@ header{
   top: 30px;
   right: 30px;
 }
+
+.logout{
+  width: 20px;
+  margin-left: 20px;
+  cursor: pointer;
+}

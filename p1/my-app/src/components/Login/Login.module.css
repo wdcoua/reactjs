@@ -1,0 +1,15 @@
+.captchaDiv{
+  display: block;
+}
+
+.noCaptcha{
+  display: none;
+}
+
+.error{
+  color: red;
+}
+
+.noError{
+  display: none;
+}

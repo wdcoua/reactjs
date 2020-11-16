@@ -39,3 +39,7 @@ export const Input = (props) => { // деструктуризація, REST-оп
     //const {input, meta, ...restProps} = props;
     return <FormControl {...props} elType='input'/>
 }
+export const Hidden = (props) => { // деструктуризація, REST-оператор
+    //const {input, meta, ...restProps} = props;
+    return <FormControl {...props} elType='input' />
+}

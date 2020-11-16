@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from "./Header";
-import { checkAuthorization, setUserAuthData, setUserAuthImg} from "../../redux/auth_reducer";
+import {checkAuthorization, logOut, setUserAuthData, setUserAuthImg} from "../../redux/auth_reducer";
 import {connect} from "react-redux";
 //import {API} from "../../api/api";
 
@@ -37,4 +37,4 @@ const mapStateToProps = (props) => {
     }
 };
 
-export default connect(mapStateToProps,{setUserAuthData,setUserAuthImg,checkAuthorization})(HeaderContainer);
+export default connect(mapStateToProps,{setUserAuthData,setUserAuthImg,checkAuthorization, logOut})(HeaderContainer);
