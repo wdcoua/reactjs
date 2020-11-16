@@ -48,8 +48,8 @@ const LoginForm = (props) => {
 
         return <form onSubmit={props.handleSubmit}>
 
-            <div className={(!props.auth.loginError ? style.noError : '') + ' ' + style.error}>
-                {props.auth.loginError}
+            <div className={( !props.error ? style.noError : '') + ' ' + style.error}>
+                { props.error}
             </div>
 
             <div>

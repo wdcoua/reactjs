@@ -1,10 +1,11 @@
 import {API} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const SET_USER_IMG = 'SET_USER_IMG';
 const SET_CAPTCHA_IMG = 'SET_CAPTCHA_IMG';
 const SET_CAPTCHA_ANS = 'SET_CAPTCHA_ANS';
-const SET_ERROR = 'SET_ERROR';
+//const SET_ERROR = 'SET_ERROR';
 
 let initialState = {
     userID: null,
@@ -48,11 +49,11 @@ const auth_reducer = (state = initialState, action) => {
                 ...state,
                 captchaAnswer:action.answer
             }
-        case SET_ERROR:
+/*        case SET_ERROR:
             return {
                 ...state,
                 loginError:action.err
-            }
+            }*/
 
 
         default:
@@ -81,9 +82,9 @@ export const setUserAuthCaptchaImg = (img) => {
 export const setUserAuthCaptchaAnswer = (ans) => {
     return {type: SET_CAPTCHA_ANS, ans};
 }
-export const setUserAuthError = (err) => {
+/*export const setUserAuthError = (err) => {
     return {type: SET_ERROR, err};
-}
+}*/
 
 // thunk-и
 
@@ -158,7 +159,9 @@ export const login = (email,pass,remember,captcha) => {
                         });*/
                 }else
                 {
-                    dispatch(setUserAuthError(data.messages.join('<br/>')));
+                    //dispatch(setUserAuthError(data.messages.join('<br/>')));
+
+                    dispatch(stopSubmit('auth',{_error: data.messages.join('<br/>')}));
 
                     if(data.resultCode === 10){
                         API.getCaptcha()
