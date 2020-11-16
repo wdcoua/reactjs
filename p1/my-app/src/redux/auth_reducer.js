@@ -1,5 +1,6 @@
 import {API} from "../api/api";
 import {stopSubmit} from "redux-form";
+import {setUserProfile, setUserStatus} from "./profile_reducer";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const SET_USER_IMG = 'SET_USER_IMG';
@@ -88,20 +89,35 @@ export const setUserAuthCaptchaAnswer = (ans) => {
 
 // thunk-и
 
-export const checkAuthorization = () => {
-    return (dispatch) => {
+export const checkAuthorization = () => (dispatch) => {
 
-        API.authMe()
+    return API.authMe()
             .then(data => {
                 if(data.resultCode === 0){
                     let {id, login, email} = data.data;
                     dispatch(setUserAuthData(id,email,login,true,null,null,null));
                     API.getProfile(id)
-                        .then(data => {
-                            if(data.resultCode === 0){
-                                dispatch(setUserAuthImg(data.photos.small))
-                            }
+                        .then(resp => {
+                            //debugger
+                            //if(resp.resultCode === 0){
+
+                                dispatch(setUserProfile(resp.data));
+                                //dispatch(setUserAuthImg(data.photos.small))
+                            //}
                         })
+                        .catch(error => {
+                            console.warn(error);
+                        });
+
+                    API.getStatus(id)
+                        .then(data => {
+                            //const {resultCode} = data;
+                            //if(resultCode === 0 || resultCode === undefined){ // експериментально
+                                dispatch(setUserStatus(data));
+                            //}
+
+                        })
+
                         .catch(error => {
                             console.warn(error);
                         });
@@ -110,7 +126,6 @@ export const checkAuthorization = () => {
             .catch(error => {
                 console.warn(error);
             });
-    }
 }
 
 

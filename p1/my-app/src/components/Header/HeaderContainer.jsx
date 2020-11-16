@@ -19,11 +19,6 @@ class HeaderContainer extends React.Component{
     //
     // });
 
-    componentDidMount() {
-
-        this.props.checkAuthorization();
-
-    }
 
     render(){
         return <Header {...this.props} />

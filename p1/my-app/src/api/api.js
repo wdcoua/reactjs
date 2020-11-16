@@ -69,10 +69,11 @@ export const API = {
     },
 
      getProfile (id) {
+
         return instance
             .get('profile/' + id)
             .then(resp => {
-                    return resp.data
+                    return resp
                 }
             );
     },

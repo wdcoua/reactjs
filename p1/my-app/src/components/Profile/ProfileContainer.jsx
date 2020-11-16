@@ -15,15 +15,40 @@ class ProfileContainer extends React.Component{
     componentDidMount() {
 
 
-        // this.props.setFetchingStatus(true);
-        let userID = this.props.match.params.userID;
-        this.props.getStatus(userID);
-        this.props.getProfile(userID);
+         //this.props.setFetchingStatus(true);
+       let userID = this.props.match.params.userID;
+        if(!userID && this.props.userID) userID = this.props.userID
+        if(userID){
+            this.props.getStatus(userID);
+            this.props.getProfile(userID);
+        }else{
+            this.props.history.push('/login')
+        }
+
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        let p = this.props.match.url;
+        let pp = prevProps.match.url;
+        let s = this.state;
+
+        if(p !== pp){
+            let userID = this.props.match.params.userID;
+            if(!userID && this.props.userID) userID = this.props.userID
+            if(userID){
+                this.props.getStatus(userID);
+                this.props.getProfile(userID);
+            }else{
+                this.props.history.push('/login')
+            }
+
+        }
+
     }
 
     render(){
         // debugger
-        if(!this.props.profile)
+        if(!this.props.profile )
             return <Preloader />
 
         return <Profile {...this.props}/>;
@@ -32,6 +57,7 @@ class ProfileContainer extends React.Component{
 
 let mapStateToProps = (state) => { // бере увесь глобальний STATE і повертає тільки те, що нам потрібно для цієї компоненти
     return {
+        userID: state.auth.userID,
          profile: state.profilePage.profile,
         status: state.profilePage.status
     }

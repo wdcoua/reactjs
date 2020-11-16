@@ -124,7 +124,7 @@ export const setFollowingInProgress = (followingIsInProgress,userId) => {
 
 
 // thunk-и
-export const getUsers = (usersPerPage = 20,currentPage = 92) => {
+export const getUsers = (usersPerPage = 20,currentPage = 107) => {
     return (dispatch) => {
 
         dispatch(setFetchingStatus(true));

@@ -10,7 +10,7 @@ const Nav = () => {
                 <Menu text="Guest Book" href="/gb"/>
                 <Menu text="Chat" href="/chat"/>
                 <Menu text="Users" href="/users"/>
-                <Menu text="bye" href="/out/13"/>
+                <Menu text="Profile" href="/profile"/>
                 <Menu text="..." href="/out/14"/>
             </nav>
     );

@@ -48,9 +48,9 @@ export const getProfile = (id) => {
     return (dispatch) => {
 
         API.getProfile(!id ? 11583 : id)
-            .then(data => {
+            .then(resp => {
                 //console.log('data = ' + data)
-                dispatch(setUserProfile(data));
+                dispatch(setUserProfile(resp.data));
             })
 
             .catch(error => {
@@ -64,10 +64,10 @@ export const getStatus = (id) => {
 
         API.getStatus(!id ? 11583 : id)
             .then(data => {
-                const {resultCode} = data;
-                if(resultCode === 0 || resultCode === undefined){ // експериментально
+                //const {resultCode} = data;
+                //if(resultCode === 0 || resultCode === undefined){ // експериментально
                     dispatch(setUserStatus(data));
-                }
+                //}
 
             })
 
