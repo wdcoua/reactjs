@@ -16,7 +16,9 @@ import {compose} from "redux";
 class UsersContainer extends React.Component {
 
     componentDidMount() {
+
         this.props.getUsers(this.props.usersPerPage ,this.currentPage);
+        //debugger
     }
 
     openPageNumber(n) {
@@ -31,6 +33,16 @@ class UsersContainer extends React.Component {
         let out = [];
         let cp = this.props.currentPage;
         let prev_is_shown = 0;
+
+        /* для відкриття на потрібній сторінці з моїм профілем *
+        let myProfileId = 11583;
+        let fromTheEnd = 6590;
+
+            //this.props.totalUsers - myProfileId; // ie 815
+        let page = Math.ceil((this.props.totalUsers - fromTheEnd) / this.props.usersPerPage);
+
+        /* /// */
+
 
         if (pages > 5) {
 
@@ -92,7 +104,7 @@ class UsersContainer extends React.Component {
 
         return (
             <div>Pages:<br/>
-                {out}<br/><br/>
+                {out}<br/>{/*{page}<br/>{this.props.totalUsers}*/}<br/>
             </div>
         )
     }

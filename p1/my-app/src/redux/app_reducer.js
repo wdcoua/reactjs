@@ -1,4 +1,7 @@
 import {checkAuthorization} from "./auth_reducer";
+import {getGbPosts} from "./gb_reducer";
+import {getUsers} from "./users_reducer";
+import {getExamples} from "./examples_reducer";
 
 const SET_INITIALIZED = 'SET_INITIALIZED';
 //const SET_ERROR = 'SET_ERROR';
@@ -35,9 +38,10 @@ export const setInitialized = () => {
 
 export const initializeApp = () => (dispatch) => {
     let promise = dispatch(checkAuthorization())
-    //let promise2 = dispatch(checkAuthorization())
-    //let promise3 = dispatch(checkAuthorization())
-    Promise.all([promise/*,promise2,promise3*/])
+    let promise2 = dispatch(getGbPosts())
+    let promise3 = dispatch(getUsers())
+    let promise4 = dispatch(getExamples())
+    Promise.all([promise,promise2,promise3,promise4])
     .then( () => {
         dispatch(setInitialized())
     })

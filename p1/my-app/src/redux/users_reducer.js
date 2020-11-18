@@ -9,7 +9,7 @@ const FOLLOWING_IN_PROGRESS = 'FOLLOWING_IN_PROGRESS';
 
 let initialState = {
     usersList: [],
-    usersPerPage: 10,
+    usersPerPage: 20,
     totalUsers: 0,
     currentPage: 30,
     isFetching: true,
@@ -124,7 +124,7 @@ export const setFollowingInProgress = (followingIsInProgress,userId) => {
 
 
 // thunk-и
-export const getUsers = (usersPerPage = 20,currentPage = 107) => {
+export const getUsers = (usersPerPage = 20,currentPage = 57) => {
     return (dispatch) => {
 
         dispatch(setFetchingStatus(true));
