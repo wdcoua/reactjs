@@ -12,6 +12,14 @@ import Users from "./User/Users";
 import Preloader from "../Preloader/Preloader";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {
+    getCurrentPage,
+    getFollowingIsInProgress,
+    getIsFetching,
+    getTotalUsers,
+    getUsersPerPage,
+    getUsersSel
+} from "../../redux/users_selectors";
 
 class UsersContainer extends React.Component {
 
@@ -136,12 +144,12 @@ class UsersContainer extends React.Component {
 let mapStateToProps = (state) => { // бере увесь глобальний STATE і повертає тільки те, що нам потрібно для цієї компоненти
     //debugger
     return {
-        users: state.users.usersList,
-        usersPerPage:state.users.usersPerPage,
-        totalUsers:state.users.totalUsers,
-        currentPage: state.users.currentPage,
-        isFetching: state.users.isFetching,
-        followingIsInProgress: state.users.followingIsInProgress,
+        users: getUsersSel(state),
+        usersPerPage:getUsersPerPage(state),
+        totalUsers:getTotalUsers(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        followingIsInProgress: getFollowingIsInProgress(state),
 
     }
 }
