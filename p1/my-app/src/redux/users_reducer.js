@@ -13,13 +13,14 @@ let initialState = {
     totalUsers: 0,
     currentPage: 30,
     isFetching: true,
-    followingIsInProgress: []
+    followingIsInProgress: [],
+    fake: 0
 }
 
 const users_reducer = (state = initialState, action) => {
 
     switch (action.type) {
-
+        case "FAKE" : return {...state, fake: state.fake + 1}
         case CHANGE_USER_FOLLOW_STATUS:
             return {
                 ...state,
@@ -124,7 +125,7 @@ export const setFollowingInProgress = (followingIsInProgress,userId) => {
 
 
 // thunk-и
-export const getUsers = (usersPerPage = 20,currentPage = 58) => {
+export const getUsers = (usersPerPage = 20,currentPage = 61) => {
     return (dispatch) => {
 
         dispatch(setFetchingStatus(true));

@@ -18,7 +18,7 @@ import {
     getIsFetching,
     getTotalUsers,
     getUsersPerPage,
-    getUsersSel
+    getUsersSel, getUsersSuper
 } from "../../redux/users_selectors";
 
 class UsersContainer extends React.Component {
@@ -118,7 +118,7 @@ class UsersContainer extends React.Component {
     }
 
     render() {
-
+        console.log('USERS')
         return ( <>
                 {this.props.isFetching ? <Preloader /> : null}
             <div>
@@ -143,8 +143,9 @@ class UsersContainer extends React.Component {
 
 let mapStateToProps = (state) => { // бере увесь глобальний STATE і повертає тільки те, що нам потрібно для цієї компоненти
     //debugger
+    console.log('usersContainer MSTP');
     return {
-        users: getUsersSel(state),
+        users: getUsersSuper(state),
         usersPerPage:getUsersPerPage(state),
         totalUsers:getTotalUsers(state),
         currentPage: getCurrentPage(state),
