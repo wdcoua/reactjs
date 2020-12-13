@@ -36,21 +36,10 @@ class UsersContainer extends React.Component {
 
     showPages() {
 
-
         let pages = Math.ceil(this.props.totalUsers / this.props.usersPerPage);
         let out = [];
         let cp = this.props.currentPage;
         let prev_is_shown = 0;
-
-        /* для відкриття на потрібній сторінці з моїм профілем *
-        let myProfileId = 11583;
-        let fromTheEnd = 6590;
-
-            //this.props.totalUsers - myProfileId; // ie 815
-        let page = Math.ceil((this.props.totalUsers - fromTheEnd) / this.props.usersPerPage);
-
-        /* /// */
-
 
         if (pages > 5) {
 
@@ -65,7 +54,7 @@ class UsersContainer extends React.Component {
                                 }
                             )
                         }
-                        className={cp === p ? styles.currentPage : /*'' + ' ' +*/ styles.pages}
+                        className={cp === p ? styles.currentPage : styles.pages}
                     > {p} </span>));
                     prev_is_shown = 0;
                 }
@@ -81,7 +70,7 @@ class UsersContainer extends React.Component {
                                 }
                             )
                         }
-                        className={cp === p ? styles.currentPage : /*'' + ' ' +*/ styles.pages}
+                        className={cp === p ? styles.currentPage : styles.pages}
                     > {p} </span>));
                     prev_is_shown = 0;
                 }
@@ -90,10 +79,7 @@ class UsersContainer extends React.Component {
                 out.push(' ... ');
 
                 prev_is_shown++;
-
             }
-
-
 
         } else {    // якщо сторінок <= 5
 

@@ -3,6 +3,7 @@ import ProfileStatus from "../Profile/ProfileStatus.jsx"
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {getProfile, getStatus, setStatus, updateProfile} from "../../redux/profile_reducer";
+import ProfileStatusWithHocs from "./ProfileStatusWithHocs";
 
 class MyProfile extends React.Component{
 
@@ -28,7 +29,7 @@ class MyProfile extends React.Component{
         return <div>
             <img src={this.props.profile.photos.large} alt=""/>
 
-            <ProfileStatus
+            <ProfileStatusWithHocs
                 status={this.props.status}
                 setStatus={this.props.setStatus}
             />
