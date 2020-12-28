@@ -37,7 +37,7 @@ const auth_reducer = (state = initialState, action) => {
         case SET_USER_IMG:
             return {
                 ...state,
-                ...action.img
+                userImg: action.img
             }
 
         case SET_CAPTCHA_IMG:
@@ -48,7 +48,7 @@ const auth_reducer = (state = initialState, action) => {
         case SET_CAPTCHA_ANS:
             return {
                 ...state,
-                captchaAnswer:action.answer
+                captchaAnswer:action.ans
             }
 /*        case SET_ERROR:
             return {
@@ -74,7 +74,7 @@ export const setUserAuthData = (userID,email,login,isAuth,capthaImg,captchaAnswe
     return {type: LOG_OUT};
 }*/
 
-export const setUserAuthImg = (img) => {
+export const setUserAuthImg = (img) => { /* not used */
     return {type: SET_USER_IMG, img};
 }
 export const setUserAuthCaptchaImg = (img) => {

@@ -1,16 +1,4 @@
 
-// let initialState = [
-//     {id:1,name:'Галерея'},
-//     {id:2,name:'Страховой калькулятор'},
-//     {id:3,name:'Форум 7pz.us'},
-//     {id:4,name:'Клик-клуб wklik.wovo4ka.ru'},
-//     {id:5,name:'Движок магазина цифровых товаров'},
-//     {id:6,name:'Движок для загруз-центра'},
-//     {id:7,name:'Продажа пикселей'},
-//     {id:8,name:'Крестики-нолики'},
-//     {id:9,name:'Сайт АссисТАС'},
-//
-// ]
 
 import {API} from "../api/api";
 
@@ -22,6 +10,8 @@ let initialState = {
 }
 
 const SET_EXAMPLES = 'SET_EXAMPLES';
+const DEL_EXAMPLE = 'DEL_EXAMPLE';
+const ADD_EXAMPLE = 'ADD_EXAMPLE';
 
 const examples_reducer = (state = initialState,action) => {
 
@@ -35,6 +25,20 @@ const examples_reducer = (state = initialState,action) => {
                 ...state,
                 // examplesList: [...state.examplesList, ...action.examples]
                 examplesList: [ ...action.examples]
+            }
+        case DEL_EXAMPLE:
+            // debugger
+            return {
+                ...state,
+                // examplesList: [...state.examplesList, ...action.examples]
+                examplesList: state.examplesList.filter(ex => ex.id !== action.id )
+            }
+        case ADD_EXAMPLE:
+            // debugger
+            return {
+                ...state,
+                // examplesList: [...state.examplesList, ...action.examples]
+                examplesList: [...state.examplesList, action.example]
             }
         default:
             return state;
@@ -52,6 +56,14 @@ export default examples_reducer;
 
 export const setExamples = (examples) => {
     return {type: SET_EXAMPLES, examples: examples};
+}
+
+export const delExample = (id) => {
+    return {type: DEL_EXAMPLE, id};
+}
+
+export const addNewExample = (example) => {
+    return {type: ADD_EXAMPLE, example};
 }
 
 

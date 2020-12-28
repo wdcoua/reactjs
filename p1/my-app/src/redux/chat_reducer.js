@@ -3,6 +3,7 @@ import kot from "../images/kotigoroshko.jpg"
 import za from "../images/zloy_admin.png"
 
 const ADD_CHAT_POST = 'ADD_CHAT_POST';
+const DEL_CHAT_POST = 'DEL_CHAT_POST';
 const NEW_CHAT_POST_CHANGE = 'NEW_CHAT_POST_CHANGE';
 //const GET_CHAT_NEW_POST_TEXT = 'GET_CHAT_NEW_POST_TEXT';
 
@@ -41,6 +42,11 @@ const chat_reducer = (state = initialState,action) => {
                 ...state,
                 newChatPostText: action.changedText
             }
+        case DEL_CHAT_POST:
+            return {
+                ...state,
+                chatPosts: state.chatPosts.filter(ch => ch.id !== action.id)
+            }
 
         default:
             return state;
@@ -58,6 +64,9 @@ export const addChatPost = (text) =>  {
 }
 export const newChatPostChange = (text) => {
     return {type: NEW_CHAT_POST_CHANGE,changedText: text};
+}
+export const delChatPost = (id) => {
+    return {type: DEL_CHAT_POST,id};
 }
 // export const getChatNewPostText = () =>  {
 //     return {type: GET_CHAT_NEW_POST_TEXT};

@@ -3,6 +3,7 @@ import {API} from "../api/api";
 const NEW_GB_POST_CHANGE = 'NEW-GB-POST-CHANGE';
 const ADD_GB_POST = 'ADD-GB-POST';
 const SET_GB_POSTS = 'SET_GB_POSTS';
+const DEL_GB_POST = 'DEL_GB_POST';
 
 let initialState = {
     gbPosts: [
@@ -65,6 +66,12 @@ const gb_reducer = (state = initialState,action) => {
                 // gbPosts: [...state.gbPosts,...action.posts],
                 gbPosts: [...action.posts],
             }
+        case DEL_GB_POST:
+            return {
+                ...state,
+                // gbPosts: [...state.gbPosts,...action.posts],
+                gbPosts: state.gbPosts.filter(post => post.id !== action.post_id )
+            }
 
         default:
             return state;
@@ -85,11 +92,12 @@ export const newGBpostChange = (text) => {
     return {type: NEW_GB_POST_CHANGE,changedText: text};
 }
 
-
-
-
 export const setGBPosts = (posts) => {
     return {type: SET_GB_POSTS, posts: posts};
+}
+
+export const delGBpost = (post_id) => {
+    return {type: DEL_GB_POST, post_id: post_id};
 }
 
 
