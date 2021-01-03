@@ -2,8 +2,9 @@ import {checkAuthorization} from "./auth_reducer";
 import {getGbPosts} from "./gb_reducer";
 import {getUsers} from "./users_reducer";
 import {getExamples} from "./examples_reducer";
+import {API} from "../api/api";
 
-const SET_INITIALIZED = 'SET_INITIALIZED';
+const SET_INITIALIZED = 'samurai_project/app/SET_INITIALIZED';
 //const SET_ERROR = 'SET_ERROR';
 
 let initialState = {
@@ -36,15 +37,15 @@ export const setInitialized = () => {
 }
 
 
-export const initializeApp = () => (dispatch) => {
+export const initializeApp = () => async (dispatch) => {
     let promise = dispatch(checkAuthorization())
     let promise2 = dispatch(getGbPosts())
     let promise3 = dispatch(getUsers())
     let promise4 = dispatch(getExamples())
-    Promise.all([promise,promise2,promise3,promise4])
-    .then( () => {
+    let data = await Promise.all([promise,promise2,promise3,promise4])
+    // .then( () => {
         dispatch(setInitialized())
-    })
+    // })
 
 
 }

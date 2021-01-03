@@ -1,16 +1,59 @@
-import React from "react";
-import ProfileStatus from "../Profile/ProfileStatus.jsx"
+import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {getProfile, getStatus, setStatus, updateProfile} from "../../redux/profile_reducer";
 import ProfileStatusWithHocs from "./ProfileStatusWithHocs";
+import ProfilePhoto from "./ProfilePhoto";
+import defaultUserPhoto from "../../images/user.png";
 
-class MyProfile extends React.Component{
+const MyProfile = (props) => {
+    let {profile,getProfile,getStatus,status,setStatus} = props;
+    useEffect(() => {
+
+        let {getProfile,getStatus} = props;
+        getProfile(11583);
+        getStatus(11583);
+    },[])
+
+
+
+    if(profile === null) {
+        getProfile(11583);
+        getStatus(11583);
+        //this.props.updateProfile();
+        return null;
+
+    }
+    return <div>
+        <ProfilePhoto
+            photo={profile.photos.large ? profile.photos.large : defaultUserPhoto }
+        />
+
+
+        <div><b>{profile.fullName}</b></div>
+        <ProfileStatusWithHocs
+            status={status}
+            setStatus={setStatus}
+        />
+
+        <div>"{profile.aboutMe}"</div><br/>
+        Мои контакты: <br/>
+        <div>{profile.contacts.facebook}</div>
+        <div>{profile.contacts.github}</div>
+        <div>{profile.contacts.instagram}</div>
+        <div>{profile.contacts.vk}</div>
+
+    </div>;
+}
+/*
+
+class MyProfile2 extends React.Component{
 
     componentDidMount() {
 
-        this.props.getProfile(11583);
-        this.props.getStatus(11583);
+        let {getProfile,getStatus} = this.props;
+        getProfile(11583);
+        getStatus(11583);
         // this.props.setFetchingStatus(true);
         //let userID = this.props.match.params.userID;
         // this.props.getProfile(11583);
@@ -19,32 +62,39 @@ class MyProfile extends React.Component{
 
     render(){
         //debugger
-        if(this.props.profile === null) {
-            this.props.getProfile(11583);
-            this.props.getStatus(11583);
+
+        let {profile,getProfile,getStatus,status,setStatus} = this.props;
+
+        if(profile === null) {
+            getProfile(11583);
+            getStatus(11583);
             //this.props.updateProfile();
             return null;
 
         }
         return <div>
-            <img src={this.props.profile.photos.large} alt=""/>
-
-            <ProfileStatusWithHocs
-                status={this.props.status}
-                setStatus={this.props.setStatus}
+            <ProfilePhoto
+                 photo={profile.photos.large ? profile.photos.large : defaultUserPhoto }
             />
 
-            <div><b>{this.props.profile.fullName}</b></div>
-            <div>"{this.props.profile.aboutMe}"</div><br/>
+
+            <div><b>{profile.fullName}</b></div>
+            <ProfileStatusWithHocs
+                status={status}
+                setStatus={setStatus}
+            />
+
+            <div>"{profile.aboutMe}"</div><br/>
             Мои контакты: <br/>
-            <div>{this.props.profile.contacts.facebook}</div>
-            <div>{this.props.profile.contacts.github}</div>
-            <div>{this.props.profile.contacts.instagram}</div>
-            <div>{this.props.profile.contacts.vk}</div>
+            <div>{profile.contacts.facebook}</div>
+            <div>{profile.contacts.github}</div>
+            <div>{profile.contacts.instagram}</div>
+            <div>{profile.contacts.vk}</div>
 
         </div>;
     }
 }
+*/
 
 let mapStateToProps = (state) => { // бере увесь глобальний STATE і повертає тільки те, що нам потрібно для цієї компоненти
     return {

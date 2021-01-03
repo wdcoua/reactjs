@@ -32,7 +32,7 @@ export const instance2 = axios.create({
 export const API = {
 
 
-     getUsers  (usersPerPage = 10, currentPage = 1)  {
+    getUsers(usersPerPage = 10, currentPage = 1) {
         return instance
             .get('users/?count=' + usersPerPage + '&page=' + currentPage)
             .then(resp => {
@@ -41,7 +41,7 @@ export const API = {
             );
     },
 
-     follow  (id)  {
+    follow(id) {
         return instance
             .post('follow/' + id)
             .then(resp => {
@@ -50,7 +50,7 @@ export const API = {
             );
     },
 
-     unfollow  (id)  {
+    unfollow(id) {
         return instance
             .delete('follow/' + id)
             .then(resp => {
@@ -59,16 +59,15 @@ export const API = {
             );
     },
 
-     authMe  ()  {
-        return instance
-            .get('auth/me')
-            .then(resp => {
-                    return resp.data
-                }
-            );
+    async authMe() {
+        let resp = await instance
+            .get('auth/me');
+        return resp.data
+
+
     },
 
-     getProfile (id) {
+    getProfile(id) {
 
         return instance
             .get('profile/' + id)
@@ -78,7 +77,7 @@ export const API = {
             );
     },
 
-     getStatus (id) {
+    getStatus(id) {
         return instance
             .get('profile/status/' + id)
             .then(resp => {
@@ -87,9 +86,9 @@ export const API = {
             );
     },
 
-     setStatus (status) {
+    setStatus(status) {
         return instance
-            .put('profile/status/',{
+            .put('profile/status/', {
                 status: status
             })
             .then(resp => {
@@ -99,9 +98,9 @@ export const API = {
     },
 
 
-     updateProfile () {
+    updateProfile() {
         return instance
-            .put('profile',{
+            .put('profile', {
                 userId: 11583,
                 lookingForAJob: false,
                 lookingForAJobDescription: 'уже есть',
@@ -124,11 +123,19 @@ export const API = {
             );
     },
 
+    async updateProfilePhoto(photo) {
+        let resp = await instance
+            .put('profile/photo', {
+                image: photo
+            });
+        return resp.data;
+    },
 
-     auth (email,pass,remember = true,captcha = false) {
-         console.log(email,pass,remember,captcha)
+
+    auth(email, pass, remember = true, captcha = false) {
+        console.log(email, pass, remember, captcha)
         return instance
-            .post('auth/login',{
+            .post('auth/login', {
                 email: email,
                 password: pass,
                 rememberMe: remember,
@@ -141,8 +148,8 @@ export const API = {
             );
     },
 
-     logOut () {
-         console.log('logout1')
+    logOut() {
+        console.log('logout1')
         return instance
             .delete('auth/login')
             .then(resp => {
@@ -153,7 +160,7 @@ export const API = {
     },
 
 
-     getCaptcha () {
+    getCaptcha() {
         return instance
             .get('security/get-captcha-url')
             .then(resp => {
@@ -163,10 +170,7 @@ export const API = {
     },
 
 
-
-
-
-    getExamples  ()  {
+    getExamples() {
         return instance2
             .get('?action=get_examples')
             .then(resp => {
@@ -175,7 +179,7 @@ export const API = {
             );
     },
 
-    getGbPosts ()  {
+    getGbPosts() {
         return instance2
             .get('?action=get_gb_posts')
             .then(resp => {

@@ -1,36 +1,47 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
 import {login, checkAuthorization} from "../../redux/auth_reducer";
 import {Redirect} from "react-router-dom";
 import {compose} from "redux";
-import {Input} from "../common/FormsControls/FormsControls";
+import {createMyField, Input} from "../common/FormsControls/FormsControls";
 import {maxLenCreator, minLenCreator, required} from "../../utils/validate/validator";
 import style from "./Login.module.css"
 
-class LoginContainer extends React.Component { // зробив для тесту, можна і без цього класу
+const LoginContainer = (props) => {
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        let p = this.props;
-        let s = this.state;
-        //debugger
-        // todo не працює при лог-ауті на сайті
-    }
+    // useEffect(() => {
+    //     let p = this.props;
+    //     let s = this.state;
+    // },[])
 
-    render() {
-        return <Login {...this.props}/>
-    }
+
+    return <Login {...props}/>
 }
 
+// class LoginContainer extends React.Component { // зробив для тесту, можна і без цього класу
+//
+//     componentDidUpdate(prevProps, prevState, snapshot) {
+//         let p = this.props;
+//         let s = this.state;
+//         //debugger
+//         // todo не працює при лог-ауті на сайті
+//     }
+//
+//     render() {
+//         return <Login {...this.props}/>
+//     }
+// }
+
 const Login = (props) => {
-    const onSubmit = (formData) => {
+    const onSubmit = ({email,pass,rememberMe,captcha}) => { //formData
         //
-        if(props.auth.isAuth === false){
-            props.login(formData.email,formData.pass,formData.rememberMe,formData.captcha)
-        }else{
+        if (props.auth.isAuth === false) {
+            props.login(email, pass, rememberMe, captcha)
+        } else {
             return <Redirect to={'/index'}/>
         }
-        console.log(formData)
+        // console.log(formData)
     }
     return <div>
         <h1>Авторизація</h1>
@@ -41,44 +52,33 @@ const maxLen50 = maxLenCreator(50);
 const minLen2 = minLenCreator(2);
 
 
-const LoginForm = (props) => {
+const LoginForm = ({auth, handleSubmit, error}) => {
 
-    if(props.auth.isAuth === false){
+    if (auth.isAuth === false) {
         //props.auth(formData.email,formData.pass,formData.rememberMe)
 
-        return <form onSubmit={props.handleSubmit}>
+        return <form onSubmit={handleSubmit}>
 
-            <div className={( !props.error ? style.noError : '') + ' ' + style.error}>
-                { props.error}
+            <div className={(!error ? style.noError : '') + ' ' + style.error}>
+                {error}
             </div>
+            {createMyField('email', Input, 'email', [required, maxLen50, minLen2])}
+            {createMyField('pass', Input, 'pass', [required, maxLen50, minLen2], {type: 'password'})}
 
-            <div>
-                <Field placeholder="email" component={Input} name='email' validate={[required,maxLen50,minLen2]}/>
-            </div>
-            <div>
-                <Field placeholder="pass" component={Input} type='password' name='pass' validate={[required,maxLen50,minLen2]} />
-            </div>
 
-            <div className={style.captchaDiv + ' ' + (!props.auth.capthaImg ? style.noCaptcha : '')}>
+            <div className={style.captchaDiv + ' ' + (!auth.capthaImg ? style.noCaptcha : '')}>
                 <div>
-                    <img alt='captcha' src={props.auth.capthaImg  ? props.auth.capthaImg : ''}  />
+                    <img alt='captcha' src={auth.capthaImg ? auth.capthaImg : ''}/>
                 </div>
-                <div>
-                    <Field placeholder="cAp7cH4"
-                           component={Input}
-                           name='captcha'
-                           validate={!props.auth.capthaImg ? [] : [required,maxLen50,minLen2]} />
-                </div>
+                {createMyField('cAp7cH4', Input, 'captcha', (!auth.capthaImg ? [] : [required, maxLen50, minLen2]))}
             </div>
 
-            <div>
-                <Field name='rememberMe' type='checkbox' component={Input}  /> Запам'ятай мене
-            </div>
+            {createMyField(null, Input, 'rememberMe', [], {type: 'checkbox'}, "Запам'ятай мене")}
             <div>
                 <button>Увійти</button>
             </div>
         </form>
-    }else{
+    } else {
         return <Redirect to={'/index'}/>
     }
 
@@ -90,17 +90,17 @@ const LoginReduxForm = reduxForm({
 })(LoginForm)
 
 
-const mapStateToProps = (props) => {
-     //debugger
+const mapStateToProps = ({auth}) => {
+    //debugger
     return {
-        auth: props.auth,
+        auth: auth,
         //capthaImg: props.capthaImg
     }
 };
 
 export default compose(
-    connect(mapStateToProps,{login,checkAuthorization}),
-    )(LoginContainer)
+    connect(mapStateToProps, {login, checkAuthorization}),
+)(LoginContainer)
 
 //
 // export default () => {

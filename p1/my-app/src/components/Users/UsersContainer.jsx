@@ -6,7 +6,7 @@ import {
     setTotalUsers,
     setUsers, setFollowingInProgress, getUsers, follow
 } from "../../redux/users_reducer";
-import React from "react";
+import React, {useEffect} from "react";
 import styles from "./User/User.module.css";
 import Users from "./User/Users";
 import Preloader from "../Preloader/Preloader";
@@ -19,103 +19,97 @@ import {
     getTotalUsers,
     getUsersPerPage, getUsersSuper
 } from "../../redux/users_selectors";
+import Pagination from "../Pagination/Pagination"
+
+const UsersContainer = ({isFetching,users,changeUserFollowStatus,setFetchingStatus,
+                            setFollowingInProgress,followingIsInProgress,follow,totalUsers,usersPerPage,currentPage,getUsers}) => {
+    useEffect(() => {
+        getUsers(usersPerPage ,currentPage);
+    },[currentPage]);
+
+/*
+    const componentDidMount = () => {
+        // let {usersPerPage,currentPage} = props;
+        getUsers(usersPerPage ,currentPage);
+        //debugger
+    }*/
+
+    const openPageNumber = (n) => {
+        // let {usersPerPage} = props;
+        getUsers(usersPerPage ,n);
+    }
+
+
+    return <>
+        {isFetching ? <Preloader /> : null}
+        <div>
+
+            <Pagination
+                totalUsers={totalUsers}
+                usersPerPage={usersPerPage}
+                currentPage={currentPage}
+                openPageNumber={openPageNumber}
+
+            />
+
+            <Users
+                users={users}
+                // showPages={showPages}
+                changeUserFollowStatus={changeUserFollowStatus}
+                setFetchingStatus={setFetchingStatus}
+                setFollowingInProgress={setFollowingInProgress}
+                followingIsInProgress={followingIsInProgress}
+                follow={follow}
+
+            />
+        </div>
+
+    </>
+}
+/*
 
 class UsersContainer extends React.Component {
 
-    componentDidMount() {
-
-        this.props.getUsers(this.props.usersPerPage ,this.currentPage);
+    componentDidMount = () => {
+        let {usersPerPage,currentPage} = this.props;
+        this.props.getUsers(usersPerPage ,currentPage);
         //debugger
     }
 
-    openPageNumber(n) {
-        this.props.getUsers(this.props.usersPerPage ,n);
+    openPageNumber = (n) => {
+        let {usersPerPage} = this.props;
+        this.props.getUsers(usersPerPage ,n);
     }
 
 
-    showPages() {
 
-        let pages = Math.ceil(this.props.totalUsers / this.props.usersPerPage);
-        let out = [];
-        let cp = this.props.currentPage;
-        let prev_is_shown = 0;
-
-        if (pages > 5) {
-
-            for(let p = 1; p <= pages; p++){
-
-                if(p === 1 || p === pages){
-                    out.push((<span
-                        key={p}
-                        onClick={
-                            (cp === p ? null : () => {
-                                    this.openPageNumber(p)
-                                }
-                            )
-                        }
-                        className={cp === p ? styles.currentPage : styles.pages}
-                    > {p} </span>));
-                    prev_is_shown = 0;
-                }
-
-                if( ((p === cp && cp !== 1 && cp !== pages) ||
-                    (p === cp-1 && cp-1 !== 1 ) ||
-                    (p === cp+1 && cp+1 !== pages ) )   ){
-                    out.push((<span
-                        key={p}
-                        onClick={
-                            (cp === p ? null : () => {
-                                    this.openPageNumber(p)
-                                }
-                            )
-                        }
-                        className={cp === p ? styles.currentPage : styles.pages}
-                    > {p} </span>));
-                    prev_is_shown = 0;
-                }
-
-                if (prev_is_shown === 1)
-                out.push(' ... ');
-
-                prev_is_shown++;
-            }
-
-        } else {    // якщо сторінок <= 5
-
-            //     console.log(styles.currentPage)
-            //     debugger
-            for (let i = 1; i <= 5; i++) {
-                if (cp === i) {
-                    out.push((<span key={i} className={styles.currentPage + ' ' + styles.pages}> {i} </span>))
-                } else {
-                    out.push((<span key={i} onClick={() => {
-                        this.openPageNumber(i)
-                    }} className={styles.pages}> {i} </span>))
-                }
-            }
-        }
-
-        return (
-            <div>Pages:<br/>
-                {out}<br/>{/*{page}<br/>{this.props.totalUsers}*/}<br/>
-            </div>
-        )
-    }
 
     render() {
         //console.log('USERS')
+
+        let {isFetching,users,changeUserFollowStatus,setFetchingStatus,
+            setFollowingInProgress,followingIsInProgress,follow,totalUsers,usersPerPage,currentPage} = this.props;
+        // debugger
         return ( <>
-                {this.props.isFetching ? <Preloader /> : null}
+                {isFetching ? <Preloader /> : null}
             <div>
-                {this.showPages()}
+
+                <Pagination
+                    totalUsers={totalUsers}
+                    usersPerPage={usersPerPage}
+                    currentPage={currentPage}
+                    openPageNumber={this.openPageNumber}
+
+                />
+
                 <Users
-                    users={this.props.users}
+                    users={users}
                     showPages={this.showPages}
-                    changeUserFollowStatus={this.props.changeUserFollowStatus}
-                    setFetchingStatus={this.props.setFetchingStatus}
-                    setFollowingInProgress={this.props.setFollowingInProgress}
-                    followingIsInProgress={this.props.followingIsInProgress}
-                    follow={this.props.follow}
+                    changeUserFollowStatus={changeUserFollowStatus}
+                    setFetchingStatus={setFetchingStatus}
+                    setFollowingInProgress={setFollowingInProgress}
+                    followingIsInProgress={followingIsInProgress}
+                    follow={follow}
 
                 />
             </div>
@@ -125,6 +119,7 @@ class UsersContainer extends React.Component {
         )
     }
 }
+*/
 
 let mapStateToProps = (state) => { // бере увесь глобальний STATE і повертає тільки те, що нам потрібно для цієї компоненти
     //debugger

@@ -5,17 +5,23 @@ import React from "react";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import {compose} from "redux";
 
-class ChatContainer extends React.Component{
+const ChatContainer = ({chat,newChatPostText,addChatPost,newChatPostChange}) => {
+    return <Chat
+        chat={chat}
+        newChatPostText={newChatPostText}
+        addChatPost={addChatPost}
+        newChatPostChange={newChatPostChange}
+    />
+}
+/*
+
+class ChatContainer2 extends React.Component{
     render() {
 
-        return <Chat
-            chat={this.props.chat}
-            newChatPostText={this.props.newChatPostText}
-            addChatPost={this.props.addChatPost}
-            newChatPostChange={this.props.newChatPostChange}
-        />
+
     }
 }
+*/
 
 let mapStateToProps = (state) => {
     return {

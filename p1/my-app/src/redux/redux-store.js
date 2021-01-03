@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore,compose} from "redux";
 import gb_reducer from "./gb_reducer";
 import chat_reducer from "./chat_reducer";
 import examples_reducer from "./examples_reducer";
@@ -21,9 +21,18 @@ let reducers = combineReducers({
     app: app_reducer
 })
 
-let store = createStore(reducers,applyMiddleware(thunkMiddleware));
+
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, /* preloadedState, */ composeEnhancers(
+    applyMiddleware(thunkMiddleware)
+));
+
+
+
+// let store = createStore(reducers,applyMiddleware(thunkMiddleware));
 //let store = createStore(reducers,composeWithDevTools(applyMiddleware(thunkMiddleware)));
 
-window.store = store;
+window.__store__ = store;
 
 export default store;

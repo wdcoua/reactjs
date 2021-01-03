@@ -4,38 +4,20 @@ import {NavLink} from "react-router-dom";
 import logout from "../../images/logout.png"
 
 
-/*const LogOutForm = (props) => {
-    return <form onSubmit={props.handleSubmit}>
-        <Field component={Hidden} name='logout' type='hidden' value='1'/>
-        <button>Log Out</button>
-    </form>
-}
 
-const LogOutFormRedux = reduxForm({
-    form: 'logOut'
-})(LogOutForm);*/
-
-const Header = (props) => {
-    // console.log(props.auth.isAuth)
-
-/*
-    const onSubmit = (formData) => {
-        props.logOut();
-        console.log(formData)
-        //formData.new_chat_post = '';
-    }*/
+const Header = ({logOut,auth}) => {
 
     return <header>
         <img src="https://wd.co.ua/pic/wd_logo.jpg" className={c.logo} alt='alt'/>
 
         <div className={c.auth}>
 
-            {props.auth.isAuth
+            {auth.isAuth
                 ? <div>
                     <NavLink to={'/myprofile'}>
-                        {props.auth.login}
+                        {auth.login}
                     </NavLink>
-                    <img src={logout} alt='logout' title='вийти' className={c.logout} onClick={props.logOut}/>
+                    <img src={logout} alt='logout' title='вийти' className={c.logout} onClick={logOut}/>
                     {/*<LogOutFormRedux {...props} onSubmit={onSubmit} />*/}
                 </div>
 

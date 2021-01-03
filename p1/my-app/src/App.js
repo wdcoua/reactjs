@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from "react";
 import './App.css';
 import Nav from './components/Nav/Nav';
 import Main from './components/Main/Main';
@@ -10,6 +10,23 @@ import {withRouter} from "react-router-dom";
 import {initializeApp} from "./redux/app_reducer";
 import Preloader from "./components/Preloader/Preloader";
 
+const App = ({initializeApp,initialized}) => {
+    useEffect(() => {
+        initializeApp();
+
+    },[initialized]);
+
+    return !initialized
+        ? <Preloader />
+        : <div className="app-wrapper">
+            <HeaderContainer/>
+            <Nav/>
+            <Main/>
+            <Footer/>
+
+        </div>
+}
+/*
 
 class App extends React.Component {
 
@@ -32,11 +49,12 @@ class App extends React.Component {
             </div>
     }
 }
+*/
 
-const mapStateToProps = (props) => {
+const mapStateToProps = ({app}) => {
     // debugger
     return {
-        initialized: props.app.initialized
+        initialized: app.initialized
     }
 };
 

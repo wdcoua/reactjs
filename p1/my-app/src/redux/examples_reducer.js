@@ -1,5 +1,3 @@
-
-
 import {API} from "../api/api";
 
 let initialState = {
@@ -9,13 +7,13 @@ let initialState = {
     ]
 }
 
-const SET_EXAMPLES = 'SET_EXAMPLES';
-const DEL_EXAMPLE = 'DEL_EXAMPLE';
-const ADD_EXAMPLE = 'ADD_EXAMPLE';
+const SET_EXAMPLES = 'samurai_project/examples/SET_EXAMPLES';
+const DEL_EXAMPLE = 'samurai_project/examples/DEL_EXAMPLE';
+const ADD_EXAMPLE = 'samurai_project/examples/ADD_EXAMPLE';
 
-const examples_reducer = (state = initialState,action) => {
+const examples_reducer = (state = initialState, action) => {
 
-    switch (action.type){
+    switch (action.type) {
         // case GET_EXAMPLES:
         //     return state;
         //     break;
@@ -24,14 +22,14 @@ const examples_reducer = (state = initialState,action) => {
             return {
                 ...state,
                 // examplesList: [...state.examplesList, ...action.examples]
-                examplesList: [ ...action.examples]
+                examplesList: [...action.examples]
             }
         case DEL_EXAMPLE:
             // debugger
             return {
                 ...state,
                 // examplesList: [...state.examplesList, ...action.examples]
-                examplesList: state.examplesList.filter(ex => ex.id !== action.id )
+                examplesList: state.examplesList.filter(ex => ex.id !== action.id)
             }
         case ADD_EXAMPLE:
             // debugger
@@ -42,7 +40,7 @@ const examples_reducer = (state = initialState,action) => {
             }
         default:
             return state;
-            //break;
+        //break;
 
     }
 
@@ -50,8 +48,6 @@ const examples_reducer = (state = initialState,action) => {
 }
 
 export default examples_reducer;
-
-
 
 
 export const setExamples = (examples) => {
@@ -69,19 +65,18 @@ export const addNewExample = (example) => {
 
 // thunk-и
 
-export const getExamples = () => {
-    return (dispatch) => {
+export const getExamples = () => async (dispatch) => {
 
-        API.getExamples()
-            // .get('https://social-network.samuraijs.com/api/1.0/users/?count=20&page=250')
-            .then(data => {
-                // debugger
-                dispatch(setExamples(data.items))
-                // console.log(resp)
-            })
+    let data = await API.getExamples()
+    // .get('https://social-network.samuraijs.com/api/1.0/users/?count=20&page=250')
+    // .then(data => {
+    // debugger
+    dispatch(setExamples(data.items))
+    // console.log(resp)
+    // })
+    //
+    // .catch(error => {
+    //     console.warn(error);
+    // });
 
-            .catch(error => {
-                console.warn(error);
-            });
-    }
 }

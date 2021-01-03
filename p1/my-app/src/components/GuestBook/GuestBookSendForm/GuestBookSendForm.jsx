@@ -7,7 +7,7 @@ import {maxLenCreator, minLenCreator, required} from "../../../utils/validate/va
 const maxLen150 = maxLenCreator(150);
 const minLen2 = minLenCreator(2);
 
-const GbForm = (props) => {
+const GbForm = ({handleSubmit}) => {
 
     //let new_gb_post = React.createRef();
 
@@ -19,7 +19,7 @@ const GbForm = (props) => {
 
     }
 */
-    return <form onSubmit={props.handleSubmit}>
+    return <form onSubmit={handleSubmit}>
         <div>
             <Field component={Textarea} name={'new_gb_post'}
                    placeholder={'new GB post here'} className={c.gb_form_text}

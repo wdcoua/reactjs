@@ -3,42 +3,63 @@ import {
     getGbPosts, newGBpostChange,
 } from "../../redux/gb_reducer";
 import {connect} from "react-redux";
-import React from "react";
+import React, {useEffect} from "react";
 import c from "./GuestBook.module.css";
 import GuestBookSendForm from "./GuestBookSendForm/GuestBookSendForm";
 import GuestBookPosts from "./GuestBookPosts/GuestBookPosts";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import {compose} from "redux";
 
+const GuestBookContainer = ({getGbPosts,newGBpostChange,addGBPost,newPostText,gbPosts}) => {
+    useEffect(() => {
+        getGbPosts();
+    },[]);
 
-class GuestBookContainer extends React.Component{
+    // let {newGBpostChange,addGBPost,newPostText,gbPosts} = this.props;
+    return (
+        <div className={c.gb}>
+            <GuestBookSendForm
+                onGBNewPostChange={newGBpostChange}
+                onGBAddPost={addGBPost}
+                newPostText={newPostText}
+            />
+
+            <GuestBookPosts gbPosts={gbPosts}/>
+        </div>
+    );
+}
+/*
+class GuestBookContainer2 extends React.Component{
+
+    // let {getGbPosts,newGBpostChange,addGBPost,newPostText,gbPosts} => this.props;
 
     componentDidMount = () => {
-        this.props.getGbPosts();
+        getGbPosts();
     }
 
     render = () => {
         //if(this.props.isAuth === false) return <Redirect to={'/login'}/>;
+        let {newGBpostChange,addGBPost,newPostText,gbPosts} = this.props;
         return (
             <div className={c.gb}>
                 <GuestBookSendForm
-                    onGBNewPostChange={this.props.newGBpostChange}
-                    onGBAddPost={this.props.addGBPost}
-                    newPostText={this.props.newPostText}
+                    onGBNewPostChange={newGBpostChange}
+                    onGBAddPost={addGBPost}
+                    newPostText={newPostText}
                 />
 
-                <GuestBookPosts gbPosts={this.props.gbPosts}/>
+                <GuestBookPosts gbPosts={gbPosts}/>
             </div>
         );
     }
-}
+}*/
 
 
 
-function mapStateToProps(state) {
+function mapStateToProps({gb}) {
     return {
-        newPostText: state.gb.newPostText,
-        gbPosts: state.gb.gbPosts,
+        newPostText: gb.newPostText,
+        gbPosts: gb.gbPosts,
         //isAuth: state.auth.isAuth
     }
 }

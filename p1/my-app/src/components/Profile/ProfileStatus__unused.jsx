@@ -1,7 +1,7 @@
 import React from "react"
 import {connect} from "react-redux";
 
-class ProfileStatus extends React.Component {
+class ProfileStatus_unused extends React.Component {
 
     state = {
         editMode: false,

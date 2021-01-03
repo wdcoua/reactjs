@@ -1,7 +1,7 @@
 import {API} from "../api/api";
 
-const SET_USER_PROFILE = 'SET_USER_PROFILE';
-const SET_USER_STATUS = 'SET_USER_STATUS';
+const SET_USER_PROFILE = 'samurai_project/profile/SET_USER_PROFILE';
+const SET_USER_STATUS = 'samurai_project/profile/SET_USER_STATUS';
 
 let initialState = {
     profile: null,
@@ -41,70 +41,77 @@ export const setUserProfile = (profile) => {
 export const setUserStatus = (status) => {
     return {type: SET_USER_STATUS, status};
 }
+export const updateProfilePhoto2 = (photo) => {
+    return {type: SET_USER_STATUS, photo};
+}
 
 // thunk-и
 
-export const getProfile = (id) => {
-    return (dispatch) => {
+export const getProfile = (id) => async (dispatch) => {
 
-        API.getProfile(!id ? 11583 : id)
-            .then(resp => {
-                //console.log('data = ' + data)
-                dispatch(setUserProfile(resp.data));
-            })
+    let resp = await API.getProfile(!id ? 11583 : id);
+    // .then(resp => {
+    //console.log('data = ' + data)
+    dispatch(setUserProfile(resp.data));
+    // })
+    //
+    // .catch(error => {
+    //     console.warn(error);
+    // });
 
-            .catch(error => {
-                console.warn(error);
-            });
-    }
 }
 
-export const getStatus = (id) => {
-    return (dispatch) => {
+export const getStatus = (id) => async (dispatch) => {
 
-        API.getStatus(!id ? 11583 : id)
-            .then(data => {
-                //const {resultCode} = data;
-                //if(resultCode === 0 || resultCode === undefined){ // експериментально
-                    dispatch(setUserStatus(data));
-                //}
+    let data = await API.getStatus(!id ? 11583 : id);
+    // .then(data => {
+    //const {resultCode} = data;
+    //if(resultCode === 0 || resultCode === undefined){ // експериментально
+    dispatch(setUserStatus(data));
+    //}
 
-            })
+    // })
+    //
+    // .catch(error => {
+    //     console.warn(error);
+    // });
 
-            .catch(error => {
-                console.warn(error);
-            });
-    }
 }
 
-export const setStatus = (status) => {
+export const updateProfilePhoto = (photo) => async (dispatch) => {
+
+    let data = await API.updateProfilePhoto(photo);
+    dispatch(setUserStatus(data));
+
+
+}
+
+export const setStatus = (status) => async (dispatch) => {
     console.log('setStatus - ' + status)
-    return (dispatch) => {
 
-        API.setStatus(status)
-            .then(data => {
-                dispatch(setUserStatus(status));
-            })
+    let data = await API.setStatus(status)
+    // .then(data => {
+    dispatch(setUserStatus(status));
+    // })
+    //
+    // .catch(error => {
+    //     console.warn(error);
+    // });
 
-            .catch(error => {
-                console.warn(error);
-            });
-    }
 }
 
-export const updateProfile = () => {
-    console.log('updateProfile - ' )
-    return (dispatch) => {
+export const updateProfile = () => async (dispatch) => {
+    console.log('updateProfile - ')
 
-        API.updateProfile()
-            .then(data => {
-                //dispatch(setUserStatus(status));
-                console.log('updateProfile + ' + data.resultCode)
-                console.log('updateProfile + ' + data.data)
-            })
+    let data = await API.updateProfile();
+    // .then(data => {
+    //dispatch(setUserStatus(status));
+    console.log('updateProfile + ' + data.resultCode)
+    console.log('updateProfile + ' + data.data)
+    // })
+    //
+    // .catch(error => {
+    //     console.warn(error);
+    // });
 
-            .catch(error => {
-                console.warn(error);
-            });
-    }
 }

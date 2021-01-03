@@ -1,9 +1,9 @@
 import {API} from "../api/api";
 
-const NEW_GB_POST_CHANGE = 'NEW-GB-POST-CHANGE';
-const ADD_GB_POST = 'ADD-GB-POST';
-const SET_GB_POSTS = 'SET_GB_POSTS';
-const DEL_GB_POST = 'DEL_GB_POST';
+const NEW_GB_POST_CHANGE = 'samurai_project/gb/NEW_GB_POST_CHANGE';
+const ADD_GB_POST = 'samurai_project/gb/ADD_GB_POST';
+const SET_GB_POSTS = 'samurai_project/gb/SET_GB_POSTS';
+const DEL_GB_POST = 'samurai_project/gb/DEL_GB_POST';
 
 let initialState = {
     gbPosts: [
@@ -102,15 +102,14 @@ export const delGBpost = (post_id) => {
 
 
 // thunk-и
-export const getGbPosts = () => {
-    return (dispatch) => {
+export const getGbPosts = () => async (dispatch) => {
 
-        API.getGbPosts()
-            .then(data => {
+        let data = await API.getGbPosts()
+            // .then(data => {
                 dispatch(setGBPosts(data.items));
-            })
-            .catch(error => {
-                console.warn(error);
-            });
-    }
+    //         })
+    //         .catch(error => {
+    //             console.warn(error);
+    //         });
+    // }
 }

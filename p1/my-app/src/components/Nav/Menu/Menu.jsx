@@ -2,11 +2,11 @@ import React from 'react';
 import c from './Menu.module.css'
 import { NavLink} from "react-router-dom";
 
-const Menu = (props) => {
+const Menu = ({href,text}) => {
 
     return (
 
-            <div className={c.menu}><NavLink to={props.href} activeClassName={c.active}>{props.text}</NavLink></div>
+            <div className={c.menu}><NavLink to={href} activeClassName={c.active}>{text}</NavLink></div>
     );
 
     /*

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import {getProfile, getStatus} from "../../redux/profile_reducer";
 import Preloader from "../Preloader/Preloader";
@@ -7,59 +7,87 @@ import Profile from "./Profile";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import {compose} from "redux";
 
+const ProfileContainer = (props) => {
 
+    useEffect(() => {
 
-
-class ProfileContainer extends React.Component{
-
-    componentDidMount() {
-
-
-         //this.props.setFetchingStatus(true);
-       let userID = this.props.match.params.userID;
-        if(!userID && this.props.userID) userID = this.props.userID
-        if(userID){
-            this.props.getStatus(userID);
-            this.props.getProfile(userID);
-        }else{
-            this.props.history.push('/login')
+        let {getStatus, getProfile, userID, history, match} = props;
+        //this.props.setFetchingStatus(true);
+        let userID2 = match.params.userID;
+        if (!userID2 && userID) userID2 = userID
+        if (userID2) {
+            getStatus(userID2);
+            getProfile(userID2);
+        } else {
+            history.push('/login')
         }
 
-    }
+    },[props.userID]);
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        let p = this.props.match.url;
-        let pp = prevProps.match.url;
-        let s = this.state;
 
-        if(p !== pp){
-            let userID = this.props.match.params.userID;
-            if(!userID && this.props.userID) userID = this.props.userID
-            if(userID){
-                this.props.getStatus(userID);
-                this.props.getProfile(userID);
-            }else{
-                this.props.history.push('/login')
+
+
+    if (!props.profile)
+        return <Preloader/>
+
+    return <Profile {...props}/>
+
+}
+    /*
+
+    class ProfileContainer2 extends React.Component {
+
+        componentDidMount() {
+
+            let {getStatus, getProfile, userID, history, match} = this.props;
+            //this.props.setFetchingStatus(true);
+            let userID2 = match.params.userID;
+            if (!userID2 && userID) userID2 = userID
+            if (userID2) {
+                getStatus(userID2);
+                getProfile(userID2);
+            } else {
+                history.push('/login')
             }
 
         }
 
+        componentDidUpdate(prevProps, prevState, snapshot) {
+
+            let {match, userID1, getStatus, getProfile, history} = this.props;
+            let p = match.url;
+            let pp = prevProps.match.url;
+            let s = this.state;
+
+            if (p !== pp) {
+                let userID = match.params.userID;
+                if (!userID && userID1) userID = userID1
+                if (userID) {
+                    getStatus(userID);
+                    getProfile(userID);
+                } else {
+                    history.push('/login')
+                }
+
+            }
+
+        }
+
+        render() {
+            // debugger
+            if (!this.props.profile)
+                return <Preloader/>
+
+            return <Profile {...this.props}/>;
+        }
     }
+    */
 
-    render(){
-        // debugger
-        if(!this.props.profile )
-            return <Preloader />
-
-        return <Profile {...this.props}/>;
-    }
-}
-
-let mapStateToProps = (state) => { // бере увесь глобальний STATE і повертає тільки те, що нам потрібно для цієї компоненти
+let mapStateToProps = ({auth, profilePage}) => { // бере увесь глобальний STATE і повертає тільки те, що нам потрібно для цієї компоненти
     return {
-        userID: state.auth.userID,
-         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        userID: auth.userID,
+        profile: profilePage.profile,
+        status: profilePage.status
     }
 }
 

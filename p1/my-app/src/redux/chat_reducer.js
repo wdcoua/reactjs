@@ -2,9 +2,9 @@
 import kot from "../images/kotigoroshko.jpg"
 import za from "../images/zloy_admin.png"
 
-const ADD_CHAT_POST = 'ADD_CHAT_POST';
-const DEL_CHAT_POST = 'DEL_CHAT_POST';
-const NEW_CHAT_POST_CHANGE = 'NEW_CHAT_POST_CHANGE';
+const ADD_CHAT_POST = 'samurai_project/chat/ADD_CHAT_POST';
+const DEL_CHAT_POST = 'samurai_project/chat/DEL_CHAT_POST';
+const NEW_CHAT_POST_CHANGE = 'samurai_project/chat/NEW_CHAT_POST_CHANGE';
 //const GET_CHAT_NEW_POST_TEXT = 'GET_CHAT_NEW_POST_TEXT';
 
 let initialState = {

@@ -33,3 +33,14 @@ it('setUserStatus is successful', () => {
     // 3 - expectation
     expect(newState.status).toBe('hello');
 });
+
+it('updateProfilePhoto is successful', () => {
+    // 1 - test data
+    let action = updateProfilePhoto('photo');
+
+    // 2 - action
+    let newState = profile_reducer(state, action);
+
+    // 3 - expectation
+    expect(newState.status).toBe('hello');
+});

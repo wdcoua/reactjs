@@ -1,7 +1,17 @@
 import {connect} from "react-redux";
 import {getExamples} from "../../redux/examples_reducer";
-import React from "react";
+import React, {useEffect} from "react"
 import Examples from "./Example/Examples";
+// import {useEffect} from "react/cjs/react.production.min";
+
+const ExamplesContainer = ({getExamples,examples}) => {
+    useEffect( () => {
+        getExamples();
+    }, []); // якщо написати [examples], то скрипт буде бомбити сервер запитами "чи не змінились екзампли"
+
+    return <Examples examples={examples.examplesList}/>;
+}
+/*
 
 class ExamplesContainer extends React.Component{
 
@@ -15,6 +25,7 @@ class ExamplesContainer extends React.Component{
         );
     }
 }
+*/
 
 let mapStateToProps = (state) => {
     // console.warn(state);

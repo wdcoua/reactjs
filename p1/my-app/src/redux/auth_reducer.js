@@ -2,10 +2,10 @@ import {API} from "../api/api";
 import {stopSubmit} from "redux-form";
 import {setUserProfile, setUserStatus} from "./profile_reducer";
 
-const SET_USER_DATA = 'SET_USER_DATA';
-const SET_USER_IMG = 'SET_USER_IMG';
-const SET_CAPTCHA_IMG = 'SET_CAPTCHA_IMG';
-const SET_CAPTCHA_ANS = 'SET_CAPTCHA_ANS';
+const SET_USER_DATA = 'samurai_project/auth/SET_USER_DATA';
+const SET_USER_IMG = 'samurai_project/auth/SET_USER_IMG';
+const SET_CAPTCHA_IMG = 'samurai_project/auth/SET_CAPTCHA_IMG';
+const SET_CAPTCHA_ANS = 'samurai_project/auth/SET_CAPTCHA_ANS';
 //const SET_ERROR = 'SET_ERROR';
 
 let initialState = {
@@ -43,18 +43,18 @@ const auth_reducer = (state = initialState, action) => {
         case SET_CAPTCHA_IMG:
             return {
                 ...state,
-                capthaImg:action.img
+                capthaImg: action.img
             }
         case SET_CAPTCHA_ANS:
             return {
                 ...state,
-                captchaAnswer:action.ans
+                captchaAnswer: action.ans
             }
-/*        case SET_ERROR:
-            return {
-                ...state,
-                loginError:action.err
-            }*/
+        /*        case SET_ERROR:
+                    return {
+                        ...state,
+                        loginError:action.err
+                    }*/
 
 
         default:
@@ -66,8 +66,8 @@ const auth_reducer = (state = initialState, action) => {
 
 export default auth_reducer;
 
-export const setUserAuthData = (userID,email,login,isAuth,capthaImg,captchaAnswer,loginError) => {
-    return {type: SET_USER_DATA, payload: {userID,email,login,isAuth,capthaImg,captchaAnswer,loginError}};
+export const setUserAuthData = (userID, email, login, isAuth, capthaImg, captchaAnswer, loginError) => {
+    return {type: SET_USER_DATA, payload: {userID, email, login, isAuth, capthaImg, captchaAnswer, loginError}};
 }
 
 /*export const setUserLogOut = () => {
@@ -89,112 +89,47 @@ export const setUserAuthCaptchaAnswer = (ans) => {
 
 // thunk-и
 
-export const checkAuthorization = () => (dispatch) => {
+export const checkAuthorization = () => async (dispatch) => {
 
-    return API.authMe()
-            .then(data => {
-                if(data.resultCode === 0){
-                    let {id, login, email} = data.data;
-                    dispatch(setUserAuthData(id,email,login,true,null,null,null));
-                    API.getProfile(id)
-                        .then(resp => {
-                            //debugger
-                            //if(resp.resultCode === 0){
-
-                                dispatch(setUserProfile(resp.data));
-                                //dispatch(setUserAuthImg(data.photos.small))
-                            //}
-                        })
-                        .catch(error => {
-                            console.warn(error);
-                        });
-
-                    API.getStatus(id)
-                        .then(data => {
-                            //const {resultCode} = data;
-                            //if(resultCode === 0 || resultCode === undefined){ // експериментально
-                                dispatch(setUserStatus(data));
-                            //}
-
-                        })
-
-                        .catch(error => {
-                            console.warn(error);
-                        });
-                }
-            })
-            .catch(error => {
-                console.warn(error);
-            });
-}
-
-
-export const logOut = () => {
-    return (dispatch) => {
-        API.logOut()
-            .then(() => {
-                console.warn('logout2');
-                //dispatch(setUserLogOut());
-                dispatch(setUserAuthData(null,null,null,false,null,null,null));
-
-            })
-            .catch(error => {
-                console.warn(error);
-            });
+    let data = await API.authMe();
+    if (data.resultCode === 0) {
+        let {id, login, email} = data.data;
+        dispatch(setUserAuthData(id, email, login, true, null, null, null));
+        let resp2 = await API.getProfile(id);
+        dispatch(setUserProfile(resp2.data));
+        let data2 = await API.getStatus(id);
+        dispatch(setUserStatus(data2));
     }
 }
 
-export const login = (email,pass,remember,captcha) => {
-    return (dispatch) => {
-        API.auth(email,pass,remember,captcha)
-            .then(data => {
-                console.log(data)
-                if(data.resultCode === 0){
-                    console.log('login +')
-                    dispatch(checkAuthorization());
-                    /*API.authMe()
-                        .then(data => {
-                            if(data.resultCode === 0){
-                                let {id, login, email} = data.data;
-                                dispatch(setUserAuthData(id,email,login));
-                                API.getProfile(id)
-                                    .then(data => {
-                                        if(data.resultCode === 0){
-                                            dispatch(setUserAuthImg(data.photos.small))
-                                        }
-                                    })
-                                    .catch(error => {
-                                        console.warn(error);
-                                    });
-                            }
-                        })
 
-                        .catch(error => {
-                            console.warn(error);
-                        });*/
-                }else
-                {
-                    //dispatch(setUserAuthError(data.messages.join('<br/>')));
+export const logOut = () => async (dispatch) => {
+    await API.logOut()
+    console.warn('logout2');
+    //dispatch(setUserLogOut());
+    dispatch(setUserAuthData(null, null, null, false, null, null, null));
 
-                    dispatch(stopSubmit('auth',{_error: data.messages.join('<br/>')}));
+}
 
-                    if(data.resultCode === 10){
-                        API.getCaptcha()
-                            .then(data => {
-                                dispatch(setUserAuthCaptchaImg(data.url))
-                            })
-                            .catch(error => {
-                                console.warn(error);
-                            });
 
-                        // todo зробити виведення помилок
-                    }
-                }
+export const login = (email, pass, remember, captcha) => async (dispatch) => {
+    let data = await API.auth(email, pass, remember, captcha);
+    console.log(data)
+    if (data.resultCode === 0) {
+        console.log('login +')
+        dispatch(checkAuthorization());
 
-            })
-            .catch(error => {
-                console.warn(error);
-            });
+    } else {
+        //dispatch(setUserAuthError(data.messages.join('<br/>')));
 
+        dispatch(stopSubmit('auth', {_error: data.messages.join('<br/>')}));
+
+        if (data.resultCode === 10) {
+            let data = await API.getCaptcha();
+                    dispatch(setUserAuthCaptchaImg(data.url));
+            // todo зробити виведення помилок - а треба?
+        }
     }
+
+
 }

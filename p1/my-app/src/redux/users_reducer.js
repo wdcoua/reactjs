@@ -1,11 +1,12 @@
 import {API} from "../api/api";
+import {updateObjectInArray} from "../utils/object-helpers";
 
-const CHANGE_USER_FOLLOW_STATUS = 'CHANGE_USER_FOLLOW_STATUS';
-const SET_USERS = 'SET_USERS';
-const SET_TOTAL_USERS = 'SET_TOTAL_USERS';
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
-const CHANGE_FETCHING_STATUS = 'CHANGE_FETCHING_STATUS';
-const FOLLOWING_IN_PROGRESS = 'FOLLOWING_IN_PROGRESS';
+const CHANGE_USER_FOLLOW_STATUS = 'samurai_project/users/CHANGE_USER_FOLLOW_STATUS';
+const SET_USERS = 'samurai_project/users/SET_USERS';
+const SET_TOTAL_USERS = 'samurai_project/users/SET_TOTAL_USERS';
+const SET_CURRENT_PAGE = 'samurai_project/users/SET_CURRENT_PAGE';
+const CHANGE_FETCHING_STATUS = 'samurai_project/users/CHANGE_FETCHING_STATUS';
+const FOLLOWING_IN_PROGRESS = 'samurai_project/users/FOLLOWING_IN_PROGRESS';
 
 let initialState = {
     usersList: [],
@@ -20,10 +21,13 @@ let initialState = {
 const users_reducer = (state = initialState, action) => {
 
     switch (action.type) {
-        case "FAKE" : return {...state, fake: state.fake + 1}
+        case "FAKE" :
+            return {...state, fake: state.fake + 1}
         case CHANGE_USER_FOLLOW_STATUS:
             return {
                 ...state,
+                usersList: updateObjectInArray(state.usersList,action.user_id, 'id', {followed: (action.followStatus === 1)} )
+                /*
                 usersList: state.usersList.map(u => { // перебір масиву користувачів
                         if (u.id === action.user_id) {    // пошук по ID
                             if (action.followStatus === 1) {
@@ -46,7 +50,7 @@ const users_reducer = (state = initialState, action) => {
                         return u;
                     }
                 )
-
+*/
 
             }
 
@@ -57,7 +61,7 @@ const users_reducer = (state = initialState, action) => {
             return {
                 ...state,
                 // usersList: [...state.usersList, ...action.users]
-                usersList: [ ...action.users]
+                usersList: [...action.users]
             }
         case SET_TOTAL_USERS:
             // debugger
@@ -82,8 +86,8 @@ const users_reducer = (state = initialState, action) => {
             return {
                 ...state,
                 followingIsInProgress: action.followingIsInProgress
-                    ? [...state.followingIsInProgress, action.userId ]
-                    : state.followingIsInProgress.filter(id => id !== action.userId )
+                    ? [...state.followingIsInProgress, action.userId]
+                    : state.followingIsInProgress.filter(id => id !== action.userId)
             }
 
         default:
@@ -117,94 +121,90 @@ export const setFetchingStatus = (isFetching) => {
     //console.log(currentPage)
     return {type: CHANGE_FETCHING_STATUS, isFetching: isFetching};
 }
-export const setFollowingInProgress = (followingIsInProgress,userId) => {
+export const setFollowingInProgress = (followingIsInProgress, userId) => {
     //console.log(currentPage)
-    return {type: FOLLOWING_IN_PROGRESS, followingIsInProgress,userId};
+    return {type: FOLLOWING_IN_PROGRESS, followingIsInProgress, userId};
 }
-
 
 
 // thunk-и
-export const getUsers = (usersPerPage = 20,currentPage = 88) => {
-    return (dispatch) => {
+export const getUsers = (usersPerPage = 20, currentPage = 108) => async (dispatch) => {
 
-        dispatch(setFetchingStatus(true));
+    dispatch(setFetchingStatus(true));
 
-        dispatch(setCurrentPage(currentPage));
+    dispatch(setCurrentPage(currentPage));
 
-        //this.props.setFetchingStatus(true);
-        API.getUsers( usersPerPage ,currentPage)
-            .then(data => {
-                // debugger
-                dispatch(setFetchingStatus(false));
-                dispatch(setUsers(data.items));
-                dispatch(setTotalUsers(data.totalCount));
-                // this.props.totalUsers = resp.data.totalCount
-                // console.log(resp)
-            })
+    //this.props.setFetchingStatus(true);
+    let data = await API.getUsers(usersPerPage, currentPage);
+    // .then(data => {
+    // debugger
+    dispatch(setFetchingStatus(false));
+    dispatch(setUsers(data.items));
+    dispatch(setTotalUsers(data.totalCount));
+    // this.props.totalUsers = resp.data.totalCount
+    // console.log(resp)
+    // })
+    //
+    // .catch(error => {
+    //     console.warn(error);
+    // });
 
-            .catch(error => {
-                console.warn(error);
-            });
-    }
 }
 
-export const follow = (id,followToggle) => {
+export const follow = (id, followToggle) => async (dispatch) => {
 
-    return (dispatch) => {
-
-        //dispatch(setFetchingStatus(true));
+    //dispatch(setFetchingStatus(true));
 
 
-        dispatch(setFollowingInProgress(true, id));
+    dispatch(setFollowingInProgress(true, id));
 
-        if(followToggle){ // follow
-
-
-            API.follow( id)
-                .then(data => {
-                    // debugger
-                    if(data.resultCode === 0){ // чи потрібно?
-
-                        //props.setFetchingStatus(false);
-                        dispatch(changeUserFollowStatus(id, 1));
-                        dispatch(setFollowingInProgress(false, id));
+    if (followToggle) { // follow
 
 
-                        //props.setUsers(resp.data.items)
-                        //props.setTotalUsers(resp.data.totalCount)
-                        // props.totalUsers = resp.data.totalCount
-                        console.log(data)
-                        //console.log('ffffff')
-                    }else{
-                        // error
-                    }
-                })
+        let data = await API.follow(id);
+        // .then(data => {
+        // debugger
+        if (data.resultCode === 0) { // чи потрібно?
 
-                .catch(error => {
-                    console.warn(error);
-                });
-        }else{ // unfollow
-            API.unfollow( id)
-                .then(resp => {
-                    // debugger
-                    //props.setFetchingStatus(false);
-                    dispatch(changeUserFollowStatus(id, 0));
-                    dispatch(setFollowingInProgress(false, id));
+            //props.setFetchingStatus(false);
+            dispatch(changeUserFollowStatus(id, 1));
+            dispatch(setFollowingInProgress(false, id));
 
 
-                    //props.setUsers(resp.data.items)
-                    //props.setTotalUsers(resp.data.totalCount)
-                    // props.totalUsers = resp.data.totalCount
-                    console.log(resp)
-                })
-
-                .catch(error => {
-                    console.warn(error);
-                });
+            //props.setUsers(resp.data.items)
+            //props.setTotalUsers(resp.data.totalCount)
+            // props.totalUsers = resp.data.totalCount
+            console.log(data)
+            //console.log('ffffff')
+        } else {
+            // error
         }
+        // })
+        //
+        // .catch(error => {
+        //     console.warn(error);
+        // });
+    } else { // unfollow
+        let resp = await API.unfollow(id)
+        // .then(resp => {
+        // debugger
+        //props.setFetchingStatus(false);
+        dispatch(changeUserFollowStatus(id, 0));
+        dispatch(setFollowingInProgress(false, id));
 
+
+        //props.setUsers(resp.data.items)
+        //props.setTotalUsers(resp.data.totalCount)
+        // props.totalUsers = resp.data.totalCount
+        console.log(resp)
+        // })
+        //
+        // .catch(error => {
+        //     console.warn(error);
+        // });
     }
+
+
 }
 
 
