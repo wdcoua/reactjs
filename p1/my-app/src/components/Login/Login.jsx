@@ -5,7 +5,7 @@ import {login, checkAuthorization} from "../../redux/auth_reducer";
 import {Redirect} from "react-router-dom";
 import {compose} from "redux";
 import {createMyField, Input} from "../common/FormsControls/FormsControls";
-import {maxLenCreator, minLenCreator, required} from "../../utils/validate/validator";
+import {maxLenCreator, minLenCreator, onlyNumbers, required} from "../../utils/validate/validator";
 import style from "./Login.module.css"
 
 const LoginContainer = (props) => {
@@ -50,12 +50,12 @@ const Login = (props) => {
 }
 const maxLen50 = maxLenCreator(50);
 const minLen2 = minLenCreator(2);
+// const numOnly = onlyNumbers();
 
 
 const LoginForm = ({auth, handleSubmit, error}) => {
 
     if (auth.isAuth === false) {
-        //props.auth(formData.email,formData.pass,formData.rememberMe)
 
         return <form onSubmit={handleSubmit}>
 

@@ -1,7 +1,7 @@
 import React from "react"
 import {connect} from "react-redux";
 
-class ProfileStatus_unused extends React.Component {
+class ProfileStatus extends React.Component {
 
     state = {
         editMode: false,
@@ -74,8 +74,8 @@ class ProfileStatus_unused extends React.Component {
     //<input type="button" onClick={this.changeStatus} value="OK"/>
 
     render() {
-        console.log(this.state.tempStatusText + ' state');
-        console.log(this.props.status + ' props');
+        // console.log(this.state.tempStatusText + ' state');
+        // console.log(this.props.status + ' props');
         return <div>
             {this.state.editMode
                 ? <div>
@@ -95,4 +95,5 @@ class ProfileStatus_unused extends React.Component {
 
 }
 
-export default connect()(ProfileStatus)
+// export default connect()(ProfileStatus)
+export default ProfileStatus

@@ -18,3 +18,8 @@ export const minLenCreator = (minLen) => value => {
     return `min length ${minLen} symbols`;
 }
 
+export const onlyNumbers = () => value => {
+    if(value.match(/[0-9]/)) return undefined;
+    return `i accept only numbers `;
+}
+

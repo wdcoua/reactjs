@@ -5,25 +5,31 @@ import {getProfile, getStatus, setStatus, updateProfile} from "../../redux/profi
 import ProfileStatusWithHocs from "./ProfileStatusWithHocs";
 import ProfilePhoto from "./ProfilePhoto";
 import defaultUserPhoto from "../../images/user.png";
+import Preloader from "../Preloader/Preloader";
 
-const MyProfile = (props) => {
-    let {profile,getProfile,getStatus,status,setStatus} = props;
+const MyProfile = ({profile,getProfile,getStatus,status,setStatus}) => {
+    // let {profile,getProfile,getStatus,status,setStatus} = props;
+
     useEffect(() => {
 
-        let {getProfile,getStatus} = props;
+        // let {getProfile,getStatus} = props;
         getProfile(11583);
         getStatus(11583);
-    },[])
+    },[status])
 
 
-
+/*
     if(profile === null) {
         getProfile(11583);
         getStatus(11583);
         //this.props.updateProfile();
         return null;
 
-    }
+    }*/
+
+    if (!profile || !status)
+        return <Preloader/>
+
     return <div>
         <ProfilePhoto
             photo={profile.photos.large ? profile.photos.large : defaultUserPhoto }

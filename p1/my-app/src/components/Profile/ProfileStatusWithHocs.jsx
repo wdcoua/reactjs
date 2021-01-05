@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from "react"
 import {connect} from "react-redux";
-import {setStatus} from "../../redux/profile_reducer";
+// import {setStatus} from "../../redux/profile_reducer";
 
 const ProfileStatusWithHocs = ({status,setStatus}) => { // props
 

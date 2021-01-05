@@ -4,11 +4,14 @@ import Nav from './components/Nav/Nav';
 import Main from './components/Main/Main';
 import Footer from './components/Footer/Footer';
 import HeaderContainer from "./components/Header/HeaderContainer";
-import {connect} from "react-redux";
+import {connect, Provider} from "react-redux";
 import {compose} from "redux";
-import {withRouter} from "react-router-dom";
+import {BrowserRouter, withRouter} from "react-router-dom";
 import {initializeApp} from "./redux/app_reducer";
 import Preloader from "./components/Preloader/Preloader";
+import store from "./redux/redux-store";
+
+
 
 const App = ({initializeApp,initialized}) => {
     useEffect(() => {
@@ -60,6 +63,21 @@ const mapStateToProps = ({app}) => {
 
 
 
-export default compose(
+const AppContainer = compose(
     withRouter,
     connect(mapStateToProps,{initializeApp}))(App);
+
+
+const SamuraiJsApp = () => {
+
+
+
+    return <BrowserRouter>
+        <Provider store={store}>
+            <AppContainer />
+        </Provider>
+    </BrowserRouter>
+}
+
+
+export default SamuraiJsApp

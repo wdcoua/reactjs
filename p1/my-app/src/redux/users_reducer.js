@@ -57,10 +57,8 @@ const users_reducer = (state = initialState, action) => {
         // console.log(stateCopy)
         // return stateCopy
         case SET_USERS:
-            // debugger
             return {
                 ...state,
-                // usersList: [...state.usersList, ...action.users]
                 usersList: [...action.users]
             }
         case SET_TOTAL_USERS:
@@ -128,7 +126,7 @@ export const setFollowingInProgress = (followingIsInProgress, userId) => {
 
 
 // thunk-и
-export const getUsers = (usersPerPage = 20, currentPage = 108) => async (dispatch) => {
+export const getUsers = (usersPerPage = 20, currentPage = 111) => async (dispatch) => {
 
     dispatch(setFetchingStatus(true));
 

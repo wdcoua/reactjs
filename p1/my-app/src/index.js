@@ -6,6 +6,7 @@ import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
 import {Provider}  from "react-redux";
+import SamuraiJsApp from "./App";
 
 /*
 setInterval(() => {
@@ -14,12 +15,7 @@ setInterval(() => {
 */
 
     ReactDOM.render(
-        <BrowserRouter>
-            <Provider store={store}>
-                <App/>
-            </Provider>
-
-        </BrowserRouter>, document.getElementById('root')
+        <SamuraiJsApp />, document.getElementById('root')
     );
 
 
