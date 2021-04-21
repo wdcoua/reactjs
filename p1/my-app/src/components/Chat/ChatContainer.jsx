@@ -4,6 +4,7 @@ import Chat from "./Chat";
 import React from "react";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
 import {compose} from "redux";
+import {withSuspenseWrapper} from "../hoc/withSuspenseWrapper";
 
 const ChatContainer = ({chat,newChatPostText,addChatPost,newChatPostChange}) => {
     return <Chat
