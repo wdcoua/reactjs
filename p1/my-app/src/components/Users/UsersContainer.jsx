@@ -20,6 +20,7 @@ import {
     getUsersPerPage, getUsersSuper
 } from "../../redux/users_selectors";
 import Pagination from "../Pagination/Pagination"
+import Pagination2 from "../Pagination/Pagination2";
 
 const UsersContainer = ({isFetching,users,changeUserFollowStatus,setFetchingStatus,
                             setFollowingInProgress,followingIsInProgress,follow,totalUsers,usersPerPage,currentPage,getUsers}) => {
@@ -45,7 +46,7 @@ const UsersContainer = ({isFetching,users,changeUserFollowStatus,setFetchingStat
         {isFetching ? <Preloader /> : null}
         <div>
 
-            <Pagination
+            <Pagination2
                 totalUsers={totalUsers}
                 usersPerPage={usersPerPage}
                 currentPage={currentPage}
@@ -61,6 +62,14 @@ const UsersContainer = ({isFetching,users,changeUserFollowStatus,setFetchingStat
                 setFollowingInProgress={setFollowingInProgress}
                 followingIsInProgress={followingIsInProgress}
                 follow={follow}
+
+            />
+
+            <Pagination
+                totalUsers={totalUsers}
+                usersPerPage={usersPerPage}
+                currentPage={currentPage}
+                openPageNumber={openPageNumber}
 
             />
         </div>

@@ -8,8 +8,16 @@
   color: red;
 }
 
-.pages{
+.pages,.current_page{
   cursor: pointer;
+  padding: 2px;
+  border: 1px solid #9f9c9c;
+  border-radius: 5px;
+  margin: 2px;
+}
+
+.current_page{
+  margin-left: 10px;
 }
 
 .oneUser{
@@ -17,4 +25,10 @@
   border-radius: 10px;
   margin: 5px;
   padding: 5px;
+}
+
+.pages:hover,.current_page:hover{
+  color: green;
+  /*text-decoration: underline;*/
+  background-color: yellow;
 }
