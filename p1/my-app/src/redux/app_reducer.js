@@ -45,9 +45,9 @@ export const initializeApp = () => async (dispatch) => {
     let promise4 = dispatch(getExamples())
     let promise5 = dispatch(getProfile())
     let data = await Promise.all([promise,promise2,promise3,promise4,promise5])
-    // .then( () => {
+     .then( () => {
         dispatch(setInitialized())
-    // })
+     })
 
 
 }

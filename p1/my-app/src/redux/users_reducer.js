@@ -3,6 +3,8 @@ import {updateObjectInArray} from "../utils/object-helpers";
 
 const CHANGE_USER_FOLLOW_STATUS = 'samurai_project/users/CHANGE_USER_FOLLOW_STATUS';
 const SET_USERS = 'samurai_project/users/SET_USERS';
+const SET_INITIAL = 'samurai_project/users/SET_INITIAL';
+const SET_PAGE_WITH_ME = 'samurai_project/users/SET_PAGE_WITH_ME';
 const SET_TOTAL_USERS = 'samurai_project/users/SET_TOTAL_USERS';
 const SET_CURRENT_PAGE = 'samurai_project/users/SET_CURRENT_PAGE';
 const CHANGE_FETCHING_STATUS = 'samurai_project/users/CHANGE_FETCHING_STATUS';
@@ -15,7 +17,10 @@ let initialState = {
     currentPage: 30,
     isFetching: true,
     followingIsInProgress: [],
-    fake: 0
+    fake: 0,
+    initial: 1,
+    pageWithMe: 0,
+    myId: 11583
 }
 
 const users_reducer = (state = initialState, action) => {
@@ -60,6 +65,16 @@ const users_reducer = (state = initialState, action) => {
             return {
                 ...state,
                 usersList: [...action.users]
+            }
+        case SET_PAGE_WITH_ME:
+            return {
+                ...state,
+                pageWithMe: action.pageWithMe
+            }
+        case SET_INITIAL:
+            return {
+                ...state,
+                initial: action.initial
             }
         case SET_TOTAL_USERS:
             // debugger
@@ -107,6 +122,12 @@ export const changeUserFollowStatus = (user_id, followStatus) => {
 export const setUsers = (users) => {
     return {type: SET_USERS, users: users};
 }
+export const setPageWithMe = (pageWithMe) => {
+    return {type: SET_PAGE_WITH_ME, pageWithMe: pageWithMe};
+}
+export const setInitial = (initial) => {
+    return {type: SET_INITIAL, initial: initial};
+}
 export const setTotalUsers = (total) => {
     return {type: SET_TOTAL_USERS, total: total};
 }
@@ -126,19 +147,50 @@ export const setFollowingInProgress = (followingIsInProgress, userId) => {
 
 
 // thunk-и
-export const getUsers = (usersPerPage = 20, currentPage = 111) => async (dispatch) => {
+// export const getUsers = (usersPerPage = 20, currentPage = 229) => async (dispatch) => {
+export const getUsers = (usersPerPage = 20, currentPage  = 0) => async (dispatch) => {
 
+    // console.log('curpage__reducer = ' + currentPage)
     dispatch(setFetchingStatus(true));
 
-    dispatch(setCurrentPage(currentPage));
+    if(currentPage === 0){
+        currentPage = 1;
+    }else{
+        dispatch(setCurrentPage(currentPage));
+    }
+    /*
+    if(initial === 1){
+        // first request to get to know total and calculate current page with ME
+        dispatch(setInitial(2));
+    }else if(initial === 2){
+        // second request to get current page with ME
+        dispatch(setInitial(0));
+    }else{
+        // all other requests - if page is set - get that page, else get page with ME
+        // every time calculate page with ME
+    }
+    */
 
     //this.props.setFetchingStatus(true);
     let data = await API.getUsers(usersPerPage, currentPage);
     // .then(data => {
     // debugger
+
+    // if(currentPage === 255){
+    //     data = await API.getUsers(usersPerPage, currentPage, data.totalCount);
+    // }
+
     dispatch(setFetchingStatus(false));
     dispatch(setUsers(data.items));
     dispatch(setTotalUsers(data.totalCount));
+    // console.log('cp - '+data.cp)
+
+
+
+    // dispatch(setInitial(initial));
+    // dispatch(setPageWithMe(2));
+
+
     // this.props.totalUsers = resp.data.totalCount
     // console.log(resp)
     // })

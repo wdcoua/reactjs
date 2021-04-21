@@ -1,6 +1,8 @@
 import React from 'react';
 import '@testing-library/jest-dom'
-import profile_reducer, {setUserProfile, setUserStatus} from "./profile_reducer";
+import profile_reducer, {setUserProfile, setUserStatus, updateProfilePhoto} from "./profile_reducer";
+import kot from "../images/kotigoroshko.jpg"
+
 
 let state = {
     profile: null,
@@ -36,11 +38,11 @@ it('setUserStatus is successful', () => {
 
 it('updateProfilePhoto is successful', () => {
     // 1 - test data
-    let action = updateProfilePhoto('photo');
+    let action = updateProfilePhoto(kot);
 
     // 2 - action
     let newState = profile_reducer(state, action);
-
+    //console.log(newState.status)
     // 3 - expectation
-    expect(newState.status).toBe('hello');
+    expect(newState.status).toBe('');
 });

@@ -60,7 +60,7 @@ let ProfilePhoto = (props) => {
 
     return <div>
         <img src={props.photo} alt=""/>
-        {/*<PhotoUpload />*/}
+        <PhotoUpload />
     </div>
 }
 

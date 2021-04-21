@@ -10,14 +10,25 @@ import {BrowserRouter, withRouter} from "react-router-dom";
 import {initializeApp} from "./redux/app_reducer";
 import Preloader from "./components/Preloader/Preloader";
 import store from "./redux/redux-store";
+import {getUsers, setPageWithMe} from "./redux/users_reducer";
 
 
 
-const App = ({initializeApp,initialized}) => {
+const App = ({initializeApp,initialized,total,usersPerPage,getUsers,setPageWithMe}) => {
     useEffect(() => {
-        initializeApp();
 
-    },[initialized]);
+        // console.log('total - ' + total);
+        // console.log('initialized - ' + initialized);
+        if(total !== 0){
+            let currentPage2 = Math.ceil((total - 6590) / usersPerPage);
+            // console.log('currentPage - ' + currentPage2);
+            // setPageWithMe(currentPage2)
+            getUsers(usersPerPage,currentPage2);
+        }else{
+            initializeApp();
+        }
+
+    },[total]);
 
     return !initialized
         ? <Preloader />
@@ -54,10 +65,16 @@ class App extends React.Component {
 }
 */
 
-const mapStateToProps = ({app}) => {
+const mapStateToProps = (store) => {
     // debugger
     return {
-        initialized: app.initialized
+        initialized: store.app.initialized,
+        initial: store.users.initial,
+        pageWithMe: store.users.pageWithMe,
+        myId: store.users.myId,
+        total: store.users.totalUsers,
+        usersPerPage: store.users.usersPerPage,
+        currentPage: store.users.currentPage,
     }
 };
 
@@ -65,7 +82,7 @@ const mapStateToProps = ({app}) => {
 
 const AppContainer = compose(
     withRouter,
-    connect(mapStateToProps,{initializeApp}))(App);
+    connect(mapStateToProps,{initializeApp,getUsers,setPageWithMe}))(App);
 
 
 const SamuraiJsApp = () => {

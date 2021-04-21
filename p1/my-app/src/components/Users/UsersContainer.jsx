@@ -25,6 +25,7 @@ const UsersContainer = ({isFetching,users,changeUserFollowStatus,setFetchingStat
                             setFollowingInProgress,followingIsInProgress,follow,totalUsers,usersPerPage,currentPage,getUsers}) => {
     useEffect(() => {
         getUsers(usersPerPage ,currentPage);
+        // console.log('currrr - ' + currentPage)
     },[currentPage]);
 
 /*

@@ -13,7 +13,7 @@ const profile_reducer = (state = initialState, action) => {
     switch (action.type) {
 
         case SET_USER_PROFILE:
-            console.log('reduser ' + action.profile)
+            //console.log('reduser ' + action.profile)
             return {
                 ...state,
                 profile: action.profile
@@ -49,7 +49,7 @@ export const updateProfilePhoto2 = (photo) => {
 // thunk-и
 
 export const getProfile = (id) => async (dispatch) => {
-    console.log('thunk - ' + id)
+    //console.log('thunk - ' + id)
     let resp = await API.getProfile(!id ? 11583 : id);
     // .then(resp => {
     //console.log('data = ' + data)

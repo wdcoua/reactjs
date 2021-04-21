@@ -1,4 +1,5 @@
 import * as axios from "axios";
+import {setCurrentPage} from "../redux/users_reducer";
 
 let apiKey = 'ada3692f-cdc4-4c82-9079-5847319d88fc'
 // baseURL = 'https://wd.co.ua/api.php'
@@ -32,10 +33,23 @@ export const instance2 = axios.create({
 export const API = {
 
 
-    getUsers(usersPerPage = 10, currentPage = 1) {
+    getUsers(usersPerPage = 10, currentPage = 5) {
+/*
+        if((currentPage === -1 || currentPage === 255) && total !== -1){
+            currentPage = Math.ceil((total - 6590) / usersPerPage);
+
+            //setCurrentPage(currentPage);
+        }
+        if(currentPage === -1){
+            currentPage = 229;
+
+            //setCurrentPage(currentPage);
+        }*/
         return instance
             .get('users/?count=' + usersPerPage + '&page=' + currentPage)
             .then(resp => {
+                    //console.log(resp);
+                    //resp.data.cp = currentPage;
                     return resp.data
                 }
             );
@@ -124,6 +138,7 @@ export const API = {
     },
 
     async updateProfilePhoto(photo) {
+        // https://docs.google.com/document/d/1ZSXmTzkgq_Kj1VbWuq8fTv_DPD95GFDvPZgqFeIYGoM/edit#heading=h.nnpkrs1rgfrd
         let resp = await instance
             .put('profile/photo', {
                 image: photo
