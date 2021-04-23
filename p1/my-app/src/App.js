@@ -6,7 +6,7 @@ import Footer from './components/Footer/Footer';
 import HeaderContainer from "./components/Header/HeaderContainer";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
-import {BrowserRouter, withRouter} from "react-router-dom";
+import {BrowserRouter, HashRouter, withRouter} from "react-router-dom";
 import {initializeApp} from "./redux/app_reducer";
 import Preloader from "./components/Preloader/Preloader";
 import store from "./redux/redux-store";
@@ -89,11 +89,16 @@ const SamuraiJsApp = () => {
 
 
 
-    return <BrowserRouter>
+    // return <BrowserRouter>
+    //     <Provider store={store}>
+    //         <AppContainer />
+    //     </Provider>
+    // </BrowserRouter>
+    return <HashRouter>
         <Provider store={store}>
             <AppContainer />
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
 }
 
 
