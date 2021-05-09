@@ -44,7 +44,7 @@ ul li{
 
 body{
   padding: 10px;
-  background-color: aquamarine;
+  background-color: #eee;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -60,7 +60,10 @@ body{
   margin: 0 auto;
 }
 
-
+nav {
+  background-color: #cde7ff;
+  padding-top: 7px;
+}
 
 
 

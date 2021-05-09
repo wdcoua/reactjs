@@ -24,12 +24,12 @@ const Pagination2 = ({totalUsers,usersPerPage,currentPage,openPageNumber,pagesPe
         if(currentPortion > 2){
             out2.push((<span onClick={() => setCurrentPortion(1)}
                              className={styles.pages}
-                             title="first"
+                             title="first" key='first'
             >{'<<'}</span>))
         }
         if(currentPortion > 1){
             out2.push((<span onClick={() => setCurrentPortion(currentPortion - 1)}
-                             className={styles.pages} title="previous">{'<-'}</span>))
+                             className={styles.pages} title="previous" key="previous">{'<-'}</span>))
         }
         for (let i = 1; i <= pages; i++) {
             if( i >= portionStart && i <= portionEnd ){
@@ -47,15 +47,15 @@ const Pagination2 = ({totalUsers,usersPerPage,currentPage,openPageNumber,pagesPe
         }
         if(currentPortion < portions){
             out2.push((<span onClick={() => setCurrentPortion(currentPortion + 1)}
-                               className={styles.pages} title="next">{'->'}</span>))
+                               className={styles.pages} title="next" key="next">{'->'}</span>))
         }
         if(currentPortion + 1 < portions){
             out2.push((<span onClick={() => setCurrentPortion(portions)}
-                               className={styles.pages} title="last">{'>>'}</span>))
+                               className={styles.pages} title="last" key="last">{'>>'}</span>))
         }
         if(currentPortion !== portionWithCurrentPage){
             out2.push((<span onClick={() => setCurrentPortion(portionWithCurrentPage)}
-                               className={styles.current_page} title="curent page">{'> * <'}</span>))
+                               className={styles.current_page} title="curent page" key="curent page">{'> * <'}</span>))
         }
 
 

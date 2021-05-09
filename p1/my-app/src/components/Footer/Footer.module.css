@@ -1,13 +1,13 @@
 
 footer{
   grid-area: footer;
-  background-color: chartreuse;
+  background-color: #2d2d2d;
   text-align: center;
   width: 100%;
 }
 
 
-
 footer .copy{
   margin: 20px 0;
+  color: #7d7d7d;
 }

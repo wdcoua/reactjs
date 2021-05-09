@@ -13,10 +13,10 @@ const realFollow = (id, followToggle,follow) => { /* 1233, true */
 const User = ({user,followingIsInProgress,follow}) => {
 
     return (
-        <div>
+        <div key={user.id}>
 
 
-                 <div key={user.id} className={style.oneUser}>
+                 <div className={style.oneUser}>
 
 
                     <NavLink to={'/profile/' + user.id}>

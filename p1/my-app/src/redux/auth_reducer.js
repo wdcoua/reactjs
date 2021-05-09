@@ -6,6 +6,7 @@ const SET_USER_DATA = 'samurai_project/auth/SET_USER_DATA';
 const SET_USER_IMG = 'samurai_project/auth/SET_USER_IMG';
 const SET_CAPTCHA_IMG = 'samurai_project/auth/SET_CAPTCHA_IMG';
 const SET_CAPTCHA_ANS = 'samurai_project/auth/SET_CAPTCHA_ANS';
+const UPD_USER_PHOTOS = 'samurai_project/auth/UPD_USER_PHOTOS';
 //const SET_ERROR = 'SET_ERROR';
 
 let initialState = {

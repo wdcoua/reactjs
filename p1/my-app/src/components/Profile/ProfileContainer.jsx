@@ -10,21 +10,22 @@ import {compose} from "redux";
 const ProfileContainer = (props) => {
 
     useEffect(() => {
-        console.log('PC test');
+        // console.log('PC test');
         let {getStatus, getProfile, userID, history, match} = props;
         //this.props.setFetchingStatus(true);
         let userID2 = match.params.userID;
-        if (!userID2 && userID) userID2 = userID; // if no ID was passed script will show 'me'
+        // console.log('PC test2 - ' + userID2);
+            if (!userID2 && userID) userID2 = userID; // if no ID was passed script will show 'me'
+            // console.log('PC test2 - ' + userID2);
         if (userID2) {
             getStatus(userID2);
             getProfile(userID2);
-            console.log('PC test2 - ' + userID2);
 
         } else {
             history.push('/login')
         }
 
-    },[props.userID]);
+    },[props.userID,props.match.params.userID]);
 
 
 
@@ -89,6 +90,7 @@ let mapStateToProps = ({auth, profilePage}) => { // бере увесь глоб
     return {
         userID: auth.userID,
         profile: profilePage.profile,
+        profileUpdatedToggle: profilePage.profileUpdatedToggle,
         status: profilePage.status
     }
 }

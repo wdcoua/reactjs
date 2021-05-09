@@ -5,42 +5,40 @@ import {Field, reduxForm} from "redux-form";
 import style from "../Login/Login.module.css";
 import {FileUpload, Input} from "../common/FormsControls/FormsControls";
 import {required} from "../../utils/validate/validator";
+import {compose} from "redux";
+import {checkAuthorization, login} from "../../redux/auth_reducer";
+import {updateProfilePhoto} from "../../redux/profile_reducer";
 
-
+/*
 const PhotoUpload = (props) => {
     const onSubmit = (formData) => {
         //
-        /*if(props.auth.isAuth === false){
+        /!*if(props.auth.isAuth === false){
             props.login(formData.email,formData.pass,formData.rememberMe,formData.captcha)
         }else{
             return <Redirect to={'/index'}/>
-        }*/
+        }*!/
         console.log(formData)
     }
     return <div>
         <PhotoUploadReduxForm onSubmit={onSubmit} {...props} />
     </div>
-}
+}*/
 
-const PhotoUploadForm = (props) => {
+const PhotoUpload = (props) => {
 
     // if(props.auth.isAuth === false){
     //props.auth(formData.email,formData.pass,formData.rememberMe)
 
-    return <form onSubmit={props.handleSubmit}>
+    const onPhotoSelected = (e) =>{
+        console.log(e.target.files[0])
+        if(e.target.files.length)
+            props.updateProfilePhoto(e.target.files[0])
+    }
 
-        <div className={( !props.error ? style.noError : '') + ' ' + style.error}>
-            { props.error}
-        </div>
+    return <input onChange={onPhotoSelected}
+                   type={'file'} />;
 
-        <div>
-            <Field placeholder="photo" component={FileUpload} name='photo' validate={[required]}/>
-        </div>
-
-        <div>
-            <button>Аплоад</button>
-        </div>
-    </form>
     /*
 }else{
     return <Redirect to={'/index'}/>
@@ -48,10 +46,10 @@ const PhotoUploadForm = (props) => {
 
 
 }
-
-const PhotoUploadReduxForm = reduxForm({
-    form: 'photoUpload'
-})(PhotoUploadForm)
+//
+// const PhotoUploadReduxForm = reduxForm({
+//     form: 'photoUpload'
+// })(PhotoUploadForm)
 
 
 
@@ -60,8 +58,12 @@ let ProfilePhoto = (props) => {
 
     return <div>
         <img src={props.photo} alt=""/>
-        <PhotoUpload />
+        <PhotoUpload updateProfilePhoto={props.updateProfilePhoto}/>
     </div>
 }
 
-export default connect()(ProfilePhoto)
+
+
+export default connect(null,{updateProfilePhoto})(ProfilePhoto)
+
+// export default connect()(ProfilePhoto)

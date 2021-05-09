@@ -14,15 +14,25 @@ import {getUsers, setPageWithMe} from "./redux/users_reducer";
 
 
 
-const App = ({initializeApp,initialized,total,usersPerPage,getUsers,setPageWithMe}) => {
+const App = ({initializeApp,initialized,total,usersPerPage,getUsers,setPageWithMe,userid}) => {
     useEffect(() => {
 
         // console.log('total - ' + total);
         // console.log('initialized - ' + initialized);
         if(total !== 0){
-            let currentPage2 = Math.ceil((total - 6590) / usersPerPage);
-            // console.log('currentPage - ' + currentPage2);
-            // setPageWithMe(currentPage2)
+
+            // 76
+            // 6590
+            let currentPage2 = 1;
+
+            if(userid === 11583) // wd
+                currentPage2 = Math.ceil((total - 6590) / usersPerPage);
+            else if(userid === 1079) // test
+                currentPage2 = Math.ceil((total - 76) / usersPerPage);
+
+            // console.log('userid - ' + userid);
+            // console.log('currentPage2 - ' + currentPage2);
+
             getUsers(usersPerPage,currentPage2);
         }else{
             initializeApp();
@@ -75,6 +85,7 @@ const mapStateToProps = (store) => {
         total: store.users.totalUsers,
         usersPerPage: store.users.usersPerPage,
         currentPage: store.users.currentPage,
+        userid: store.auth.userID,
     }
 };
 

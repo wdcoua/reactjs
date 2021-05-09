@@ -1,0 +1,7 @@
+sudo npm run deploy
+
+git add .
+git commit -am "deploy4"
+git push --set-upstream origin master
+
+

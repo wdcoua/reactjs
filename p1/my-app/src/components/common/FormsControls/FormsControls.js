@@ -5,7 +5,7 @@ import {required} from "../../../utils/validate/validator";
 
 const FormControl = ({input, meta: {touched,error}, elType, ...props}) => {
     let hasError = touched && error;
-
+    // console.log(props)
     return (
         <div className={styles.formControls + " " + (hasError && styles.error)}>
 
@@ -17,10 +17,21 @@ const FormControl = ({input, meta: {touched,error}, elType, ...props}) => {
     )
 }
 
+/*
+
+React.createElement(
+    "input", {
+        className: "rating-input", type: "radio", name: "rate", value: "1", ref: "rating", onChange: this.handleChange
+    }
+),
+*/
 
 
 export const Textarea = (props) => { // деструктуризація, REST-оператор
-    return <FormControl {...props} elType='textarea'/>
+    return <FormControl {...props} elType='textarea' />
+}
+export const Radio = (props) => { // деструктуризація, REST-оператор
+    return <FormControl {...props} elType='input' type='radio'/>
 }
 /*
 export const Textarea = (props) => { // деструктуризація, REST-оператор
@@ -43,7 +54,7 @@ export const Input = (props) => { // деструктуризація, REST-оп
 }
 export const Hidden = (props) => { // деструктуризація, REST-оператор
     //const {input, meta, ...restProps} = props;
-    return <FormControl {...props} elType='input' />
+    return <FormControl {...props} elType='input' type='hidden' />
 }
 export const FileUpload = (props) => { // деструктуризація, REST-оператор
     //const {input, meta, ...restProps} = props;

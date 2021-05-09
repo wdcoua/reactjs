@@ -142,4 +142,4 @@ let all_data = { //store
 
 
 export default all_data;
-window.all_data = all_data;
+//window.all_data = all_data;

@@ -112,9 +112,9 @@ export const API = {
     },
 
 
-    updateProfile() {
+    updateProfile(profileObj) {
         return instance
-            .put('profile', {
+            .put('profile', profileObj/*{
                 userId: 11583,
                 lookingForAJob: false,
                 lookingForAJobDescription: 'уже есть',
@@ -130,7 +130,7 @@ export const API = {
                     youtube: '',
                     mainLink: '',
                 }
-            })
+            }*/)
             .then(resp => {
                     return resp.data
                 }
@@ -139,10 +139,11 @@ export const API = {
 
     async updateProfilePhoto(photo) {
         // https://docs.google.com/document/d/1ZSXmTzkgq_Kj1VbWuq8fTv_DPD95GFDvPZgqFeIYGoM/edit#heading=h.nnpkrs1rgfrd
+
+        const formData = new FormData();
+        formData.append('image', photo)
         let resp = await instance
-            .put('profile/photo', {
-                image: photo
-            });
+            .put('profile/photo', formData,{ headers: {"Content-Type": "multipart/form-data" }});
         return resp.data;
     },
 

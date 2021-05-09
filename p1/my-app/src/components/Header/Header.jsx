@@ -8,7 +8,7 @@ import logout from "../../images/logout.png"
 const Header = ({logOut,auth}) => {
 
     return <header>
-        <img src="https://wd.co.ua/pic/wd_logo.jpg" className={c.logo} alt='alt'/>
+        <img src="https://wd.co.ua/pic/wd_logo_sh_transparent.png" className={c.logo} alt='alt'/>
 
         <div className={c.auth}>
 
