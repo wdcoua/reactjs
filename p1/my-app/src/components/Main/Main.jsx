@@ -1,4 +1,4 @@
-import React, {lazy,Suspense} from 'react';
+import React, {lazy} from 'react';
 import c from './Main.module.css';
 import { Route} from "react-router-dom";
 // import ChatContainer from "../Chat/ChatContainer";
@@ -9,7 +9,6 @@ import ExamplesContainer from "../Examples/ExamplesContainer";
 // import ProfileContainer from "../Profile/ProfileContainer";
 // import Login from "../Login/Login";
 // import MyProfile from "../Profile/MyProfile";
-import Preloader from "../Preloader/Preloader";
 import {withSuspenseWrapper} from "../hoc/withSuspenseWrapper";
 
 // ленивая загрузка компонентов

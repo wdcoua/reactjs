@@ -1,13 +1,13 @@
-import React, {useState} from "react";
-import {Field, reduxForm} from "redux-form";
-import {createMyField, Hidden, Input, Radio, Textarea} from "../common/FormsControls/FormsControls";
-import {compose} from "redux";
-import {connect} from "react-redux";
+import React from "react";
+import {Field} from "redux-form";
+import {createMyField, Input, Textarea} from "../common/FormsControls/FormsControls";
+// import {compose} from "redux";
+// import {connect} from "react-redux";
 import c from './Profile.module.css';
-import {updateProfile} from "../../redux/profile_reducer";
+// import {updateProfile} from "../../redux/profile_reducer";
 
 
-const ProfileEditForm = ({profile, handleSubmit, error}) => {
+const ProfileEditForm = ({ handleSubmit}) => {
 
     // let errrs = (error ? error.split('|||') : []);
 

@@ -1,38 +1,11 @@
 import React, {useEffect, useState} from "react";
 import defaultUserPhoto from "../../images/user.png";
-import ProfilePhoto from "./ProfilePhoto";
-import {Field, reduxForm} from "redux-form";
-import {createMyField, Hidden, Input, Radio, Textarea} from "../common/FormsControls/FormsControls";
-import {Redirect} from "react-router-dom";
+import {reduxForm} from "redux-form";
 import {compose} from "redux";
 import {connect} from "react-redux";
-import {checkAuthorization, login} from "../../redux/auth_reducer";
-import c from './Profile.module.css';
 import {setProfileUpdated, updateProfile} from "../../redux/profile_reducer";
-import style from "../Login/Login.module.css";
-import {setInitialized} from "../../redux/app_reducer";
-// import ProfileEditReduxForm from "./ProfileEditForm";
 import ProfileEditForm from "./ProfileEditForm";
 
-
-/*
- {
-    "aboutMe": "я круто чувак 1001%",
-    "contacts": {
-        facebook: "facebook.com",
-        github: "github.com",
-        instagram: "instagra.com/sds",
-        mainLink: null,
-        twitter: "https://twitter.com/@sdf",
-        vk: "vk.com/dimych",
-        website: null,
-        youtube: null
-    },
-    "lookingForAJob": true,
-    "lookingForAJobDescription": 'не ищу',
-    "fullName": "samurai d"
-}
- */
 
 
 const ProfileEditReduxForm = reduxForm({
@@ -75,8 +48,8 @@ const Profile = React.memo((props) => {
 
 
     useEffect( () => {
-        console.log('new profile');
-        console.log(profileUpdatedToggle);
+        // console.log('new profile');
+        // console.log(profileUpdatedToggle);
 
         if(profileUpdatedToggle) {
             toggleEditMode();

@@ -1,11 +1,11 @@
-import React, {useEffect} from "react";
-import {Field, reduxForm} from "redux-form";
+import React from "react";
+import { reduxForm} from "redux-form";
 import {connect} from "react-redux";
-import {login, checkAuthorization} from "../../redux/auth_reducer";
+import {login, checkAuthorization, setCaptchaAnswer} from "../../redux/auth_reducer";
 import {Redirect} from "react-router-dom";
 import {compose} from "redux";
 import {createMyField, Hidden, Input} from "../common/FormsControls/FormsControls";
-import {maxLenCreator, minLenCreator, onlyNumbers, required} from "../../utils/validate/validator";
+import {maxLenCreator, minLenCreator, required} from "../../utils/validate/validator";
 import style from "./Login.module.css"
 
 const LoginContainer = (props) => {
@@ -34,20 +34,23 @@ const LoginContainer = (props) => {
 // }
 
 const Login = (props) => {
-    const onSubmit = ({email,pass,rememberMe,captcha}) => { //formData
+
+    // let {tempCaptcha,setTempCaptcha} = useState('');
+
+    const onSubmit = ({email,pass,rememberMe}) => { //formData
         //
         if (props.auth.isAuth === false) {
-            props.login(email, pass, rememberMe, captcha)
+            props.login(email, pass, rememberMe)
         } else {
             return <Redirect to={'/index'}/>
         }
         // console.log(formData)
     }
-    const onSubmit2 = ({email2,pass2,rememberMe2,captcha2}) => { //formData
+    const onSubmit2 = ({email2,pass2,rememberMe2}) => { //formData
         //
-        console.log('email = ' + email2)
+        // console.log('email = ' + email2)
         if (props.auth.isAuth === false) {
-            props.login(email2, pass2, rememberMe2, captcha2)
+            props.login(email2, pass2, rememberMe2)
         } else {
             return <Redirect to={'/index'}/>
         }
@@ -63,12 +66,19 @@ const maxLen50 = maxLenCreator(50);
 const minLen2 = minLenCreator(2);
 // const numOnly = onlyNumbers();
 
+// main login_form
+const LoginForm = ({auth, handleSubmit, error,setCaptchaAnswer}) => {
 
-const LoginForm = ({auth, handleSubmit, error}) => {
+    // remember captcha in State for both accounts (to they both could use it while authorizing)
+    const formChanged = (e) => {
+        if(e.target.name === 'captcha'){
+            setCaptchaAnswer(e.target.value)
+        }
+    }
 
     if (auth.isAuth === false) {
 
-        return <form onSubmit={handleSubmit}>
+        return <form onSubmit={handleSubmit} onChange={formChanged} >
 
             <div className={(!error ? style.noError : '') + ' ' + style.error}>
                 {error}
@@ -81,7 +91,7 @@ const LoginForm = ({auth, handleSubmit, error}) => {
                 <div>
                     <img alt='captcha' src={auth.capthaImg ? auth.capthaImg : ''}/>
                 </div>
-                {createMyField('cAp7cH4', Input, 'captcha', (!auth.capthaImg ? [] : [required, maxLen50, minLen2]))}
+                {createMyField('enter captcha', Input, 'captcha', (!auth.capthaImg ? [] : [required, maxLen50, minLen2]))}
             </div>
 
             {createMyField(null, Input, 'rememberMe', [], {type: 'checkbox',checked: 'checked'}, "Remember me")}
@@ -95,6 +105,8 @@ const LoginForm = ({auth, handleSubmit, error}) => {
 
 
 }
+
+// secondary login form for TESTing
 const LoginForm2 = ({auth, handleSubmit, error}) => {
 
     if (auth.isAuth === false) {
@@ -104,18 +116,18 @@ const LoginForm2 = ({auth, handleSubmit, error}) => {
             <div className={(!error ? style.noError : '') + ' ' + style.error}>
                 {error}
             </div>
-            {createMyField(null, Hidden, 'email2', [],{'value': 'free@samuraijs.com'})}
-            {createMyField(null, Hidden, 'pass2', [], {'value': 'free'})}
+            {createMyField(null, Hidden, 'email2', [])}
+            {createMyField(null, Hidden, 'pass2', [])}
 
+            {/*  NO CAPTCHA NEEDED */}
+            {/*<div className={style.captchaDiv + ' ' + (!auth.capthaImg ? style.noCaptcha : '')}>*/}
+            {/*    <div>*/}
+            {/*        <img alt='captcha' src={auth.capthaImg ? auth.capthaImg : ''}/>*/}
+            {/*    </div>*/}
+            {/*    {createMyField('enter captcha', Input, 'captcha2', (!auth.capthaImg ? [] : [required, maxLen50, minLen2]))}*/}
+            {/*</div>*/}
 
-            <div className={style.captchaDiv + ' ' + (!auth.capthaImg ? style.noCaptcha : '')}>
-                <div>
-                    <img alt='captcha' src={auth.capthaImg ? auth.capthaImg : ''}/>
-                </div>
-                {createMyField('cAp7cH4', Input, 'captcha2', (!auth.capthaImg ? [] : [required, maxLen50, minLen2]))}
-            </div>
-
-            {createMyField(null, Hidden, 'rememberMe2', [], {value: true} )}
+            {createMyField(null, Hidden, 'rememberMe2', [])}
             <div>
                 <button>Log in for test</button>
             </div>
@@ -140,8 +152,10 @@ const mapStateToProps = ({auth}) => {
     return {
         auth: auth,
         initialValues: {
-            email2: 'free@samuraijs.com',
-            pass2: 'free',
+            email2: 'wovo4ka2010@gmail.com',
+            pass2: '3AtGqkmDkKfmX6J',
+            // email2: 'free@samuraijs.com',
+            // pass2: 'free',
             rememberMe2: true,
 
         },
@@ -151,7 +165,7 @@ const mapStateToProps = ({auth}) => {
 };
 
 export default compose(
-    connect(mapStateToProps, {login, checkAuthorization}),
+    connect(mapStateToProps, {login, checkAuthorization,setCaptchaAnswer}),
 )(LoginContainer)
 
 //

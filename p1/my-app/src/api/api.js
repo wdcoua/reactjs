@@ -1,7 +1,8 @@
 import * as axios from "axios";
-import {setCurrentPage} from "../redux/users_reducer";
+// import {setCurrentPage} from "../redux/users_reducer";
 
-let apiKey = 'ada3692f-cdc4-4c82-9079-5847319d88fc'
+let apiKey = 'c5115442-0621-432c-8b99-a8efe085eda6'
+// let apiKey = '3db08625-24f8-429d-8bdb-ea405db0921e'
 // baseURL = 'https://wd.co.ua/api.php'
 let baseURL = 'https://social-network.samuraijs.com/api/1.0/'
 // currPage = 4
@@ -149,7 +150,7 @@ export const API = {
 
 
     auth(email, pass, remember = true, captcha = false) {
-        console.log(email, pass, remember, captcha)
+        // console.log(email, pass, remember, captcha)
         return instance
             .post('auth/login', {
                 email: email,
@@ -165,11 +166,11 @@ export const API = {
     },
 
     logOut() {
-        console.log('logout1')
+        // console.log('logout1')
         return instance
             .delete('auth/login')
             .then(resp => {
-                    console.log('logout')
+                    // console.log('logout')
                     return resp.data
                 }
             );

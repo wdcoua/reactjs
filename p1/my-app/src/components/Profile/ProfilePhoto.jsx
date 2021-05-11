@@ -1,12 +1,12 @@
-import React, {useState,useEffect} from "react"
+import React from "react"
 import {connect} from "react-redux";
-import {Redirect} from "react-router-dom";
-import {Field, reduxForm} from "redux-form";
-import style from "../Login/Login.module.css";
-import {FileUpload, Input} from "../common/FormsControls/FormsControls";
-import {required} from "../../utils/validate/validator";
-import {compose} from "redux";
-import {checkAuthorization, login} from "../../redux/auth_reducer";
+// import {Redirect} from "react-router-dom";
+// import {Field, reduxForm} from "redux-form";
+// import style from "../Login/Login.module.css";
+// import {FileUpload, Input} from "../common/FormsControls/FormsControls";
+// import {required} from "../../utils/validate/validator";
+// import {compose} from "redux";
+// import {checkAuthorization, login} from "../../redux/auth_reducer";
 import {updateProfilePhoto} from "../../redux/profile_reducer";
 
 /*

@@ -13,8 +13,8 @@ const MyProfile = ({profile,getProfile,getStatus,status,setStatus}) => {
     useEffect(() => {
 
         // let {getProfile,getStatus} = props;
-        getProfile(11583);
-        getStatus(11583);
+        getProfile(profile.userId);
+        getStatus(profile.userId);
     },[status])
 
 
@@ -27,7 +27,7 @@ const MyProfile = ({profile,getProfile,getStatus,status,setStatus}) => {
 
     }*/
 
-    if (!profile || !status)
+    if (!profile )
         return <Preloader/>
 
     return <div>

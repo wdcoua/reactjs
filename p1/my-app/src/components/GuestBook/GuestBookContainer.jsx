@@ -13,7 +13,7 @@ import {compose} from "redux";
 const GuestBookContainer = ({getGbPosts,newGBpostChange,addGBPost,newPostText,gbPosts}) => {
     useEffect(() => {
         getGbPosts();
-    },[]);
+    });
 
     // let {newGBpostChange,addGBPost,newPostText,gbPosts} = this.props;
     return (

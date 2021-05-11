@@ -2,6 +2,6 @@ sudo npm run deploy
 
 git add .
 git commit -am "deploy111"
-git push --set-upstream origin master
+git push --set-upstream origin main
 
 

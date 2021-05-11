@@ -15,7 +15,8 @@ let state = {
     isAuth: false,
     capthaImg: null,
     captchaAnswer: null,
-    loginError: null
+    loginError: null,
+
 }
 // userID,email,login,isAuth,capthaImg,captchaAnswer,loginError
 /*let userdata = (1,'dfgdrgr', 'rrr', true,null,null, null);

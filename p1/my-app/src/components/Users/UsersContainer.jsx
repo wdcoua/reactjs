@@ -7,7 +7,7 @@ import {
     setUsers, setFollowingInProgress, getUsers, follow
 } from "../../redux/users_reducer";
 import React, {useEffect} from "react";
-import styles from "./User/User.module.css";
+// import styles from "./User/User.module.css";
 import Users from "./User/Users";
 import Preloader from "../Preloader/Preloader";
 import {withAuthRedirect} from "../hoc/withAuthRedirect";
@@ -27,7 +27,7 @@ const UsersContainer = ({isFetching,users,changeUserFollowStatus,setFetchingStat
     useEffect(() => {
         getUsers(usersPerPage ,currentPage);
         // console.log('currrr - ' + currentPage)
-    },[currentPage]);
+    },[usersPerPage,currentPage]);
 
 /*
     const componentDidMount = () => {

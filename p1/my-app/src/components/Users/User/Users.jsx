@@ -1,7 +1,7 @@
 import React from 'react';
-import defaultUserPhoto from '../../../images/user.png'
-import style from './User.module.css'
-import {NavLink} from "react-router-dom";
+// import defaultUserPhoto from '../../../images/user.png'
+// import style from './User.module.css'
+// import {NavLink} from "react-router-dom";
 import User from "./User";
 //import {API} from "../../../api/api";
 

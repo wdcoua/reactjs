@@ -7,7 +7,7 @@ const Pagination2 = ({totalUsers,usersPerPage,currentPage,openPageNumber,pagesPe
         let pages = Math.ceil(totalUsers / usersPerPage);
         let out2 = [];
         let cp = currentPage;
-        let prev_is_shown = 0;
+        // let prev_is_shown = 0;
         let portionWithCurrentPage = Math.ceil(cp/pagesPerPortion);
 
         let [currentPortion, setCurrentPortion] = useState(portionWithCurrentPage);

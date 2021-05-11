@@ -1,8 +1,8 @@
 import {API} from "../api/api";
 import {stopSubmit} from "redux-form";
-import {checkAuthorization, setUserAuthCaptchaImg} from "./auth_reducer";
-import {getExamples} from "./examples_reducer";
-import {setInitialized} from "./app_reducer";
+// import {checkAuthorization, setUserAuthCaptchaImg} from "./auth_reducer";
+// import {getExamples} from "./examples_reducer";
+// import {setInitialized} from "./app_reducer";
 
 const SET_USER_PROFILE = 'samurai_project/profile/SET_USER_PROFILE';
 const SET_USER_STATUS = 'samurai_project/profile/SET_USER_STATUS';
@@ -74,9 +74,11 @@ export const updateProfilePhotos = (photos) => {
 
 // thunk-и
 
-export const getProfile = (id) => async (dispatch) => {
+export const getProfile = (id) => async (dispatch,getState) => {
+    const userId = getState().auth.userID;
+
     //console.log('thunk - ' + id)
-    let resp = await API.getProfile(!id ? 11583 : id);
+    let resp = await API.getProfile(!id ? userId : id);
     // .then(resp => {
     //console.log('data = ' + data)
     dispatch(setUserProfile(resp.data));
@@ -88,9 +90,9 @@ export const getProfile = (id) => async (dispatch) => {
 
 }
 
-export const getStatus = (id) => async (dispatch) => {
-
-    let data = await API.getStatus(!id ? 11583 : id);
+export const getStatus = (id) => async (dispatch,getState) => {
+    const userId = getState().auth.userID;
+    let data = await API.getStatus(!id ? userId : id);
     // .then(data => {
     //const {resultCode} = data;
     //if(resultCode === 0 || resultCode === undefined){ // експериментально
@@ -113,9 +115,9 @@ export const getStatus = (id) => async (dispatch) => {
 
 export const updateProfilePhoto = (photoFile) => async (dispatch) => {
     // await API.updateProfilePhoto(photoFile)
-    console.warn(photoFile);
+    // console.warn(photoFile);
     let out = await API.updateProfilePhoto(photoFile);
-    console.warn(out);
+    // console.warn(out);
     //dispatch(setUserLogOut());
     dispatch(updateProfilePhotos(out.data.photos));
 
@@ -123,17 +125,11 @@ export const updateProfilePhoto = (photoFile) => async (dispatch) => {
 
 
 export const setStatus = (status) => async (dispatch) => {
-    console.log('setStatus - ' + status)
-
-    let data = await API.setStatus(status)
-    // .then(data => {
-    dispatch(setUserStatus(status));
-    // })
-    //
-    // .catch(error => {
-    //     console.warn(error);
-    // });
-
+    let promise1 = await API.setStatus(status)
+    await Promise.all([promise1])
+        .then( () => {
+            dispatch(setUserStatus(status));
+        })
 }
 
 export const updateProfile = (profileObj) => async (dispatch,getState) => {
@@ -147,11 +143,11 @@ export const updateProfile = (profileObj) => async (dispatch,getState) => {
     //dispatch(setUserStatus(status));
     // console.log('updateProfile + ' + data.resultCode)
     // console.log('updateProfile + ' + data.data)
-    console.log(data)
+    // console.log(data)
 
 
     if (data.resultCode === 0) {
-        console.log('updateProfile +')
+        // console.log('updateProfile +')
         // dispatch(checkAuthorization());
         //  dispatch(getProfile(profileObj.userId));
 

@@ -1,6 +1,7 @@
 import {API} from "../api/api";
 import {stopSubmit} from "redux-form";
-import {setUserProfile, setUserStatus} from "./profile_reducer";
+import {getStatus, setUserProfile, setUserStatus} from "./profile_reducer";
+import {setInitialized} from "./app_reducer";
 
 const SET_USER_DATA = 'samurai_project/auth/SET_USER_DATA';
 const SET_USER_IMG = 'samurai_project/auth/SET_USER_IMG';
@@ -90,34 +91,53 @@ export const setUserAuthCaptchaAnswer = (ans) => {
 
 // thunk-и
 
+export const setCaptchaAnswer = (c) => async (dispatch) => {
+    // console.log('dsd')
+    // console.log(c)
+    dispatch(setUserAuthCaptchaAnswer(c));
+}
+
 export const checkAuthorization = () => async (dispatch) => {
 
     let data = await API.authMe();
     if (data.resultCode === 0) {
         let {id, login, email} = data.data;
         dispatch(setUserAuthData(id, email, login, true, null, null, null));
-        let resp2 = await API.getProfile(id);
-        dispatch(setUserProfile(resp2.data));
-        let data2 = await API.getStatus(id);
-        dispatch(setUserStatus(data2));
+        // let resp2 = await API.getProfile(id);
+        // dispatch(setUserProfile(resp2.data));
+        // let data2 = await API.getStatus(id);
+        // dispatch(setUserStatus(data2));
+
+        let promise1 = await API.getProfile(id);
+        let promise2 = await API.getStatus(id);
+        let data3 = await Promise.all([promise1,promise2])
+            .then( () => {
+
+                dispatch(setUserProfile(promise1.data));
+                dispatch(setUserStatus(promise2));
+                // dispatch(setInitialized())
+            })
+
+
     }
 }
 
 
 export const logOut = () => async (dispatch) => {
     await API.logOut()
-    console.warn('logout2');
+    // console.warn('logout2');
     //dispatch(setUserLogOut());
     dispatch(setUserAuthData(null, null, null, false, null, null, null));
 
 }
 
 
-export const login = (email, pass, remember, captcha) => async (dispatch) => {
+export const login = (email, pass, remember) => async (dispatch,getState) => {
+    let captcha = getState().auth.captchaAnswer;
     let data = await API.auth(email, pass, remember, captcha);
-    console.log(data)
+    // console.log(data)
     if (data.resultCode === 0) {
-        console.log('login +')
+        // console.log('login +')
         dispatch(checkAuthorization());
 
     } else {
