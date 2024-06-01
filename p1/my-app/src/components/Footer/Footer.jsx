@@ -3,7 +3,7 @@ import c from './Footer.module.css';
 
 const Footer = () => {
   return (
-    <footer><div className={c.copy}>&copy; wd<br />- 2020 -</div></footer>
+    <footer><div className={c.copy}>&copy; wd<br />- 2010-2024 -</div></footer>
   );
 }
 
