@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useEffect, useState} from "react"
 import {connect} from "react-redux";
 // import {setStatus} from "../../redux/profile_reducer";
 
@@ -11,16 +11,10 @@ const ProfileStatusWithHocs = ({status,setStatus}) => { // props
     let [editMode,setEditMode] = useState(false); // hook
     let [tempStatus,setTempStatus] = useState(status); // hook
     //
-    // useEffect( () => { // хук, функція, яка виконується ПІСЛЯ того як відбулось відображення рендерингу
-    //     // debugger
-    //     // console.log('useEffect setStatus - ' + status + ' ?=== '+ tempStatus)
-    //     // if(status !== tempStatus){
-    //     //     console.log('useEffect no')
-    //     // }else{
-    //     //     console.log('useEffect yes')
-    //     // }
-    //     // setStatus(status) // що зробити
-    // },[status]); // при якій умові - коли змінюється вказаний елемент // якщо умова - порожній масив - [] - то поведінка буде як у componentDidMount
+     useEffect( () => { // хук, функція, яка виконується ПІСЛЯ того як відбулось відображення рендерингу
+         // що зробити
+          setTempStatus(status)
+     },[status]); // при якій умові - коли змінюється вказаний елемент // якщо умова - порожній масив - [] - то поведінка буде як у componentDidMount
 
     const toggleEditMode = () => {
         if( editMode === false)
@@ -28,6 +22,8 @@ const ProfileStatusWithHocs = ({status,setStatus}) => { // props
         else{
             setEditMode(false);
             setStatus(tempStatus);
+            setTempStatus(status)
+
         }
     }
 

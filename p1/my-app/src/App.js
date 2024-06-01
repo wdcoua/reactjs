@@ -7,41 +7,60 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import {BrowserRouter, HashRouter, withRouter} from "react-router-dom";
-import {initializeApp} from "./redux/app_reducer";
+import {initializeApp, setMainError, settingMainError} from "./redux/app_reducer";
 import Preloader from "./components/Preloader/Preloader";
 import store from "./redux/redux-store";
 import {getUsers, setPageWithMe} from "./redux/users_reducer";
+import {withErrorsShowerWrapper} from "./components/hoc/withErrorsShowerWrapper";
 
 
+const catchAllUnhandledErrors = (event) => {
+     // console.log(reason)
+     // console.log(promise)
+    // event.preventDefault()
+    // promise.preventDefault()
+    // alert('test')
+}
+const App = ({initializeApp, initialized, total, usersPerPage, getUsers, setPageWithMe, userid}) => {
 
-const App = ({initializeApp,initialized,total,usersPerPage,getUsers,setPageWithMe,userid}) => {
+
+    useEffect(() => {
+        // like componentDidMount and componentDidUpdate
+        window.addEventListener('unhandledrejection', catchAllUnhandledErrors);
+
+        // Указываем, как сбросить этот эффект:
+        // like componentWillUnmount
+        return function cleanup() {
+            window.removeEventListener('unhandledrejection', catchAllUnhandledErrors);
+        };
+    })
     useEffect(() => {
 
         // console.log('total - ' + total);
         // console.log('initialized - ' + initialized);
-        if(total !== 0){
+        if (total !== 0) {
 
             // 76
             // 6590
             let currentPage2 = 1;
 
-            if(userid === 11583) // wd
+            if (userid === 11583) // wd
                 currentPage2 = Math.ceil((total - 6590) / usersPerPage);
-            else if(userid === 1079) // test
+            else if (userid === 1079) // test
                 currentPage2 = Math.ceil((total - 76) / usersPerPage);
 
             // console.log('userid - ' + userid);
             // console.log('currentPage2 - ' + currentPage2);
 
-            getUsers(usersPerPage,currentPage2);
-        }else{
+            getUsers(usersPerPage, currentPage2);
+        } else {
             initializeApp();
         }
 
-    },[total]);
+    }, [total]);
 
     return !initialized
-        ? <Preloader />
+        ? <Preloader/>
         : <div className="app-wrapper">
             <HeaderContainer/>
             <Nav/>
@@ -90,14 +109,12 @@ const mapStateToProps = (store) => {
 };
 
 
-
 const AppContainer = compose(
     withRouter,
-    connect(mapStateToProps,{initializeApp,getUsers,setPageWithMe}))(App);
+    connect(mapStateToProps, {initializeApp, getUsers, setPageWithMe,settingMainError}),withErrorsShowerWrapper)(App);
 
 
 const SamuraiJsApp = () => {
-
 
 
     // return <BrowserRouter>
@@ -107,7 +124,7 @@ const SamuraiJsApp = () => {
     // </BrowserRouter>
     return <HashRouter>
         <Provider store={store}>
-            <AppContainer />
+            <AppContainer/>
         </Provider>
     </HashRouter>
 }

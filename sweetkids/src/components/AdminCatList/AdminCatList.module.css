@@ -1,0 +1,54 @@
+/*.top_filters{*/
+/*    width: 100%;*/
+/*    background-color: #cc55ff;*/
+/*    !*height: 30px;*!*/
+/*    text-align: center;*/
+/*    padding: 20px 0;*/
+/*}*/
+
+/*.left_filters{*/
+/*    width: 30%;*/
+/*    background-color: #7d7d7d;*/
+/*}*/
+
+/*.main_body{*/
+/*    width: 70%;*/
+/*    background-color: #f5bdbd;*/
+/*}*/
+
+/*.main_container{*/
+/*    display: flex;*/
+/*    min-height: 70vh;*/
+/*}*/
+
+/*.sort_button{*/
+/*    padding: 5px;*/
+/*    margin: 9px;*/
+/*    background-color: aliceblue;*/
+/*    border-radius: 5px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.items_container{*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*}*/
+
+/*.item{*/
+/*    width: 250px;*/
+/*    height: 250px;*/
+/*    position: relative;*/
+/*    margin: 14px;*/
+/*}*/
+
+/*.item img{*/
+/*    width: 100%;*/
+/*}*/
+
+/*.item .text{*/
+/*    position: absolute;*/
+/*    bottom: 7px;*/
+/*    text-align: center;*/
+/*    left: 5px;*/
+/*    background-color: aqua;*/
+/*}*/

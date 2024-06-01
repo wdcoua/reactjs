@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../Users/User/User.module.css";
+import cn from 'classnames'
 
 const Pagination = ({totalUsers,usersPerPage,currentPage,openPageNumber}) => {
 
@@ -22,7 +23,7 @@ const Pagination = ({totalUsers,usersPerPage,currentPage,openPageNumber}) => {
                                 }
                             )
                         }
-                        className={cp === p ? styles.currentPage : styles.pages}
+                        className={cn(styles.pages,cp === p ? styles.currentPage : '')}
                     > {p} </span>));
                     prev_is_shown = 0;
                 }

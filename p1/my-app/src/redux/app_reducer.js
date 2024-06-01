@@ -6,10 +6,12 @@ import {API} from "../api/api";
 import {getProfile, getStatus} from "./profile_reducer";
 
 const SET_INITIALIZED = 'samurai_project/app/SET_INITIALIZED';
+const SET_MAIN_ERROR = 'samurai_project/app/SET_MAIN_ERROR';
 //const SET_ERROR = 'SET_ERROR';
 
 let initialState = {
-    initialized: false
+    initialized: false,
+    mainError: ''
 }
 
 const app_reducer = (state = initialState, action) => {
@@ -20,6 +22,12 @@ const app_reducer = (state = initialState, action) => {
             return {
                 ...state,
                 initialized: true,
+            }
+
+        case SET_MAIN_ERROR:
+            return {
+                ...state,
+                mainError: action.error,
             }
 
 
@@ -36,7 +44,14 @@ export default app_reducer;
 export const setInitialized = () => {
     return {type: SET_INITIALIZED};
 }
+export const setMainError = (error) => {
+    return {type: SET_MAIN_ERROR,error};
+}
 
+
+export const settingMainError = (error) => async (dispatch) => {
+    dispatch(setMainError(error))
+}
 
 export const initializeApp = () => async (dispatch) => {
     let promise = dispatch(checkAuthorization())

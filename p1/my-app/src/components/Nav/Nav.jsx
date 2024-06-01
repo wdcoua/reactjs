@@ -5,13 +5,13 @@ const Nav = () => {
     return (
 
             <nav>
-                <Menu text="Main" href="/index"/>
+                {/*<Menu text="Main" href="/index"/>*/}
                 <Menu text="Examples" href="/examples"/>
                 <Menu text="Guest Book" href="/gb"/>
                 <Menu text="Chat" href="/chat"/>
                 <Menu text="Users" href="/users"/>
                 <Menu text="Profile" href="/profile"/>
-                <Menu text="..." href="/out/14"/>
+                {/*<Menu text="..." href="/out/14"/>*/}
             </nav>
     );
 

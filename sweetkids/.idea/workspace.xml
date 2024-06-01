@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="81d98e25-c26c-4f57-9268-a57390ef359e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="15e68582-1733-464f-86e7-cee3e30cc725" />
+        <option name="url" value="https://github.com/wdcoua/reactjs.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/package.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/components/Header/Header.jsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/components/Header/Header.module.css" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/components/Index/Index.jsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/components/Login/Login.jsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/components/Main/Main.module.css" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/components/Signup/Signup.jsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/components/common/FormsControls/FormsControls.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/redux/auth_reducer.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../wd/wd.co.ua/sweetkids.site/PHP_errors.log" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="1swxJeSRVPXkSkBXm6P88Lxe9uW" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/media/wd/1c65ded6-8343-4eea-b5cb-6cb824d7acab/wd/wd5/webdev/react/sweetkids",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/media/wd/1c65ded6-8343-4eea-b5cb-6cb824d7acab/wd/wd5/webdev/react/sweetkids/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/redux" />
+      <recent name="$PROJECT_DIR$/src/components/Theme" />
+      <recent name="$PROJECT_DIR$/src/components" />
+      <recent name="$PROJECT_DIR$/src/components/common" />
+      <recent name="$PROJECT_DIR$/../../wd/wd.co.ua/sweetkids.site" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/../../wd/wd.co.ua/sweetkids.site/service" />
+      <recent name="$PROJECT_DIR$/src/components/CartPage" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="__________ addCat is successful" type="JavaScriptTestRunnerJest" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <node-options value="" />
+      <jest-package value="$PROJECT_DIR$/node_modules/react-scripts" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/src/redux/admin_reducer.test.js" />
+      <test-names>
+        <test-name value="__________ addCat is successful" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Jest.__________ addCat is successful" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="81d98e25-c26c-4f57-9268-a57390ef359e" name="Default Changelist" comment="" />
+      <created>1621797383158</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1621797383158</updated>
+      <workItem from="1621797403612" duration="15840000" />
+      <workItem from="1622305604043" duration="2332000" />
+      <workItem from="1622560006777" duration="21949000" />
+      <workItem from="1622736649490" duration="4689000" />
+      <workItem from="1622741975233" duration="87811000" />
+      <workItem from="1623099338551" duration="41999000" />
+      <workItem from="1623507717886" duration="18548000" />
+      <workItem from="1623772413391" duration="54775000" />
+      <workItem from="1624018537157" duration="40465000" />
+      <workItem from="1624558182520" duration="35045000" />
+      <workItem from="1624777695333" duration="58209000" />
+      <workItem from="1625067311235" duration="1270000" />
+      <workItem from="1625069486218" duration="54000" />
+      <workItem from="1625070248506" duration="4452000" />
+      <workItem from="1625084655701" duration="1075000" />
+      <workItem from="1625086189137" duration="40870000" />
+      <workItem from="1625524191609" duration="7501000" />
+      <workItem from="1625936139717" duration="21822000" />
+      <workItem from="1626071293127" duration="87257000" />
+      <workItem from="1626778702063" duration="42773000" />
+      <workItem from="1627292875214" duration="1047000" />
+      <workItem from="1627381071425" duration="624000" />
+      <workItem from="1627623996845" duration="651000" />
+      <workItem from="1628238928899" duration="22886000" />
+      <workItem from="1628598403995" duration="98024000" />
+      <workItem from="1629987167679" duration="32968000" />
+      <workItem from="1630223374037" duration="87818000" />
+      <workItem from="1631377671513" duration="45092000" />
+      <workItem from="1631816502842" duration="218000" />
+      <workItem from="1631816771694" duration="16916000" />
+      <workItem from="1632047370607" duration="23602000" />
+      <workItem from="1632145284511" duration="40348000" />
+      <workItem from="1632404824301" duration="5031000" />
+      <workItem from="1632489639770" duration="148965000" />
+      <workItem from="1634233573893" duration="1792000" />
+      <workItem from="1634333441720" duration="6111000" />
+      <workItem from="1634385840265" duration="92192000" />
+      <workItem from="1635007621480" duration="68770000" />
+      <workItem from="1635438911931" duration="12345000" />
+      <workItem from="1635519527777" duration="53248000" />
+      <workItem from="1635947943770" duration="59046000" />
+      <workItem from="1636221236148" duration="533000" />
+      <workItem from="1636222474849" duration="9701000" />
+      <workItem from="1637238793793" duration="1728000" />
+      <workItem from="1637398202170" duration="677000" />
+      <workItem from="1645597510433" duration="62000" />
+      <workItem from="1645597598995" duration="184000" />
+      <workItem from="1666975696088" duration="3249000" />
+    </task>
+    <task id="LOCAL-00001" summary="initial commit&#10;&#10;* додавання, редагування, сортування і видалення категорій&#10;* інтервали в категоріях&#10;* додавання, видалення, редагування товарів&#10;* додавання, видалення, редагування, сортування фото">
+      <created>1624038001330</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1624038001330</updated>
+    </task>
+    <task id="LOCAL-00002" summary="&#10;* Ant Design&#10;* сортування товарів на головній&#10;* логін, реєстрація, &quot;запам'ятай мене&quot;">
+      <created>1625243493795</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1625243493795</updated>
+    </task>
+    <task id="LOCAL-00003" summary="&#10;* переклад шапки і головної&#10;* переклад товарів">
+      <created>1626562607740</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1626562607740</updated>
+    </task>
+    <task id="LOCAL-00004" summary="* розширений переклад&#10;* створена і зроблена сторінка Корзини&#10;* зроблена автореєстрація&#10;* реалізоване зберігання Корзини при реєстрації&#10;* створена сторінка для оформлення замовлення (налаштування в процесі)&#10;* дрібні правки">
+      <created>1630017727777</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1630017727777</updated>
+    </task>
+    <task id="LOCAL-00005" summary="* доданий переклад&#10;* зроблена сторінка оформлення замовлення&#10;* дрібні правки">
+      <created>1630230514457</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1630230514457</updated>
+    </task>
+    <task id="LOCAL-00006" summary="* доданий переклад&#10;* додана сторінка оплати&#10;* доданий модуль Error&#10;* дрібні правки">
+      <created>1631377839050</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1631377839050</updated>
+    </task>
+    <task id="LOCAL-00007" summary="* створив заготовку для майбутньої сторінки редагування налаштувань&#10;* правив таймер&#10;* правив кошик, щоб показувало, що товар закінчився&#10;* створив Redirector&#10;* додав кілька дій перед ініціалізацією програми&#10;-- deploy">
+      <created>1632180663890</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1632180663890</updated>
+    </task>
+    <task id="LOCAL-00008" summary="* правка Redirector&#10;-- build">
+      <created>1632181996802</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1632181996802</updated>
+    </task>
+    <task id="LOCAL-00009" summary="* правка API&#10;* правки Pay&#10;...">
+      <created>1632866029967</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1632866029967</updated>
+    </task>
+    <task id="LOCAL-00010" summary="* правка order_reducer.js&#10;* правки дизайну сторінки оплати&#10;* додав заготовку компоненту Checker">
+      <created>1632952448856</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1632952448856</updated>
+    </task>
+    <task id="LOCAL-00011" summary="* таймер працює, &#10;* перехід до активного замовлення працює">
+      <created>1632989413874</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1632989413874</updated>
+    </task>
+    <task id="LOCAL-00012" summary="* зробив чекер, поки що тільки для замовлень&#10;-- build">
+      <created>1633045938902</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1633045938902</updated>
+    </task>
+    <task id="LOCAL-00013" summary="* підгрузка товарів на головній&#10;* додані кнопки скасування і підтвердження замовлення&#10;* відключена можливість додавати товари до корзини якщо у тебе є активне неоплачене замовлення&#10;* модифікована функція діставання товарів із бази&#10;* додана функція перевірки інету, додана в чекер&#10;* додана кнопочка clearAllIntervals (прибрати для продакшена)&#10;* зробив правильне відображення кількості доступних товарів&#10;&#10;-- build">
+      <created>1634215246885</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1634215246885</updated>
+    </task>
+    <task id="LOCAL-00014" summary="* доданий переклад&#10;* доданий перегляд замовлень в адмінці та модифікація статусу (з глюками)&#10;* правки кабінету&#10;* правки корзини (сума не менше 100)&#10;* доданий перегляд товарів по категоріях&#10;* доданий перегляд своїх замовлень&#10;* доданий пошук товарів на головній&#10;* додане сортування товарів&#10;* імплементований TypeScript у кілька редюсерів&#10;* правка API">
+      <created>1635465480890</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1635465480890</updated>
+    </task>
+    <task id="LOCAL-00015" summary="* доданий переклад&#10;* доробив перегляд замовлень в адмінці та модифікація статусу + сортування&#10;* додав улюблені (додавання, видалення, перегляд в кабінеті)&#10;* правка API&#10;&#10;-- build">
+      <created>1635928076336</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1635928076336</updated>
+    </task>
+    <task id="LOCAL-00016" summary="* доданий переклад&#10;* додані сторінки (про нас, оплата і доставка, контакти, FAQ)&#10;* правка скрипта додавання і редагування товарів&#10;* вимкнув більшість console.log()&#10;* прибрав кнопку-стопер інтервалів&#10;* прибрав головний банер&#10;* додав пояснення до валюти&#10;* підправив ключі в списках&#10;* правка API&#10;&#10;-- build">
+      <created>1636124571576</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1636124571576</updated>
+    </task>
+    <task id="LOCAL-00017" summary="* доданий переклад&#10;* правка сторінки перегляду замовлень (ширина таблиці)&#10;* правка скрипта  редагування товарів&#10;* правка сторінки оформлення замовлення (особисті дані)&#10;* правка сторінки редагування особистих даних&#10;* правка API&#10;&#10;-- build">
+      <created>1636143146545</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1636143146545</updated>
+    </task>
+    <task id="LOCAL-00018" summary="* доданий переклад&#10;* правка хедера &#10;* додав функціонал зміни теми на темну&#10;* обновив ноду&#10;&#10;-- build">
+      <created>1636227435565</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1636227435565</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="7a3c57de-29e0-4680-ba50-1f170aa08d14">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="roots">
+                    <value>
+                      <list>
+                        <option value="$PROJECT_DIR$" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="7a3c57de-29e0-4680-ba50-1f170aa08d14" value="TOOL_WINDOW" />
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/.." />
+    </ignored-roots>
+    <MESSAGE value="initial commit&#10;&#10;* додавання, редагування, сортування і видалення категорій&#10;* інтервали в категоріях&#10;* додавання, видалення, редагування товарів&#10;* додавання, видалення, редагування, сортування фото" />
+    <MESSAGE value="&#10;* Ant Design&#10;* сортування товарів на головній&#10;* логін, реєстрація, &quot;запам'ятай мене&quot;" />
+    <MESSAGE value="&#10;* переклад шапки і головної&#10;* переклад товарів" />
+    <MESSAGE value="* розширений переклад&#10;* створена і зроблена сторінка Корзини&#10;* зроблена автореєстрація&#10;* реалізоване зберігання Корзини при реєстрації&#10;* створена сторінка для оформлення замовлення (налаштування в процесі)&#10;* дрібні правки" />
+    <MESSAGE value="* доданий переклад&#10;* зроблена сторінка оформлення замовлення&#10;* дрібні правки" />
+    <MESSAGE value="* доданий переклад&#10;* додана сторінка оплати&#10;* доданий модуль Error&#10;* дрібні правки" />
+    <MESSAGE value="* створив заготовку для майбутньої сторінки редагування налаштувань&#10;* правив таймер&#10;* правив кошик, щоб показувало, що товар закінчився&#10;* створив Redirector&#10;* додав кілька дій перед ініціалізацією програми&#10;-- deploy" />
+    <MESSAGE value="* правка Redirector&#10;-- build" />
+    <MESSAGE value="* правка API&#10;* правки Pay&#10;..." />
+    <MESSAGE value="* правка order_reducer.js&#10;* правки дизайну сторінки оплати&#10;* додав заготовку компоненту Checker" />
+    <MESSAGE value="* таймер працює, &#10;* перехід до активного замовлення працює" />
+    <MESSAGE value="* зробив чекер, поки що тільки для замовлень&#10;-- build" />
+    <MESSAGE value="* підгрузка товарів на головній&#10;* додані кнопки скасування і підтвердження замовлення&#10;* відключена можливість додавати товари до корзини якщо у тебе є активне неоплачене замовлення&#10;* модифікована функція діставання товарів із бази&#10;* додана функція перевірки інету, додана в чекер&#10;* додана кнопочка clearAllIntervals (прибрати для продакшена)&#10;* зробив правильне відображення кількості доступних товарів&#10;&#10;-- build" />
+    <MESSAGE value="* доданий переклад&#10;* доданий перегляд замовлень в адмінці та модифікація статусу (з глюками)&#10;* правки кабінету&#10;* правки корзини (сума не менше 100)&#10;* доданий перегляд товарів по категоріях&#10;* доданий перегляд своїх замовлень&#10;* доданий пошук товарів на головній&#10;* додане сортування товарів&#10;* імплементований TypeScript у кілька редюсерів&#10;* правка API" />
+    <MESSAGE value="* доданий переклад&#10;* доробив перегляд замовлень в адмінці та модифікація статусу + сортування&#10;* додав улюблені (додавання, видалення, перегляд в кабінеті)&#10;* правка API&#10;&#10;-- build" />
+    <MESSAGE value="* доданий переклад&#10;* додані сторінки (про нас, оплата і доставка, контакти, FAQ)&#10;* правка скрипта додавання і редагування товарів&#10;* вимкнув більшість console.log()&#10;* прибрав кнопку-стопер інтервалів&#10;* прибрав головний банер&#10;* додав пояснення до валюти&#10;* підправив ключі в списках&#10;* правка API&#10;&#10;-- build" />
+    <MESSAGE value="* доданий переклад&#10;* правка сторінки перегляду замовлень (ширина таблиці)&#10;* правка скрипта  редагування товарів&#10;* правка сторінки оформлення замовлення (особисті дані)&#10;* правка сторінки редагування особистих даних&#10;* правка API&#10;&#10;-- build" />
+    <MESSAGE value="* доданий переклад&#10;* правка хедера &#10;* додав функціонал зміни теми на темну&#10;* обновив ноду&#10;&#10;-- build" />
+    <option name="LAST_COMMIT_MESSAGE" value="* доданий переклад&#10;* правка хедера &#10;* додав функціонал зміни теми на темну&#10;* обновив ноду&#10;&#10;-- build" />
+  </component>
+</project>

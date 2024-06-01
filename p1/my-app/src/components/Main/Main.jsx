@@ -1,6 +1,6 @@
 import React, {lazy} from 'react';
 import c from './Main.module.css';
-import { Route} from "react-router-dom";
+import {Redirect, Route, Switch} from "react-router-dom";
 // import ChatContainer from "../Chat/ChatContainer";
 // import GuestBookContainer from "../GuestBook/GuestBookContainer";
 import ExamplesContainer from "../Examples/ExamplesContainer";
@@ -21,24 +21,27 @@ const UsersContainer = lazy(() => import ('../Users/UsersContainer'));
 
 const Main = () => {
     return (
-            <div className={c.main}>
-
+        <div className={c.main}>
+            <Switch>
                 <Route path='/examples' render={() => (
-                            <ExamplesContainer/>
+                    <ExamplesContainer/>
                 )}/>
-                <Route path='/index' render={() => (
-                            <ExamplesContainer/>
-                )}/>
-                <Route  path='/gb' render={withSuspenseWrapper(GuestBookContainer)}/>
-                <Route  path='/chat' render={withSuspenseWrapper(ChatContainer)}/>
-                <Route  path='/users' render={withSuspenseWrapper(UsersContainer)}/>
-                <Route  path='/profile/:userID?' render={withSuspenseWrapper(ProfileContainer)}/>
-                <Route  path='/myprofile' render={withSuspenseWrapper(MyProfile)}/>
-                <Route  path='/login' render={withSuspenseWrapper(Login)}/>
-                <Route  path='/reg' render={withSuspenseWrapper(Login)}/>
+                {/*<Route exact path='/' render={() => ( <ExamplesContainer/> )}/>*/}
+                <Route exact path='/' render={() => (<Redirect to={'/examples'}/>)}/>
+                <Route path='/index' render={() => (<Redirect to={'/examples'}/>)}/>
+                {/*<Route path='/index' render={() => (<ExamplesContainer/>)}/>*/}
+                <Route path='/gb' render={withSuspenseWrapper(GuestBookContainer)}/>
+                <Route path='/chat' render={withSuspenseWrapper(ChatContainer)}/>
+                <Route path='/users' render={withSuspenseWrapper(UsersContainer)}/>
+                <Route path='/profile/:userID?' render={withSuspenseWrapper(ProfileContainer)}/>
+                <Route path='/myprofile' render={withSuspenseWrapper(MyProfile)}/>
+                <Route exact path='/login/facebook' render={() => <div>From FaceBook</div>}/>
+                <Route path='/login' render={withSuspenseWrapper(Login)}/>
+                <Route path='/reg' render={withSuspenseWrapper(Login)}/>
+                <Route path='*' render={() => <div>404 <br/>Page Not Found</div>}/>
+            </Switch>
 
-
-            </div>
+        </div>
     );
 }
 

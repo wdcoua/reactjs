@@ -9,7 +9,7 @@ const HeaderContainer = (props) => {
 /*
 class HeaderContainer2 extends React.Component{
     render(){
-        return <Header {...this.props} />
+        return <Index {...this.props} />
     }
 }*/
 

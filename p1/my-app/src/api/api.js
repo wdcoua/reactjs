@@ -53,7 +53,11 @@ export const API = {
                     //resp.data.cp = currentPage;
                     return resp.data
                 }
-            );
+            )
+            .catch(error => { // catches errors
+                return error.response
+                // error handling, use error.response to access the non 2xx response
+            });
     },
 
     follow(id) {
@@ -62,7 +66,11 @@ export const API = {
             .then(resp => {
                     return resp.data
                 }
-            );
+            )
+            .catch(error => { // catches errors
+                return error.response
+                // error handling, use error.response to access the non 2xx response
+            });
     },
 
     unfollow(id) {
@@ -71,13 +79,25 @@ export const API = {
             .then(resp => {
                     return resp.data
                 }
-            );
+            )
+            .catch(error => { // catches errors
+                return error.response
+                // error handling, use error.response to access the non 2xx response
+            });
     },
 
     async authMe() {
-        let resp = await instance
-            .get('auth/me');
-        return resp.data
+        return instance
+            .get('auth/me')
+            .then(resp => {
+                    return resp.data
+                }
+            )
+            .catch(error => { // catches errors
+                return error.response
+                // error handling, use error.response to access the non 2xx response
+            });
+
 
 
     },
@@ -89,7 +109,11 @@ export const API = {
             .then(resp => {
                     return resp
                 }
-            );
+            )
+            .catch(error => { // catches errors
+                return error.response
+                // error handling, use error.response to access the non 2xx response
+            });
     },
 
     getStatus(id) {
@@ -98,7 +122,11 @@ export const API = {
             .then(resp => {
                     return resp.data
                 }
-            );
+            ).catch((error) => {
+                console.log(error)
+                return error.response
+                // error handling, use error.response to access the non 2xx response
+            });
     },
 
     setStatus(status) {
@@ -109,7 +137,12 @@ export const API = {
             .then(resp => {
                     return resp.data
                 }
-            );
+            )
+            .catch(error => { // catches errors
+                return error.response
+                // error handling, use error.response to access the non 2xx response
+            })
+            //.done(); // destroys promise
     },
 
 
@@ -135,7 +168,11 @@ export const API = {
             .then(resp => {
                     return resp.data
                 }
-            );
+            )
+            .catch(error => { // catches errors
+                return error.response
+                // error handling, use error.response to access the non 2xx response
+            });
     },
 
     async updateProfilePhoto(photo) {
@@ -143,9 +180,17 @@ export const API = {
 
         const formData = new FormData();
         formData.append('image', photo)
-        let resp = await instance
-            .put('profile/photo', formData,{ headers: {"Content-Type": "multipart/form-data" }});
-        return resp.data;
+        return instance
+            .put('profile/photo', formData,{ headers: {"Content-Type": "multipart/form-data" }})
+            .then(resp => {
+                    return resp.data
+                }
+            )
+            .catch(error => { // catches errors
+                return error.response
+                // error handling, use error.response to access the non 2xx response
+            });
+        // return resp.data;
     },
 
 
@@ -162,7 +207,11 @@ export const API = {
             .then(resp => {
                     return resp.data
                 }
-            );
+            )
+            .catch(error => { // catches errors
+                return error.response
+                // error handling, use error.response to access the non 2xx response
+            });
     },
 
     logOut() {
@@ -173,7 +222,11 @@ export const API = {
                     // console.log('logout')
                     return resp.data
                 }
-            );
+            )
+            .catch(error => { // catches errors
+                return error.response
+                // error handling, use error.response to access the non 2xx response
+            });
     },
 
 
@@ -183,7 +236,11 @@ export const API = {
             .then(resp => {
                     return resp.data
                 }
-            );
+            )
+            .catch(error => { // catches errors
+                return error.response
+                // error handling, use error.response to access the non 2xx response
+            });
     },
 
 
@@ -193,7 +250,11 @@ export const API = {
             .then(resp => {
                     return resp.data
                 }
-            );
+            )
+            .catch(error => { // catches errors
+                return error.response
+                // error handling, use error.response to access the non 2xx response
+            });
     },
 
     getGbPosts() {
@@ -202,6 +263,10 @@ export const API = {
             .then(resp => {
                     return resp.data
                 }
-            );
+            )
+            .catch(error => { // catches errors
+                return error.response
+                // error handling, use error.response to access the non 2xx response
+            });
     }
 }

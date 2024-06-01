@@ -1,0 +1,12 @@
+.errors{
+    border: 3px solid red;
+    color: grey;
+    position: fixed;
+    top: 12px;
+    left: 50%;
+    padding: 15px;
+    background-color: #ffe6e6;
+    width: 500px;
+    margin-left: -250px;
+}
+

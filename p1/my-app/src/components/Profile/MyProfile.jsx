@@ -7,14 +7,16 @@ import ProfilePhoto from "./ProfilePhoto";
 import defaultUserPhoto from "../../images/user.png";
 import Preloader from "../Preloader/Preloader";
 
-const MyProfile = ({profile,getProfile,getStatus,status,setStatus}) => {
+const MyProfile = ({profile,getProfile,getStatus,status,setStatus,userId}) => {
     // let {profile,getProfile,getStatus,status,setStatus} = props;
 
     useEffect(() => {
 
         // let {getProfile,getStatus} = props;
-        getProfile(profile.userId);
-        getStatus(profile.userId);
+
+            getProfile(userId);
+            getStatus(userId);
+
     },[status])
 
 
@@ -105,7 +107,8 @@ class MyProfile2 extends React.Component{
 let mapStateToProps = (state) => { // бере увесь глобальний STATE і повертає тільки те, що нам потрібно для цієї компоненти
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        userId: state.auth.userID
     }
 }
 

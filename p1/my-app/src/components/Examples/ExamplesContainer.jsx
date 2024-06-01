@@ -7,7 +7,7 @@ import Examples from "./Example/Examples";
 const ExamplesContainer = ({getExamples,examples}) => {
     useEffect( () => {
         getExamples();
-    }); // якщо написати [examples], то скрипт буде бомбити сервер запитами "чи не змінились екзампли"
+    },[]); // якщо написати [examples], то скрипт буде бомбити сервер запитами "чи не змінились екзампли"
 
     return <Examples examples={examples.examplesList}/>;
 }

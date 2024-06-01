@@ -5,7 +5,8 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {setProfileUpdated, updateProfile} from "../../redux/profile_reducer";
 import ProfileEditForm from "./ProfileEditForm";
-
+import c from "./Profile.module.css"
+import {renderToString} from "react-dom/server";
 
 
 const ProfileEditReduxForm = reduxForm({
@@ -38,20 +39,22 @@ const ProfileEditReduxForm = reduxForm({
 //     }
 // };
 
+// React.memo === shouldComponentUpdate
+
 const Profile = React.memo((props) => {
-    let {profile,status,userID,profileUpdatedToggle} = props;
+    let {profile, status, userID, profileUpdatedToggle} = props;
     let co = profile.contacts;
     let isOwner = (userID === profile.userId);
 
     // let [isOwner, setIsOwner] = useState(0); // hook
-    let [editMode,setEditMode] = useState(false); // hook
+    let [editMode, setEditMode] = useState(false); // hook
 
 
-    useEffect( () => {
+    useEffect(() => {
         // console.log('new profile');
         // console.log(profileUpdatedToggle);
 
-        if(profileUpdatedToggle) {
+        if (profileUpdatedToggle) {
             toggleEditMode();
             props.setProfileUpdated(false);
         }
@@ -59,11 +62,10 @@ const Profile = React.memo((props) => {
     }, [profileUpdatedToggle]); // якщо написати [examples], то скрипт буде бомбити сервер запитами "чи не змінились екзампли"
 
 
-
     const toggleEditMode = () => {
-        if( editMode === false)
+        if (editMode === false)
             setEditMode(true);
-        else{
+        else {
             setEditMode(false);
             //setStatus(tempStatus);
         }
@@ -98,7 +100,7 @@ const Profile = React.memo((props) => {
         // formData.lookingForAJob = formData.lookingForAJob === '1'
         // console.log(formData)
         //  console.log(out)
-         // console.log('test1')
+        // console.log('test1')
         props.updateProfile(out);
         // console.log('test2')
         // debugger
@@ -132,19 +134,26 @@ const Profile = React.memo((props) => {
 */
 
             isOwner && editMode
-            ? <div>
+                ? <div>
                     {/*<ProfileEditReduxForm onSubmit={onSubmit} initialValues={profile} {...props} />*/}
                     <ProfileEditReduxForm onSubmit={onSubmit} {...props} />
-            </div>
-            : <div>
-                    {isOwner ? <div><button onClick={toggleEditMode}>Edit Profile</button><br/></div> : ''}
-            <img src={profile.photos.large ? profile.photos.large : defaultUserPhoto} alt=""/>
-            <div><b>{profile.fullName}</b></div>
-                    <div><u>Статус:</u> {status}</div>
-            <div><u>Обо мне:</u> "{profile.aboutMe}"</div>
-            <div><u>Ищу работу:</u> "{profile.lookingForAJob ? 'Да' : 'Нет'}"<br/>
-                {profile.lookingForAJobDescription}
-            </div>
+                </div>
+                : <div>
+                    {isOwner ? <div>
+                        <button onClick={toggleEditMode}>Edit Profile</button>
+                        <br/></div> : ''}
+                    <img src={profile.photos.large ? profile.photos.large : defaultUserPhoto} alt=""/>
+                    <div className={c.fullName}>{profile.fullName}</div>
+
+                    <div>
+                        <span className={c.profileData}>Статус:</span> {status}</div>
+                    <div>
+                        <span className={c.profileData}>Обо мне:</span> {profile.aboutMe}
+                    </div>
+                    <div>
+                        <span className={c.profileData}>Ищу работу:</span> {profile.lookingForAJob ? 'Да' : 'Нет'}<br/>
+                        <span className={c.profileData}>Описание для искомой работы:</span> {profile.lookingForAJobDescription}
+                    </div>
                     { // show only if there is at least one contact
                         co.facebook ||
                         co.github ||
@@ -153,10 +162,10 @@ const Profile = React.memo((props) => {
                         co.mainLink ||
                         co.twitter ||
                         co.youtube ||
-                        co.website ? <><b>Мои контакты:</b> <br/></> : ''
+                        co.website ? <><b><u>Мои контакты:</u></b> <br/></> : ''
                     }
 
-                    {Object.keys(co).map((k)=>{
+                    {Object.keys(co).map((k) => {
                         return <Contact key={k} contactName={k} contactValue={co[k]}/>
                     })}
 
@@ -168,14 +177,27 @@ const Profile = React.memo((props) => {
                     {/*{co.twitter ? <div><u>TW:</u> {co.twitter}</div> : ''}*/}
                     {/*{co.youtube ? <div><u>YT:</u> {co.youtube}</div> : ''}*/}
                     {/*{co.website ? <div><u>Site:</u> <a href={co.website}>{co.website}</a></div> : ''}*/}
-            </div>
+                </div>
         }
 
     </div>;
 });
+// {'style="margin-left: 15px;"'}
+const Contact = ({contactName, contactValue}) => {
+    if(contactName && contactValue){
+        if(contactValue.indexOf('http') !== 0)
+            contactValue = '<a href="https://' + contactValue + '">' + contactValue + '</a>';
+        else
+            contactValue = '<a href="'+contactValue+'">'+contactValue+'</a>';
 
-const Contact = ({contactName,contactValue}) => {
-    return <div><u>{contactName}:</u> {contactValue}</div>
+
+        return <div className={c.contact} dangerouslySetInnerHTML={{
+            __html: '<b>'+contactName+':</b> '+contactValue+''
+        }}/>
+    }else{
+        return null;
+    }
+
 }
 
 /*
@@ -338,7 +360,6 @@ class Profile extends Component {
 * */
 
 
-
 // export default Profile
 
 
@@ -347,7 +368,7 @@ const mapStateToProps = ({profilePage}) => {
 
     let co = profilePage.profile.contacts;
     return {
-         initialValues: {
+        initialValues: {
             fullName: profilePage.profile.fullName,
             aboutMe: profilePage.profile.aboutMe,
             facebook: co.facebook,
@@ -361,7 +382,7 @@ const mapStateToProps = ({profilePage}) => {
             lookingForAJob: profilePage.profile.lookingForAJob ? '1' : '0',
             lookingForAJobDescription: profilePage.profile.lookingForAJobDescription,
 
-         },
+        },
 
         //capthaImg: props.capthaImg
     }
@@ -383,5 +404,5 @@ const mapStateToProps = ({profilePage}) => {
     "fullName": formData.fullName*/
 
 export default compose(
-    connect(mapStateToProps, {updateProfile,setProfileUpdated}),
+    connect(mapStateToProps, {updateProfile, setProfileUpdated}),
 )(Profile)
